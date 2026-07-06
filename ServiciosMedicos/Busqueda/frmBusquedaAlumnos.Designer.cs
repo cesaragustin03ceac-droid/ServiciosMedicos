@@ -30,24 +30,25 @@
         {
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            textBox1 = new TextBox();
             dataGridView1 = new DataGridView();
+            textBox1 = new TextBox();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
             groupBox1.Location = new Point(-7, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(795, 100);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(dataGridView1);
             groupBox2.Controls.Add(textBox1);
@@ -56,14 +57,6 @@
             groupBox2.Size = new Size(623, 559);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(45, 24);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(529, 23);
-            textBox1.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -72,6 +65,13 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(547, 436);
             dataGridView1.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(45, 24);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(529, 23);
+            textBox1.TabIndex = 0;
             // 
             // frmBusquedaAlumnos
             // 
