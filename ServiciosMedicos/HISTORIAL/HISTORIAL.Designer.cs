@@ -33,6 +33,8 @@
             groupBox3 = new GroupBox();
             dataGridView1 = new DataGridView();
             label1 = new Label();
+            label2 = new Label();
+            groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -51,6 +53,7 @@
             // groupBox2
             // 
             groupBox2.BackColor = Color.White;
+            groupBox2.Controls.Add(label2);
             groupBox2.Location = new Point(23, 202);
             groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
@@ -93,6 +96,16 @@
             label1.Text = "Atenciones Pasadas";
             label1.Click += label1_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(50, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(179, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Perfil del Estudiantes ";
+            label2.Click += label2_Click;
+            // 
             // HISTORIAL
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -105,6 +118,8 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -118,5 +133,6 @@
         private GroupBox groupBox3;
         private Label label1;
         private DataGridView dataGridView1;
+        private Label label2;
     }
 }
