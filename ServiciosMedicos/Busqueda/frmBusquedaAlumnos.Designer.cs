@@ -30,9 +30,11 @@
         {
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            pictureBox1 = new PictureBox();
             dataGridView1 = new DataGridView();
             textBox1 = new TextBox();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -50,6 +52,7 @@
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.White;
+            groupBox2.Controls.Add(pictureBox1);
             groupBox2.Controls.Add(dataGridView1);
             groupBox2.Controls.Add(textBox1);
             groupBox2.Location = new Point(91, 151);
@@ -57,6 +60,17 @@
             groupBox2.Size = new Size(623, 559);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.lupita;
+            pictureBox1.Location = new Point(504, 41);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(61, 23);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
             // 
             // dataGridView1
             // 
@@ -68,7 +82,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(45, 24);
+            textBox1.Location = new Point(36, 41);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(529, 23);
             textBox1.TabIndex = 0;
@@ -83,8 +97,10 @@
             Controls.Add(groupBox1);
             Name = "frmBusquedaAlumnos";
             Text = "frmBusquedaAlumnos";
+            Load += frmBusquedaAlumnos_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
@@ -95,5 +111,6 @@
         private GroupBox groupBox2;
         private TextBox textBox1;
         private DataGridView dataGridView1;
+        private PictureBox pictureBox1;
     }
 }

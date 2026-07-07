@@ -6,18 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ServiciosMedicos.Busqueda
+namespace ServiciosMedicos.GeneracionReceta
 {
-    public partial class frmBusquedaAlumnos : Form
+    public partial class GeneracionReceta : Form
     {
-        public frmBusquedaAlumnos()
+        public GeneracionReceta()
         {
             InitializeComponent();
         }
 
-        private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
