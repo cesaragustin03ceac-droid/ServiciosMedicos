@@ -6,16 +6,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ServiciosMedicos.Busqueda
+namespace ServiciosMedicos.HISTORIAL
 {
-    public partial class FMRHISTORIAL : Form
+    public partial class HISTORIAL : Form
     {
-        public FMRHISTORIAL()
+        public HISTORIAL()
         {
             InitializeComponent();
         }
 
-        private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

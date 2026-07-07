@@ -63,29 +63,9 @@ namespace ServiciosMedicos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ChatGPT_Image_6_jul_2026__12_10_02_p_m_ {
+        internal static System.Drawing.Bitmap logo_uthh {
             get {
-                object obj = ResourceManager.GetObject("ChatGPT Image 6 jul 2026, 12_10_02 p.m.", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ChatGPT_Image_6_jul_2026__12_10_02_p_m___1_ {
-            get {
-                object obj = ResourceManager.GetObject("ChatGPT Image 6 jul 2026, 12_10_02 p.m. (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lupita {
-            get {
-                object obj = ResourceManager.GetObject("lupita", resourceCulture);
+                object obj = ResourceManager.GetObject("logo uthh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
