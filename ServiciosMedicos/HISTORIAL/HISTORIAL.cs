@@ -6,13 +6,18 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ServiciosMedicos.Busqueda
+namespace ServiciosMedicos.HISTORIAL
 {
-    public partial class FMRHISTORIAL : Form
+    public partial class HISTORIAL : Form
     {
-        public FMRHISTORIAL()
+        public HISTORIAL()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
