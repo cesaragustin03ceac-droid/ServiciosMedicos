@@ -64,7 +64,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.lupita;
+            //pictureBox1.Image = Properties.Resources.lupita;
             pictureBox1.Location = new Point(504, 41);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(61, 23);
