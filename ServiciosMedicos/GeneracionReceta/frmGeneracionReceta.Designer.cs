@@ -1,6 +1,6 @@
 ﻿namespace ServiciosMedicos.GeneracionReceta
 {
-    partial class GeneracionReceta
+    partial class frmGeneracionReceta
     {
         /// <summary>
         /// Required designer variable.

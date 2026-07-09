@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace ServiciosMedicos.GeneracionReceta
 {
-    public partial class GeneracionReceta : Form
+    public partial class frmGeneracionReceta : Form
     {
-        public GeneracionReceta()
+        public frmGeneracionReceta()
         {
             InitializeComponent();
         }

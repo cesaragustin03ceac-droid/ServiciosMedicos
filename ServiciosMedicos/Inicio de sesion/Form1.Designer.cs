@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
-            button1 = new Button();
+            BtEntrar = new Button();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            TxbContrasena = new TextBox();
+            TxbUsuario = new TextBox();
             panel2 = new Panel();
             pictureBox3 = new PictureBox();
             panel1.SuspendLayout();
@@ -46,27 +46,28 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(BtEntrar);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(TxbContrasena);
+            panel1.Controls.Add(TxbUsuario);
             panel1.Location = new Point(100, 190);
             panel1.Name = "panel1";
             panel1.Size = new Size(567, 262);
             panel1.TabIndex = 0;
             // 
-            // button1
+            // BtEntrar
             // 
-            button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Cursor = Cursors.IBeam;
-            button1.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(94, 190);
-            button1.Name = "button1";
-            button1.Size = new Size(389, 38);
-            button1.TabIndex = 4;
-            button1.Text = "Entrar";
-            button1.UseVisualStyleBackColor = false;
+            BtEntrar.BackColor = Color.FromArgb(204, 204, 204);
+            BtEntrar.Cursor = Cursors.IBeam;
+            BtEntrar.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtEntrar.Location = new Point(94, 190);
+            BtEntrar.Name = "BtEntrar";
+            BtEntrar.Size = new Size(389, 38);
+            BtEntrar.TabIndex = 4;
+            BtEntrar.Text = "Entrar";
+            BtEntrar.UseVisualStyleBackColor = false;
+            BtEntrar.Click += BtEntrar_Click;
             // 
             // pictureBox2
             // 
@@ -90,25 +91,25 @@
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
-            // textBox2
+            // TxbContrasena
             // 
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(136, 120);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(347, 40);
-            textBox2.TabIndex = 1;
-            textBox2.Text = "Contraseña";
+            TxbContrasena.BorderStyle = BorderStyle.FixedSingle;
+            TxbContrasena.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxbContrasena.Location = new Point(136, 120);
+            TxbContrasena.Name = "TxbContrasena";
+            TxbContrasena.PlaceholderText = "Contraseña";
+            TxbContrasena.Size = new Size(347, 40);
+            TxbContrasena.TabIndex = 1;
             // 
-            // textBox1
+            // TxbUsuario
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(136, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(347, 40);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Usuario";
+            TxbUsuario.BorderStyle = BorderStyle.FixedSingle;
+            TxbUsuario.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxbUsuario.Location = new Point(136, 52);
+            TxbUsuario.Name = "TxbUsuario";
+            TxbUsuario.PlaceholderText = "Usuario";
+            TxbUsuario.Size = new Size(347, 40);
+            TxbUsuario.TabIndex = 0;
             // 
             // panel2
             // 
@@ -120,7 +121,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.logo_uthh;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
             pictureBox3.Location = new Point(100, 21);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(567, 101);
@@ -139,6 +140,7 @@
             Controls.Add(panel1);
             Name = "Form1";
             Text = "Inicio de sesion";
+            Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -151,9 +153,9 @@
 
         private Panel panel1;
         private Panel panel2;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox TxbContrasena;
+        private TextBox TxbUsuario;
+        private Button BtEntrar;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
