@@ -226,7 +226,7 @@
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(4, 5, 4, 5);
             groupBox3.RightToLeft = RightToLeft.No;
-            groupBox3.Size = new Size(1076, 375);
+            groupBox3.Size = new Size(1076, 425);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
