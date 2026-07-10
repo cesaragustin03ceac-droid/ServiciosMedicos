@@ -1,7 +1,4 @@
-using ServiciosMedicos.HISTORIAL;
 
-
-using ServiciosMedicos.Busqueda;
 namespace ServiciosMedicos
 {
     internal static class Program
@@ -15,7 +12,7 @@ namespace ServiciosMedicos
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new ServiciosMedicos.HISTORIAL.HISTORIAL());
+
         }
     }
 }

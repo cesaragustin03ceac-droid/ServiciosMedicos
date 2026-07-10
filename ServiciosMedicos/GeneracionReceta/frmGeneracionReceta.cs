@@ -6,18 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ServiciosMedicos.Busqueda
+namespace ServiciosMedicos.GeneracionReceta
 {
-    public partial class FMRHISTORIAL : Form
+    public partial class frmGeneracionReceta : Form
     {
-        public FMRHISTORIAL()
+        public frmGeneracionReceta()
         {
             InitializeComponent();
         }
 
-        private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
