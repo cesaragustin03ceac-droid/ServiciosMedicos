@@ -1,7 +1,3 @@
-using System;
-using System.Windows.Forms;
-using ServiciosMedicos.Busqueda;
-using ServiciosMedicos.GeneracionReceta;
 
 namespace ServiciosMedicos
 {
@@ -16,7 +12,6 @@ namespace ServiciosMedicos
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmGeneracionReceta());
 
         }
     }

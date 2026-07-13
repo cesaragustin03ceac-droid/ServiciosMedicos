@@ -24,5 +24,10 @@ namespace ServiciosMedicos
                 MessageBox.Show("error usuario o contraeña incorrecto", "Error de acceso");
             }
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
