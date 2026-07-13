@@ -31,13 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneracionReceta));
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
             textBox4 = new TextBox();
+            textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
-            label7 = new Label();
-            textBox3 = new TextBox();
-            label6 = new Label();
             label5 = new Label();
+            label7 = new Label();
+            label6 = new Label();
             label4 = new Label();
             label1 = new Label();
             groupBox3 = new GroupBox();
@@ -59,6 +60,7 @@
             button3 = new Button();
             button4 = new Button();
             groupBox2.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,80 +76,106 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.White;
-            groupBox2.Controls.Add(textBox4);
-            groupBox2.Controls.Add(textBox2);
-            groupBox2.Controls.Add(textBox1);
-            groupBox2.Controls.Add(label7);
-            groupBox2.Controls.Add(textBox3);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(tableLayoutPanel1);
             groupBox2.Location = new Point(50, 138);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(694, 146);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.9704666F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.0295372F));
+            tableLayoutPanel1.Controls.Add(textBox4, 3, 1);
+            tableLayoutPanel1.Controls.Add(textBox3, 1, 0);
+            tableLayoutPanel1.Controls.Add(textBox2, 3, 0);
+            tableLayoutPanel1.Controls.Add(textBox1, 1, 1);
+            tableLayoutPanel1.Controls.Add(label5, 0, 1);
+            tableLayoutPanel1.Controls.Add(label7, 2, 1);
+            tableLayoutPanel1.Controls.Add(label6, 2, 0);
+            tableLayoutPanel1.Controls.Add(label4, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(3, 19);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(688, 124);
+            tableLayoutPanel1.TabIndex = 14;
+            // 
             // textBox4
             // 
-            textBox4.Location = new Point(422, 91);
+            textBox4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox4.Location = new Point(441, 81);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(190, 23);
+            textBox4.Size = new Size(244, 23);
             textBox4.TabIndex = 13;
+            // 
+            // textBox3
+            // 
+            textBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox3.Location = new Point(93, 19);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(252, 23);
+            textBox3.TabIndex = 10;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(422, 46);
+            textBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox2.Location = new Point(441, 19);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(190, 23);
+            textBox2.Size = new Size(244, 23);
             textBox2.TabIndex = 12;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(91, 88);
+            textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(93, 81);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(190, 23);
+            textBox1.Size = new Size(252, 23);
             textBox1.TabIndex = 11;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(361, 91);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 7;
-            label7.Text = "Fecha";
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(91, 46);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(190, 23);
-            textBox3.TabIndex = 10;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(361, 46);
-            label6.Name = "label6";
-            label6.Size = new Size(45, 15);
-            label6.TabIndex = 6;
-            label6.Text = "Carrera";
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(28, 91);
+            label5.Location = new Point(3, 85);
             label5.Name = "label5";
             label5.Size = new Size(51, 15);
             label5.TabIndex = 5;
             label5.Text = "Nombre";
             // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Left;
+            label7.AutoSize = true;
+            label7.Location = new Point(351, 85);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 7;
+            label7.Text = "Fecha";
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Left;
+            label6.AutoSize = true;
+            label6.Location = new Point(351, 23);
+            label6.Name = "label6";
+            label6.Size = new Size(45, 15);
+            label6.TabIndex = 6;
+            label6.Text = "Carrera";
+            // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
-            label4.Location = new Point(28, 46);
+            label4.Location = new Point(3, 23);
             label4.Name = "label4";
             label4.Size = new Size(57, 15);
             label4.TabIndex = 4;
@@ -164,6 +192,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.BackColor = Color.White;
             groupBox3.Controls.Add(button6);
             groupBox3.Controls.Add(textBox8);
@@ -351,7 +380,8 @@
             Name = "frmGeneracionReceta";
             Text = "GeneracionReceta";
             groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
@@ -389,5 +419,6 @@
         private TextBox textBox7;
         private TextBox textBox6;
         private TextBox textBox5;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }
