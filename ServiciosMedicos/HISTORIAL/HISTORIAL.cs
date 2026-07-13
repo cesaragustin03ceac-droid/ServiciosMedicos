@@ -89,9 +89,9 @@ namespace ServiciosMedicos.HISTORIAL
 
         }
 
-        
+
         // ESTE METODO CARGA LA INF DEL PACIENTE 
-    
+
         public void CargarInformacionPaciente(string idPaciente)
         {
             // UN LIMPÍA CAJAS POR AI HABIA DATOS ANTES 
@@ -155,7 +155,7 @@ namespace ServiciosMedicos.HISTORIAL
                 MessageBox.Show("Error al conectar con la BD: " + ex.Message);
             }
         }
-        
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -174,7 +174,7 @@ namespace ServiciosMedicos.HISTORIAL
             }
 
         }
-      
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -231,6 +231,9 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
