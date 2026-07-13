@@ -47,6 +47,8 @@
             groupBox3 = new GroupBox();
             label1 = new Label();
             dataGridView1 = new DataGridView();
+            button1 = new Button();
+            button2 = new Button();
             groupBox2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -57,11 +59,11 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
-            groupBox1.Location = new Point(-10, 0);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Location = new Point(-8, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(1136, 168);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(909, 135);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -71,12 +73,12 @@
             groupBox2.Controls.Add(panel1);
             groupBox2.Controls.Add(pictureBox1);
             groupBox2.Controls.Add(label2);
-            groupBox2.Location = new Point(22, 202);
-            groupBox2.Margin = new Padding(4, 5, 4, 5);
+            groupBox2.Location = new Point(17, 143);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 5, 4, 5);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
             groupBox2.RightToLeft = RightToLeft.No;
-            groupBox2.Size = new Size(1076, 375);
+            groupBox2.Size = new Size(861, 341);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
@@ -92,61 +94,77 @@
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
-            panel1.Location = new Point(321, 35);
-            panel1.Margin = new Padding(2);
+            panel1.Location = new Point(233, 19);
+            panel1.Margin = new Padding(1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(694, 292);
+            panel1.Size = new Size(608, 309);
             panel1.TabIndex = 4;
             // 
             // textBox5
             // 
             textBox5.BackColor = Color.FromArgb(217, 217, 217);
-            textBox5.Location = new Point(248, 230);
+            textBox5.BorderStyle = BorderStyle.None;
+            textBox5.Location = new Point(274, 265);
+            textBox5.Margin = new Padding(2, 3, 2, 3);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(370, 31);
+            textBox5.ReadOnly = true;
+            textBox5.Size = new Size(279, 20);
             textBox5.TabIndex = 9;
             // 
             // textBox4
             // 
             textBox4.BackColor = Color.FromArgb(217, 217, 217);
-            textBox4.Location = new Point(220, 174);
+            textBox4.BorderStyle = BorderStyle.None;
+            textBox4.Location = new Point(274, 204);
+            textBox4.Margin = new Padding(2, 3, 2, 3);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(398, 31);
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(281, 20);
             textBox4.TabIndex = 8;
             textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
             textBox3.BackColor = Color.FromArgb(217, 217, 217);
-            textBox3.Location = new Point(182, 119);
+            textBox3.BorderStyle = BorderStyle.None;
+            textBox3.Location = new Point(274, 147);
+            textBox3.Margin = new Padding(2, 3, 2, 3);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(436, 31);
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(281, 20);
             textBox3.TabIndex = 7;
             textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
             textBox2.BackColor = Color.FromArgb(217, 217, 217);
-            textBox2.Location = new Point(253, 75);
+            textBox2.BorderStyle = BorderStyle.None;
+            textBox2.Location = new Point(274, 92);
+            textBox2.Margin = new Padding(2, 3, 2, 3);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(365, 31);
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(281, 20);
             textBox2.TabIndex = 6;
             // 
             // textBox1
             // 
             textBox1.BackColor = Color.FromArgb(217, 217, 217);
-            textBox1.Location = new Point(128, 29);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Location = new Point(118, 43);
+            textBox1.Margin = new Padding(2, 3, 2, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(490, 31);
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(437, 20);
             textBox1.TabIndex = 5;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(39, 236);
-            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(33, 265);
+            label7.Margin = new Padding(1, 0, 1, 0);
             label7.Name = "label7";
-            label7.Size = new Size(209, 25);
+            label7.Size = new Size(233, 25);
             label7.TabIndex = 4;
             label7.Text = "Contacto de Emergencia:";
             label7.Click += label7_Click;
@@ -154,40 +172,44 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(39, 174);
-            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(33, 204);
+            label6.Margin = new Padding(1, 0, 1, 0);
             label6.Name = "label6";
-            label6.Size = new Size(176, 25);
+            label6.Size = new Size(198, 25);
             label6.TabIndex = 3;
             label6.Text = "Enfermedad Cronica:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(41, 119);
-            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(33, 147);
+            label5.Margin = new Padding(1, 0, 1, 0);
             label5.Name = "label5";
-            label5.Size = new Size(136, 25);
+            label5.Size = new Size(152, 25);
             label5.TabIndex = 2;
             label5.Text = "Tipo de Sangre:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(41, 75);
-            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(33, 92);
+            label4.Margin = new Padding(1, 0, 1, 0);
             label4.Name = "label4";
-            label4.Size = new Size(215, 25);
+            label4.Size = new Size(238, 25);
             label4.TabIndex = 1;
             label4.Text = "Alergias a Medicamentos:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(41, 29);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(33, 43);
+            label3.Margin = new Padding(1, 0, 1, 0);
             label3.Name = "label3";
-            label3.Size = new Size(82, 25);
+            label3.Size = new Size(91, 25);
             label3.TabIndex = 0;
             label3.Text = "Nombre:";
             label3.Click += label3_Click;
@@ -196,10 +218,9 @@
             // 
             pictureBox1.BackColor = Color.White;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(50, 75);
-            pictureBox1.Margin = new Padding(4);
+            pictureBox1.Location = new Point(23, 89);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(201, 199);
+            pictureBox1.Size = new Size(178, 193);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
@@ -208,10 +229,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(50, 35);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(23, 24);
+            label2.Margin = new Padding(1, 0, 1, 0);
             label2.Name = "label2";
-            label2.Size = new Size(179, 25);
+            label2.Size = new Size(201, 25);
             label2.TabIndex = 0;
             label2.Text = "Perfil del Estudiantes ";
             label2.Click += label2_Click;
@@ -221,22 +243,23 @@
             groupBox3.BackColor = Color.White;
             groupBox3.Controls.Add(label1);
             groupBox3.Controls.Add(dataGridView1);
-            groupBox3.Location = new Point(22, 602);
-            groupBox3.Margin = new Padding(4, 5, 4, 5);
+            groupBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox3.Location = new Point(17, 492);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(4, 5, 4, 5);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
             groupBox3.RightToLeft = RightToLeft.No;
-            groupBox3.Size = new Size(1076, 425);
+            groupBox3.Size = new Size(861, 280);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(79, 30);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(40, 23);
+            label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
-            label1.Size = new Size(167, 25);
+            label1.Size = new Size(185, 25);
             label1.TabIndex = 1;
             label1.Text = "Atenciones Pasadas";
             label1.Click += label1_Click;
@@ -246,26 +269,52 @@
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(76, 65);
-            dataGridView1.Margin = new Padding(2);
+            dataGridView1.Location = new Point(40, 49);
+            dataGridView1.Margin = new Padding(1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(939, 225);
+            dataGridView1.Size = new Size(773, 202);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(204, 204, 204);
+            button1.Location = new Point(524, 785);
+            button1.Margin = new Padding(2, 3, 2, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(135, 43);
+            button1.TabIndex = 2;
+            button1.Text = "Editar Expediente ";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(204, 204, 204);
+            button2.Location = new Point(711, 785);
+            button2.Margin = new Padding(2, 3, 2, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(119, 43);
+            button2.TabIndex = 3;
+            button2.Text = "Formato";
+            button2.UseVisualStyleBackColor = false;
+            // 
             // HISTORIAL
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(1120, 1050);
+            ClientSize = new Size(896, 840);
+            Controls.Add(button2);
             Controls.Add(groupBox3);
+            Controls.Add(button1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
+            Paint += DibujarBordeGrueso;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -297,5 +346,7 @@
         private TextBox textBox3;
         private TextBox textBox2;
         private TextBox textBox1;
+        private Button button2;
+        private Button button1;
     }
 }
