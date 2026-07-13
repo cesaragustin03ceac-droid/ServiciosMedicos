@@ -235,5 +235,10 @@ namespace ServiciosMedicos.HISTORIAL
         {
 
         }
+
+        private void HISTORIAL_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
