@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace ServiciosMedicos.Busqueda
 {
-    public partial class FMRHISTORIAL : Form
+    public partial class BusquedaAlumnos : Form
     {
-        public FMRHISTORIAL()
+        public BusquedaAlumnos()
         {
             InitializeComponent();
         }
