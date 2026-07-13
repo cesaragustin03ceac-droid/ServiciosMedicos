@@ -59,9 +59,11 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
-            groupBox1.Location = new Point(-7, 0);
+            groupBox1.Location = new Point(17, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(795, 101);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(861, 135);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -146,11 +148,11 @@
             // 
             textBox1.BackColor = Color.FromArgb(217, 217, 217);
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(239, 32);
-            textBox1.Margin = new Padding(2);
+            textBox1.Location = new Point(273, 43);
+            textBox1.Margin = new Padding(2, 3, 2, 3);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(247, 16);
+            textBox1.Size = new Size(282, 20);
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -269,15 +271,15 @@
             dataGridView1.Margin = new Padding(1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(676, 152);
+            dataGridView1.Size = new Size(773, 203);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button1
             // 
             button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Location = new Point(458, 589);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(523, 785);
+            button1.Margin = new Padding(2, 3, 2, 3);
             button1.Name = "button1";
             button1.Size = new Size(118, 32);
             button1.TabIndex = 2;
@@ -298,10 +300,10 @@
             // 
             // HISTORIAL
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(784, 661);
+            ClientSize = new Size(889, 837);
             Controls.Add(button2);
             Controls.Add(groupBox3);
             Controls.Add(button1);
@@ -309,6 +311,7 @@
             Controls.Add(groupBox1);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
+            Load += HISTORIAL_Load;
             Paint += DibujarBordeGrueso;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
