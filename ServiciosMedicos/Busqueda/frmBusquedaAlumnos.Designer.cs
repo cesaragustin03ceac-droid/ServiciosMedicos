@@ -1,6 +1,6 @@
 ﻿namespace ServiciosMedicos.Busqueda
 {
-    partial class FMRHISTORIAL
+    partial class BusquedaAlumnos
     {
         /// <summary>
         /// Required designer variable.
