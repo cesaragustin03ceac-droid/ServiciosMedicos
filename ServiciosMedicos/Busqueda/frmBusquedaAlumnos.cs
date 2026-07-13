@@ -8,14 +8,29 @@ using System.Windows.Forms;
 
 namespace ServiciosMedicos.Busqueda
 {
-    public partial class FMRHISTORIAL : Form
+    public partial class BusquedaAlumnos : Form
     {
-        public FMRHISTORIAL()
+        public BusquedaAlumnos()
         {
             InitializeComponent();
         }
 
         private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

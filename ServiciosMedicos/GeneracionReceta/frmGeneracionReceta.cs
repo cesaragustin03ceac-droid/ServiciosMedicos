@@ -15,6 +15,6 @@ namespace ServiciosMedicos.GeneracionReceta
             InitializeComponent();
         }
 
-       
+        
     }
 }
