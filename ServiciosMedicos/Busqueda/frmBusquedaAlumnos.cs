@@ -27,18 +27,21 @@ namespace ServiciosMedicos.Busqueda
             {
                 try
                 {
-                    string query = @"SELECT Matricula, 
+                    string query = @"SELECT Matricula AS 'Tipo de id', 
                                 Nombre, 
                                 Apellido_P AS 'Apellido Paterno', 
-                                Apellido_M AS 'Apellido Materno'
+                                Apellido_M AS 'Apellido Materno',
+                                'Alumno' AS 'Tipo de trabajador'
+                                
                           
                          FROM Alumno
                          UNION ALL
                         
-                         SELECT Num_Trabajador,
+                         SELECT Num_Trabajador AS 'Tipo de id',
                          Nombre,
                          Apellido_P AS 'Apellido Paterno',
-                         Apellido_M AS 'Apellido Materno'
+                         Apellido_M AS 'Apellido Materno',
+                         'Trabajdor' AS 'Tipo de trabajador'
                          FROM Trabajador;"; 
 
                     MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
