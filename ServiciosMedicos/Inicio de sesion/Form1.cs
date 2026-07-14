@@ -1,3 +1,5 @@
+using ServiciosMedicos.Busqueda;
+
 namespace ServiciosMedicos
 {
     public partial class Form1 : Form
@@ -9,7 +11,7 @@ namespace ServiciosMedicos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.ActiveControl = BtEntrar;
         }
 
         private void BtEntrar_Click(object sender, EventArgs e)
@@ -17,6 +19,8 @@ namespace ServiciosMedicos
             if (TxbUsuario.Text == "admin" && TxbContrasena.Text == "1234")
             {
                 MessageBox.Show("Ingresando", "Éxito");
+                frmBusquedaAlumnos ventanaBusqueda = new frmBusquedaAlumnos();
+                ventanaBusqueda.Show();
 
             }
             else
