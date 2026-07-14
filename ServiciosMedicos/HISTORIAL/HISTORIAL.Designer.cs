@@ -66,7 +66,7 @@
             groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(1062, 162);
+            groupBox1.Size = new Size(1062, 137);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -77,8 +77,8 @@
             groupBox2.Controls.Add(panel1);
             groupBox2.Controls.Add(pictureBox1);
             groupBox2.Controls.Add(label2);
-            groupBox2.Location = new Point(17, 143);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(13, 147);
+            groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
             groupBox2.RightToLeft = RightToLeft.No;
@@ -297,12 +297,12 @@
             groupBox3.Controls.Add(label1);
             groupBox3.Controls.Add(dataGridView1);
             groupBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox3.Location = new Point(17, 492);
-            groupBox3.Margin = new Padding(3, 4, 3, 4);
+            groupBox3.Location = new Point(13, 566);
+            groupBox3.Margin = new Padding(4, 5, 4, 5);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 4, 3, 4);
             groupBox3.RightToLeft = RightToLeft.No;
-            groupBox3.Size = new Size(861, 280);
+            groupBox3.Size = new Size(1033, 310);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
@@ -327,7 +327,7 @@
             dataGridView1.Margin = new Padding(1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1025, 296);
+            dataGridView1.Size = new Size(1025, 269);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -335,7 +335,7 @@
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Location = new Point(628, 942);
+            button1.Location = new Point(708, 885);
             button1.Margin = new Padding(2, 4, 2, 4);
             button1.Name = "button1";
             button1.Size = new Size(135, 43);
@@ -348,8 +348,8 @@
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.BackColor = Color.FromArgb(204, 204, 204);
-            button2.Location = new Point(711, 785);
-            button2.Margin = new Padding(2, 3, 2, 3);
+            button2.Location = new Point(903, 885);
+            button2.Margin = new Padding(2, 4, 2, 4);
             button2.Name = "button2";
             button2.Size = new Size(119, 43);
             button2.TabIndex = 3;
@@ -361,7 +361,7 @@
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(1067, 1004);
+            ClientSize = new Size(1067, 944);
             Controls.Add(button2);
             Controls.Add(groupBox3);
             Controls.Add(button1);
