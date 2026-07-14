@@ -20,7 +20,8 @@ namespace ServiciosMedicos.HISTORIAL
             groupBox3.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
             button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
             button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
-            
+            dataGridView1.Rows.Add("14/07/2026", "Dolor de cabeza", "Migraña leve", "Ver Formato", "Ver Receta");    // ESTA LINA ES SOLO DE PRUEBA PARA VISUALIZAR EL FORMATO DE LA TABLA 
+
 
         }
         private void EstilarDataGridView()
@@ -65,79 +66,14 @@ namespace ServiciosMedicos.HISTORIAL
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        
-
-
-        
-
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
-
-
-
-       
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void DibujarBordeGrueso(object sender, PaintEventArgs e)
         {
             Control control = (Control)sender;
-            int grosor = 3; // Lápiz grueso de 3 píxeles
+            int grosor = 3;
 
             using (Pen lapizNegro = new Pen(Color.Black, grosor))
             {
-                // Ajustamos el rectángulo un poquito hacia adentro para que no se amoche
+             
                 Rectangle rectangulo = new Rectangle(
                     grosor / 2,
                     grosor / 2,
@@ -148,20 +84,9 @@ namespace ServiciosMedicos.HISTORIAL
                 e.Graphics.DrawRectangle(lapizNegro, rectangulo);
             }
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HISTORIAL_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void groupBox2_Enter_1(object sender, EventArgs e)
         {
-
         }
+
     }
 }

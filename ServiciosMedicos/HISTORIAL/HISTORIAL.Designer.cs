@@ -68,7 +68,7 @@
             groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(1042, 137);
+            groupBox1.Size = new Size(1050, 137);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -86,7 +86,7 @@
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
             groupBox2.RightToLeft = RightToLeft.No;
-            groupBox2.Size = new Size(1042, 341);
+            groupBox2.Size = new Size(1050, 368);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Enter += groupBox2_Enter_1;
@@ -99,25 +99,27 @@
             dataGridView2.Location = new Point(294, 85);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.Size = new Size(724, 225);
+            dataGridView2.Size = new Size(732, 267);
             dataGridView2.TabIndex = 7;
             // 
             // textBox6
             // 
             textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox6.Location = new Point(515, 30);
+            textBox6.Location = new Point(544, 30);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(503, 31);
+            textBox6.ReadOnly = true;
+            textBox6.Size = new Size(482, 31);
             textBox6.TabIndex = 6;
             // 
             // label9
             // 
             label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.Location = new Point(294, 30);
             label9.Name = "label9";
-            label9.Size = new Size(183, 25);
+            label9.Size = new Size(243, 30);
             label9.TabIndex = 5;
-            label9.Text = "Nombre del paciente ";
+            label9.Text = "Nombre del paciente :";
             // 
             // pictureBox1
             // 
@@ -129,7 +131,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // label2
             // 
@@ -141,7 +142,6 @@
             label2.Size = new Size(213, 31);
             label2.TabIndex = 0;
             label2.Text = "Perfil del Paciente ";
-            label2.Click += label2_Click;
             // 
             // textBox5
             // 
@@ -166,7 +166,6 @@
             textBox4.ReadOnly = true;
             textBox4.Size = new Size(467, 24);
             textBox4.TabIndex = 8;
-            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
@@ -179,7 +178,6 @@
             textBox3.ReadOnly = true;
             textBox3.Size = new Size(467, 24);
             textBox3.TabIndex = 7;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
@@ -203,7 +201,6 @@
             textBox1.ReadOnly = true;
             textBox1.Size = new Size(467, 24);
             textBox1.TabIndex = 5;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label7
             // 
@@ -216,7 +213,6 @@
             label7.Size = new Size(251, 62);
             label7.TabIndex = 4;
             label7.Text = "Contacto de Emergencia:";
-            label7.Click += label7_Click;
             // 
             // label6
             // 
@@ -263,7 +259,6 @@
             label3.Size = new Size(108, 31);
             label3.TabIndex = 0;
             label3.Text = "Nombre:";
-            label3.Click += label3_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -299,12 +294,12 @@
             groupBox3.Controls.Add(label1);
             groupBox3.Controls.Add(dataGridView1);
             groupBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox3.Location = new Point(13, 566);
+            groupBox3.Location = new Point(4, 534);
             groupBox3.Margin = new Padding(4, 5, 4, 5);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 4, 3, 4);
             groupBox3.RightToLeft = RightToLeft.No;
-            groupBox3.Size = new Size(1033, 310);
+            groupBox3.Size = new Size(1050, 342);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             // 
@@ -317,7 +312,6 @@
             label1.Size = new Size(222, 31);
             label1.TabIndex = 1;
             label1.Text = "Atenciones Pasadas";
-            label1.Click += label1_Click;
             // 
             // dataGridView1
             // 
@@ -329,30 +323,29 @@
             dataGridView1.Margin = new Padding(1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1025, 256);
+            dataGridView1.Size = new Size(1042, 288);
             dataGridView1.TabIndex = 0;
             // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Location = new Point(708, 885);
+            button1.Location = new Point(663, 885);
             button1.Margin = new Padding(2, 4, 2, 4);
             button1.Name = "button1";
-            button1.Size = new Size(135, 43);
+            button1.Size = new Size(180, 43);
             button1.TabIndex = 2;
             button1.Text = "Editar Expediente ";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.BackColor = Color.FromArgb(204, 204, 204);
-            button2.Location = new Point(903, 885);
+            button2.Location = new Point(887, 885);
             button2.Margin = new Padding(2, 4, 2, 4);
             button2.Name = "button2";
-            button2.Size = new Size(119, 43);
+            button2.Size = new Size(135, 43);
             button2.TabIndex = 3;
             button2.Text = "Formato";
             button2.UseVisualStyleBackColor = false;
@@ -371,7 +364,6 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
-            Load += HISTORIAL_Load;
             Paint += DibujarBordeGrueso;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
