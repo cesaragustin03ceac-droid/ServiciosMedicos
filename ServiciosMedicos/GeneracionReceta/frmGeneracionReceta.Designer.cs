@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneracionReceta));
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -42,17 +41,12 @@
             label4 = new Label();
             label1 = new Label();
             groupBox3 = new GroupBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            button6 = new Button();
-            button5 = new Button();
-            label8 = new Label();
-            textBox8 = new TextBox();
-            label9 = new Label();
-            label10 = new Label();
-            textBox7 = new TextBox();
-            label11 = new Label();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            dataGridView1 = new DataGridView();
+            colMedicamentos = new DataGridViewComboBoxColumn();
+            colPresentación = new DataGridViewComboBoxColumn();
+            colFrecuencia = new DataGridViewComboBoxColumn();
+            colDuracion = new DataGridViewTextBoxColumn();
+            colEliminar = new DataGridViewButtonColumn();
             label2 = new Label();
             label3 = new Label();
             richTextBox1 = new RichTextBox();
@@ -63,11 +57,12 @@
             groupBox2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
             groupBox1.Location = new Point(-5, 0);
             groupBox1.Name = "groupBox1";
@@ -77,10 +72,10 @@
             // 
             // groupBox2
             // 
-            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(tableLayoutPanel1);
-            groupBox2.Location = new Point(50, 138);
+            groupBox2.Location = new Point(50, 134);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(694, 76);
             groupBox2.TabIndex = 2;
@@ -185,7 +180,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(49, 120);
+            label1.Location = new Point(49, 114);
             label1.Name = "label1";
             label1.Size = new Size(85, 15);
             label1.TabIndex = 3;
@@ -193,9 +188,9 @@
             // 
             // groupBox3
             // 
-            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.BackColor = Color.White;
-            groupBox3.Controls.Add(flowLayoutPanel1);
+            groupBox3.Controls.Add(dataGridView1);
             groupBox3.Location = new Point(50, 248);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(694, 214);
@@ -203,105 +198,51 @@
             groupBox3.TabStop = false;
             groupBox3.Enter += groupBox3_Enter;
             // 
-            // flowLayoutPanel1
+            // dataGridView1
             // 
-            flowLayoutPanel1.Location = new Point(28, 28);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(200, 100);
-            flowLayoutPanel1.TabIndex = 0;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colMedicamentos, colPresentación, colFrecuencia, colDuracion, colEliminar });
+            dataGridView1.Location = new Point(3, 19);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(688, 192);
+            dataGridView1.TabIndex = 0;
             // 
-            // button6
+            // colMedicamentos
             // 
-            button6.BackgroundImage = Properties.Resources.eliminar;
-            button6.BackgroundImageLayout = ImageLayout.Zoom;
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(655, 522);
-            button6.Name = "button6";
-            button6.Size = new Size(31, 20);
-            button6.TabIndex = 16;
-            button6.UseVisualStyleBackColor = true;
+            colMedicamentos.HeaderText = "Medicamento";
+            colMedicamentos.Name = "colMedicamentos";
+            colMedicamentos.Resizable = DataGridViewTriState.True;
             // 
-            // button5
+            // colPresentación
             // 
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
-            button5.BackgroundImageLayout = ImageLayout.Zoom;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(76, 468);
-            button5.Name = "button5";
-            button5.Size = new Size(31, 20);
-            button5.TabIndex = 6;
-            button5.UseVisualStyleBackColor = true;
+            colPresentación.HeaderText = "Presentación";
+            colPresentación.Name = "colPresentación";
+            colPresentación.Resizable = DataGridViewTriState.True;
             // 
-            // label8
+            // colFrecuencia
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(127, 471);
-            label8.Name = "label8";
-            label8.Size = new Size(81, 15);
-            label8.TabIndex = 5;
-            label8.Text = "Medicamento";
+            colFrecuencia.HeaderText = "Frecuencia";
+            colFrecuencia.Name = "colFrecuencia";
+            colFrecuencia.Resizable = DataGridViewTriState.True;
             // 
-            // textBox8
+            // colDuracion
             // 
-            textBox8.Location = new Point(539, 521);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(75, 23);
-            textBox8.TabIndex = 15;
+            colDuracion.HeaderText = "Duración";
+            colDuracion.Name = "colDuracion";
+            colDuracion.Resizable = DataGridViewTriState.True;
+            colDuracion.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
-            // label9
+            // colEliminar
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(267, 471);
-            label9.Name = "label9";
-            label9.Size = new Size(75, 15);
-            label9.TabIndex = 7;
-            label9.Text = "Presentación";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(409, 471);
-            label10.Name = "label10";
-            label10.Size = new Size(64, 15);
-            label10.TabIndex = 8;
-            label10.Text = "Frecuencia";
-            // 
-            // textBox7
-            // 
-            textBox7.Location = new Point(409, 521);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(64, 23);
-            textBox7.TabIndex = 14;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(539, 471);
-            label11.Name = "label11";
-            label11.Size = new Size(55, 15);
-            label11.TabIndex = 9;
-            label11.Text = "Duración";
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(127, 521);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(81, 23);
-            textBox5.TabIndex = 12;
-            // 
-            // textBox6
-            // 
-            textBox6.Location = new Point(267, 521);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(75, 23);
-            textBox6.TabIndex = 13;
+            colEliminar.HeaderText = "Eliminar";
+            colEliminar.Name = "colEliminar";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(49, 217);
+            label2.Location = new Point(49, 222);
             label2.Name = "label2";
             label2.Size = new Size(126, 15);
             label2.TabIndex = 5;
@@ -310,7 +251,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(50, 505);
+            label3.Location = new Point(50, 489);
             label3.Name = "label3";
             label3.Size = new Size(113, 15);
             label3.TabIndex = 6;
@@ -318,7 +259,8 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(49, 523);
+            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.Location = new Point(49, 514);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(424, 88);
             richTextBox1.TabIndex = 7;
@@ -326,6 +268,7 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.Location = new Point(501, 523);
             button1.Name = "button1";
             button1.Size = new Size(93, 32);
@@ -335,6 +278,7 @@
             // 
             // button2
             // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.Location = new Point(617, 523);
             button2.Name = "button2";
             button2.Size = new Size(93, 32);
@@ -344,6 +288,7 @@
             // 
             // button3
             // 
+            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button3.Location = new Point(501, 579);
             button3.Name = "button3";
             button3.Size = new Size(93, 32);
@@ -353,6 +298,7 @@
             // 
             // button4
             // 
+            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button4.Location = new Point(617, 579);
             button4.Name = "button4";
             button4.Size = new Size(93, 32);
@@ -366,24 +312,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(784, 641);
-            Controls.Add(button6);
             Controls.Add(button4);
-            Controls.Add(button5);
-            Controls.Add(label8);
             Controls.Add(button3);
-            Controls.Add(textBox8);
             Controls.Add(button2);
-            Controls.Add(label9);
             Controls.Add(button1);
-            Controls.Add(label10);
             Controls.Add(richTextBox1);
-            Controls.Add(textBox7);
             Controls.Add(label3);
-            Controls.Add(label11);
             Controls.Add(label2);
-            Controls.Add(textBox5);
             Controls.Add(groupBox3);
-            Controls.Add(textBox6);
             Controls.Add(label1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -393,6 +329,7 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -410,16 +347,6 @@
         private Button button2;
         private Button button3;
         private Button button4;
-        private Label label8;
-        private Button button5;
-        private Label label11;
-        private Label label10;
-        private Label label9;
-        private Button button6;
-        private TextBox textBox8;
-        private TextBox textBox7;
-        private TextBox textBox6;
-        private TextBox textBox5;
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBox4;
         private TextBox textBox3;
@@ -429,6 +356,11 @@
         private Label label7;
         private Label label6;
         private Label label4;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private DataGridView dataGridView1;
+        private DataGridViewComboBoxColumn colMedicamentos;
+        private DataGridViewComboBoxColumn colPresentación;
+        private DataGridViewComboBoxColumn colFrecuencia;
+        private DataGridViewTextBoxColumn colDuracion;
+        private DataGridViewButtonColumn colEliminar;
     }
 }
