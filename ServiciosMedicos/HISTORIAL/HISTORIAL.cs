@@ -235,5 +235,15 @@ namespace ServiciosMedicos.HISTORIAL
         {
 
         }
+
+        private void HISTORIAL_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
