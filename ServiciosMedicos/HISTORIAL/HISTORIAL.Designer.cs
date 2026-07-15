@@ -70,6 +70,78 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
+
+            // groupBox2perfil
+            // 
+            groupBox2perfil.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2perfil.BackColor = Color.White;
+            groupBox2perfil.Controls.Add(dataGridView2datos_d_paciente);
+            groupBox2perfil.Controls.Add(textBoxpaciente);
+            groupBox2perfil.Controls.Add(labelNOMBRE);
+            groupBox2perfil.Controls.Add(pictureBox1usuario);
+            groupBox2perfil.Controls.Add(label2);
+            groupBox2perfil.Location = new Point(4, 156);
+            groupBox2perfil.Margin = new Padding(4, 5, 4, 5);
+            groupBox2perfil.Name = "groupBox2perfil";
+            groupBox2perfil.Padding = new Padding(3, 4, 3, 4);
+            groupBox2perfil.RightToLeft = RightToLeft.No;
+            groupBox2perfil.Size = new Size(1050, 368);
+            groupBox2perfil.TabIndex = 1;
+            groupBox2perfil.TabStop = false;
+            groupBox2perfil.Enter += groupBox2_Enter_1;
+            // 
+            // dataGridView2datos_d_paciente
+            // 
+            dataGridView2datos_d_paciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView2datos_d_paciente.BackgroundColor = Color.White;
+            dataGridView2datos_d_paciente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2datos_d_paciente.Location = new Point(259, 85);
+            dataGridView2datos_d_paciente.Name = "dataGridView2datos_d_paciente";
+            dataGridView2datos_d_paciente.RowHeadersWidth = 62;
+            dataGridView2datos_d_paciente.Size = new Size(767, 267);
+            dataGridView2datos_d_paciente.TabIndex = 7;
+            // 
+            // textBoxpaciente
+            // 
+            textBoxpaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxpaciente.Location = new Point(508, 41);
+            textBoxpaciente.Name = "textBoxpaciente";
+            textBoxpaciente.ReadOnly = true;
+            textBoxpaciente.Size = new Size(510, 31);
+            textBoxpaciente.TabIndex = 6;
+            // 
+            // labelNOMBRE
+            // 
+            labelNOMBRE.AutoSize = true;
+            labelNOMBRE.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelNOMBRE.Location = new Point(259, 42);
+            labelNOMBRE.Name = "labelNOMBRE";
+            labelNOMBRE.Size = new Size(243, 30);
+            labelNOMBRE.TabIndex = 5;
+            labelNOMBRE.Text = "Nombre del paciente :";
+            // 
+            // pictureBox1usuario
+            // 
+            pictureBox1usuario.BackColor = Color.White;
+            pictureBox1usuario.Image = (Image)resources.GetObject("pictureBox1usuario.Image");
+            pictureBox1usuario.Location = new Point(23, 89);
+            pictureBox1usuario.Name = "pictureBox1usuario";
+            pictureBox1usuario.Size = new Size(178, 193);
+            pictureBox1usuario.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1usuario.TabIndex = 3;
+            pictureBox1usuario.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(23, 24);
+            label2.Margin = new Padding(1, 0, 1, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(213, 31);
+            label2.TabIndex = 0;
+            label2.Text = "Perfil del Paciente ";
+
             // groupBox2
             // 
             groupBox2.BackColor = Color.White;
@@ -100,6 +172,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(532, 232);
             panel1.TabIndex = 4;
+
             // 
             // textBox5
             // 
