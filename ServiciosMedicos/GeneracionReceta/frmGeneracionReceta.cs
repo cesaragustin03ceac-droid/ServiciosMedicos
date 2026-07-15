@@ -13,6 +13,10 @@ namespace ServiciosMedicos.GeneracionReceta
         public frmGeneracionReceta()
         {
             InitializeComponent();
+            button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
+            button5.Paint += DibujarBordeGrueso;
+            button6.Paint += DibujarBordeGrueso;
+            groupBox2.Paint += DibujarBordeGrueso;
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
