@@ -96,26 +96,26 @@
             dataGridView2datos_d_paciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView2datos_d_paciente.BackgroundColor = Color.White;
             dataGridView2datos_d_paciente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2datos_d_paciente.Location = new Point(294, 85);
+            dataGridView2datos_d_paciente.Location = new Point(259, 85);
             dataGridView2datos_d_paciente.Name = "dataGridView2datos_d_paciente";
             dataGridView2datos_d_paciente.RowHeadersWidth = 62;
-            dataGridView2datos_d_paciente.Size = new Size(732, 267);
+            dataGridView2datos_d_paciente.Size = new Size(767, 267);
             dataGridView2datos_d_paciente.TabIndex = 7;
             // 
             // textBoxpaciente
             // 
             textBoxpaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxpaciente.Location = new Point(544, 30);
+            textBoxpaciente.Location = new Point(508, 41);
             textBoxpaciente.Name = "textBoxpaciente";
             textBoxpaciente.ReadOnly = true;
-            textBoxpaciente.Size = new Size(482, 31);
+            textBoxpaciente.Size = new Size(510, 31);
             textBoxpaciente.TabIndex = 6;
             // 
             // labelNOMBRE
             // 
             labelNOMBRE.AutoSize = true;
             labelNOMBRE.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelNOMBRE.Location = new Point(294, 30);
+            labelNOMBRE.Location = new Point(259, 42);
             labelNOMBRE.Name = "labelNOMBRE";
             labelNOMBRE.Size = new Size(243, 30);
             labelNOMBRE.TabIndex = 5;
