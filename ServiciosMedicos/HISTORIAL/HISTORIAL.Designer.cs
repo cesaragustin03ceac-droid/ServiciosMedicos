@@ -30,8 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HISTORIAL));
             groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            panel1 = new Panel();
+            groupBox2perfil = new GroupBox();
+            dataGridView2datos_d_paciente = new DataGridView();
+            textBoxpaciente = new TextBox();
+            labelNOMBRE = new Label();
+            pictureBox1usuario = new PictureBox();
+            label2 = new Label();
             textBox5 = new TextBox();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
@@ -42,22 +46,23 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
-            pictureBox1 = new PictureBox();
-            label2 = new Label();
-            groupBox3 = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            groupBox3atenciones = new GroupBox();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            dataGridView1atenciones = new DataGridView();
             button1 = new Button();
             button2 = new Button();
-            groupBox2.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox2perfil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2datos_d_paciente).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            groupBox3atenciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1atenciones).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
             groupBox1.Location = new Point(-7, 0);
             groupBox1.Name = "groupBox1";
@@ -98,6 +103,7 @@
             // 
             // textBox5
             // 
+            textBox5.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox5.BackColor = Color.FromArgb(217, 217, 217);
             textBox5.BorderStyle = BorderStyle.None;
             textBox5.Location = new Point(240, 199);
@@ -109,6 +115,7 @@
             // 
             // textBox4
             // 
+            textBox4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox4.BackColor = Color.FromArgb(217, 217, 217);
             textBox4.BorderStyle = BorderStyle.None;
             textBox4.Location = new Point(240, 153);
@@ -117,10 +124,10 @@
             textBox4.ReadOnly = true;
             textBox4.Size = new Size(246, 16);
             textBox4.TabIndex = 8;
-            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
+            textBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox3.BackColor = Color.FromArgb(217, 217, 217);
             textBox3.BorderStyle = BorderStyle.None;
             textBox3.Location = new Point(240, 110);
@@ -129,7 +136,6 @@
             textBox3.ReadOnly = true;
             textBox3.Size = new Size(246, 16);
             textBox3.TabIndex = 7;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
@@ -144,6 +150,7 @@
             // 
             // textBox1
             // 
+            textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox1.BackColor = Color.FromArgb(217, 217, 217);
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Location = new Point(103, 32);
@@ -155,6 +162,7 @@
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.Location = new Point(29, 199);
@@ -163,10 +171,10 @@
             label7.Size = new Size(182, 20);
             label7.TabIndex = 4;
             label7.Text = "Contacto de Emergencia:";
-            label7.Click += label7_Click;
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.Location = new Point(29, 153);
@@ -189,6 +197,7 @@
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.Location = new Point(29, 69);
@@ -208,7 +217,6 @@
             label3.Size = new Size(71, 20);
             label3.TabIndex = 0;
             label3.Text = "Nombre:";
-            label3.Click += label3_Click;
             // 
             // pictureBox1
             // 
@@ -257,9 +265,8 @@
             label1.Size = new Size(147, 20);
             label1.TabIndex = 1;
             label1.Text = "Atenciones Pasadas";
-            label1.Click += label1_Click;
             // 
-            // dataGridView1
+            // dataGridView1atenciones
             // 
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
@@ -274,6 +281,7 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.BackColor = Color.FromArgb(204, 204, 204);
             button1.Location = new Point(458, 589);
             button1.Margin = new Padding(2);
@@ -282,10 +290,10 @@
             button1.TabIndex = 2;
             button1.Text = "Editar Expediente ";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.BackColor = Color.FromArgb(204, 204, 204);
             button2.Location = new Point(622, 589);
             button2.Margin = new Padding(2);
@@ -302,34 +310,34 @@
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(784, 661);
             Controls.Add(button2);
-            Controls.Add(groupBox3);
+            Controls.Add(groupBox3atenciones);
             Controls.Add(button1);
-            Controls.Add(groupBox2);
+            Controls.Add(groupBox2perfil);
             Controls.Add(groupBox1);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
             Paint += DibujarBordeGrueso;
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox2perfil.ResumeLayout(false);
+            groupBox2perfil.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2datos_d_paciente).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            groupBox3atenciones.ResumeLayout(false);
+            groupBox3atenciones.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1atenciones).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private GroupBox groupBox3;
+        private GroupBox groupBox2perfil;
+        private GroupBox groupBox3atenciones;
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView1atenciones;
         private Label label2;
-        private PictureBox pictureBox1;
-        private Panel panel1;
+        private PictureBox pictureBox1usuario;
         private Label label3;
         private Label label7;
         private Label label6;
@@ -342,5 +350,9 @@
         private TextBox textBox1;
         private Button button2;
         private Button button1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TextBox textBoxpaciente;
+        private Label labelNOMBRE;
+        private DataGridView dataGridView2datos_d_paciente;
     }
 }

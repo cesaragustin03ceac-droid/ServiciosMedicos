@@ -30,11 +30,11 @@
         {
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            dataGridView1 = new DataGridView();
-            textBox1 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            RegistroAlumnos = new DataGridView();
+            txtBusqueda = new TextBox();
+            btnNuevo = new Button();
+            btnEditar = new Button();
+            btnEliminar = new Button();
             groupBox3 = new GroupBox();
             label5 = new Label();
             label4 = new Label();
@@ -47,7 +47,7 @@
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,7 +73,7 @@
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
-            // dataGridView1
+            // RegistroAlumnos
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(36, 108);
@@ -82,14 +82,14 @@
             dataGridView1.Size = new Size(603, 262);
             dataGridView1.TabIndex = 1;
             // 
-            // textBox1
+            // txtBusqueda
             // 
             textBox1.Location = new Point(36, 41);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(603, 23);
             textBox1.TabIndex = 0;
             // 
-            // button1
+            // btnNuevo
             // 
             button1.Location = new Point(137, 703);
             button1.Margin = new Padding(3, 2, 3, 2);
@@ -99,7 +99,7 @@
             button1.Text = "Nuevo";
             button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnEditar
             // 
             button2.Location = new Point(369, 703);
             button2.Margin = new Padding(3, 2, 3, 2);
@@ -109,7 +109,7 @@
             button2.Text = "Editar";
             button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnEliminar
             // 
             button3.Location = new Point(556, 703);
             button3.Margin = new Padding(3, 2, 3, 2);
@@ -121,7 +121,6 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
@@ -184,7 +183,7 @@
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
             label1.TabIndex = 5;
-            label1.Text = "Nombre ";
+            label1.Text = "Matricula";
             label1.Click += label1_Click;
             // 
             // textBox6
@@ -235,9 +234,9 @@
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(784, 661);
             Controls.Add(groupBox3);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnEditar);
+            Controls.Add(btnNuevo);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "frmBusquedaAlumnos";
@@ -245,7 +244,7 @@
             Load += frmBusquedaAlumnos_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
@@ -255,21 +254,19 @@
 
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private TextBox textBox1;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private TextBox txtBusqueda;
+        private DataGridView RegistroAlumnos;
+        private Button btnNuevo;
+        private Button btnEditar;
+        private Button btnEliminar;
         private GroupBox groupBox3;
-        private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox txtApellidoM;
+        private TextBox txtApellidoP;
+        private TextBox txtNombre;
+        private TextBox txtMatricula;
         private Label label1;
         private Label label3;
         private Label label2;
-        private Label label5;
         private Label label4;
     }
 }
