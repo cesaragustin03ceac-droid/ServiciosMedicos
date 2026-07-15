@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneracionReceta));
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -42,18 +44,19 @@
             label1 = new Label();
             groupBox3 = new GroupBox();
             dataGridView1 = new DataGridView();
-            colMedicamentos = new DataGridViewComboBoxColumn();
-            colPresentación = new DataGridViewComboBoxColumn();
-            colFrecuencia = new DataGridViewComboBoxColumn();
+            colMedicamentos = new DataGridViewTextBoxColumn();
+            colPresentación = new DataGridViewTextBoxColumn();
+            colFrecuencia = new DataGridViewTextBoxColumn();
             colDuracion = new DataGridViewTextBoxColumn();
             colEliminar = new DataGridViewButtonColumn();
             label2 = new Label();
             label3 = new Label();
-            richTextBox1 = new RichTextBox();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
             button1 = new Button();
+            richTextBox1 = new RichTextBox();
             button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
             groupBox2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -97,6 +100,7 @@
             tableLayoutPanel1.Controls.Add(label6, 2, 0);
             tableLayoutPanel1.Controls.Add(label4, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             tableLayoutPanel1.Location = new Point(3, 19);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
@@ -110,7 +114,7 @@
             textBox4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox4.Location = new Point(441, 30);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(244, 23);
+            textBox4.Size = new Size(244, 27);
             textBox4.TabIndex = 13;
             // 
             // textBox3
@@ -118,7 +122,7 @@
             textBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox3.Location = new Point(93, 3);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(252, 23);
+            textBox3.Size = new Size(252, 27);
             textBox3.TabIndex = 10;
             // 
             // textBox2
@@ -126,7 +130,7 @@
             textBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox2.Location = new Point(441, 3);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(244, 23);
+            textBox2.Size = new Size(244, 27);
             textBox2.TabIndex = 12;
             // 
             // textBox1
@@ -134,16 +138,17 @@
             textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox1.Location = new Point(93, 30);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(252, 23);
+            textBox1.Size = new Size(252, 27);
             textBox1.TabIndex = 11;
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(3, 33);
+            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            label5.Location = new Point(3, 30);
             label5.Name = "label5";
-            label5.Size = new Size(51, 15);
+            label5.Size = new Size(67, 20);
             label5.TabIndex = 5;
             label5.Text = "Nombre";
             // 
@@ -151,9 +156,10 @@
             // 
             label7.Anchor = AnchorStyles.Left;
             label7.AutoSize = true;
-            label7.Location = new Point(351, 33);
+            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            label7.Location = new Point(351, 30);
             label7.Name = "label7";
-            label7.Size = new Size(38, 15);
+            label7.Size = new Size(49, 20);
             label7.TabIndex = 7;
             label7.Text = "Fecha";
             // 
@@ -161,9 +167,10 @@
             // 
             label6.Anchor = AnchorStyles.Left;
             label6.AutoSize = true;
-            label6.Location = new Point(351, 6);
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            label6.Location = new Point(351, 3);
             label6.Name = "label6";
-            label6.Size = new Size(45, 15);
+            label6.Size = new Size(60, 20);
             label6.TabIndex = 6;
             label6.Text = "Carrera";
             // 
@@ -171,18 +178,20 @@
             // 
             label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
-            label4.Location = new Point(3, 6);
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            label4.Location = new Point(3, 3);
             label4.Name = "label4";
-            label4.Size = new Size(57, 15);
+            label4.Size = new Size(75, 20);
             label4.TabIndex = 4;
             label4.Text = "Matricula";
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             label1.Location = new Point(49, 114);
             label1.Name = "label1";
-            label1.Size = new Size(85, 15);
+            label1.Size = new Size(113, 20);
             label1.TabIndex = 3;
             label1.Text = "Datos Paciente";
             // 
@@ -200,32 +209,39 @@
             // 
             // dataGridView1
             // 
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colMedicamentos, colPresentación, colFrecuencia, colDuracion, colEliminar });
-            dataGridView1.Location = new Point(3, 19);
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.Location = new Point(3, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(688, 192);
+            dataGridView1.Size = new Size(688, 208);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // colMedicamentos
             // 
             colMedicamentos.HeaderText = "Medicamento";
             colMedicamentos.Name = "colMedicamentos";
             colMedicamentos.Resizable = DataGridViewTriState.True;
+            colMedicamentos.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // colPresentación
             // 
             colPresentación.HeaderText = "Presentación";
             colPresentación.Name = "colPresentación";
             colPresentación.Resizable = DataGridViewTriState.True;
+            colPresentación.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // colFrecuencia
             // 
             colFrecuencia.HeaderText = "Frecuencia";
             colFrecuencia.Name = "colFrecuencia";
             colFrecuencia.Resizable = DataGridViewTriState.True;
+            colFrecuencia.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // colDuracion
             // 
@@ -242,69 +258,93 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             label2.Location = new Point(49, 222);
             label2.Name = "label2";
-            label2.Size = new Size(126, 15);
+            label2.Size = new Size(166, 20);
             label2.TabIndex = 5;
             label2.Text = "Medicamentos y Dosis";
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Location = new Point(50, 489);
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            label3.Location = new Point(50, 483);
             label3.Name = "label3";
-            label3.Size = new Size(113, 15);
+            label3.Size = new Size(149, 20);
             label3.TabIndex = 6;
             label3.Text = "Indicaciones y Dosis";
             // 
-            // richTextBox1
+            // button5
             // 
-            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Location = new Point(49, 514);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(424, 88);
-            richTextBox1.TabIndex = 7;
-            richTextBox1.Text = "";
+            button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button5.BackColor = Color.FromArgb(204, 204, 204);
+            button5.Location = new Point(484, 524);
+            button5.Margin = new Padding(2);
+            button5.Name = "button5";
+            button5.Size = new Size(118, 32);
+            button5.TabIndex = 12;
+            button5.Text = "Guardar";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button6.BackColor = Color.FromArgb(204, 204, 204);
+            button6.Location = new Point(623, 524);
+            button6.Margin = new Padding(2);
+            button6.Name = "button6";
+            button6.Size = new Size(118, 32);
+            button6.TabIndex = 13;
+            button6.Text = "Vista Previa";
+            button6.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button7.BackColor = Color.FromArgb(204, 204, 204);
+            button7.Location = new Point(484, 560);
+            button7.Margin = new Padding(2);
+            button7.Name = "button7";
+            button7.Size = new Size(118, 32);
+            button7.TabIndex = 14;
+            button7.Text = "Imprimir";
+            button7.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(501, 523);
+            button1.BackColor = Color.FromArgb(204, 204, 204);
+            button1.Location = new Point(626, 560);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(93, 32);
-            button1.TabIndex = 8;
-            button1.Text = "Guardar";
-            button1.UseVisualStyleBackColor = true;
+            button1.Size = new Size(118, 32);
+            button1.TabIndex = 15;
+            button1.Text = "Cancelar";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.Location = new Point(49, 506);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(424, 96);
+            richTextBox1.TabIndex = 7;
+            richTextBox1.Text = "";
             // 
             // button2
             // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Location = new Point(617, 523);
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Zoom;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(221, 220);
             button2.Name = "button2";
-            button2.Size = new Size(93, 32);
-            button2.TabIndex = 9;
-            button2.Text = "Vista preva";
+            button2.RightToLeft = RightToLeft.No;
+            button2.Size = new Size(25, 25);
+            button2.TabIndex = 16;
             button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.Location = new Point(501, 579);
-            button3.Name = "button3";
-            button3.Size = new Size(93, 32);
-            button3.TabIndex = 10;
-            button3.Text = "Imprimir";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Location = new Point(617, 579);
-            button4.Name = "button4";
-            button4.Size = new Size(93, 32);
-            button4.TabIndex = 11;
-            button4.Text = "Cancelar";
-            button4.UseVisualStyleBackColor = true;
             // 
             // frmGeneracionReceta
             // 
@@ -312,19 +352,21 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(784, 641);
-            Controls.Add(button4);
-            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(richTextBox1);
+            Controls.Add(button7);
+            Controls.Add(button6);
+            Controls.Add(button5);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(groupBox3);
             Controls.Add(label1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Controls.Add(richTextBox1);
             Name = "frmGeneracionReceta";
             Text = "GeneracionReceta";
+            Load += frmGeneracionReceta_Load;
             groupBox2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -342,11 +384,6 @@
         private GroupBox groupBox3;
         private Label label2;
         private Label label3;
-        private RichTextBox richTextBox1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBox4;
         private TextBox textBox3;
@@ -357,10 +394,16 @@
         private Label label6;
         private Label label4;
         private DataGridView dataGridView1;
-        private DataGridViewComboBoxColumn colMedicamentos;
-        private DataGridViewComboBoxColumn colPresentación;
-        private DataGridViewComboBoxColumn colFrecuencia;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private Button button1;
+        private RichTextBox richTextBox1;
+        private DataGridViewTextBoxColumn colMedicamentos;
+        private DataGridViewTextBoxColumn colPresentación;
+        private DataGridViewTextBoxColumn colFrecuencia;
         private DataGridViewTextBoxColumn colDuracion;
         private DataGridViewButtonColumn colEliminar;
+        private Button button2;
     }
 }
