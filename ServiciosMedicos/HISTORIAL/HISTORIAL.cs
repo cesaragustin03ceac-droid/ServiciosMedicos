@@ -16,54 +16,54 @@ namespace ServiciosMedicos.HISTORIAL
             InitializeComponent();
             EstilarDataGridView(); //ESTIRA LA TABLA DE ABAJPO 
             groupBox1.Paint += DibujarBordeGrueso;  // BORDES DFEL GRUPÓ BOX 1 INFORMACION DEL PACIENTE 
-            groupBox2.Paint += DibujarBordeGrueso;   // BORDES DFEL GRUPÓ BOX  3 PARTE GRIS DED ARIIBA 
-            groupBox3.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
+            groupBox2perfil.Paint += DibujarBordeGrueso;   // BORDES DFEL GRUPÓ BOX  3 PARTE GRIS DED ARIIBA 
+            groupBox3atenciones.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
             button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
             button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
-            dataGridView1.Rows.Add("14/07/2026", "Dolor de cabeza", "Migraña leve", "Ver Formato", "Ver Receta");    // ESTA LINA ES SOLO DE PRUEBA PARA VISUALIZAR EL FORMATO DE LA TABLA 
+            dataGridView1atenciones.Rows.Add("14/07/2026", "Dolor de cabeza", "Migraña leve", "Ver Formato", "Ver Receta");    // ESTA LINA ES SOLO DE PRUEBA PARA VISUALIZAR EL FORMATO DE LA TABLA 
 
 
         }
         private void EstilarDataGridView()
         {
-            dataGridView1.Columns.Clear();
-            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1atenciones.Columns.Clear();
+            dataGridView1atenciones.EnableHeadersVisualStyles = false;
 
             // Color Azul de la Guía de Estilos (#6FA8DC)
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#6FA8DC");
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.ColumnHeadersHeight = 35;
+            dataGridView1atenciones.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#6FA8DC");
+            dataGridView1atenciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dataGridView1atenciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridView1atenciones.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1atenciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1atenciones.ColumnHeadersHeight = 35;
 
             // Formato general de celdas y rejilla
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.BorderStyle = BorderStyle.FixedSingle;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dataGridView1.GridColor = Color.Black;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1atenciones.BackgroundColor = Color.White;
+            dataGridView1atenciones.BorderStyle = BorderStyle.FixedSingle;
+            dataGridView1atenciones.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dataGridView1atenciones.GridColor = Color.Black;
+            dataGridView1atenciones.RowHeadersVisible = false;
+            dataGridView1atenciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1atenciones.AllowUserToAddRows = false;
 
             // Crear las 5 columnas vacías
-            dataGridView1.Columns.Add("colFecha", "Fecha");
-            dataGridView1.Columns.Add("colMotivo", "Motivo");
-            dataGridView1.Columns.Add("colDiagnostico", "Diagnostico");
+            dataGridView1atenciones.Columns.Add("colFecha", "Fecha");
+            dataGridView1atenciones.Columns.Add("colMotivo", "Motivo");
+            dataGridView1atenciones.Columns.Add("colDiagnostico", "Diagnostico");
 
             DataGridViewLinkColumn colFormato = new DataGridViewLinkColumn();
             colFormato.Name = "colFormato";
             colFormato.HeaderText = "Formato";
             colFormato.UseColumnTextForLinkValue = false;
-            dataGridView1.Columns.Add(colFormato);
+            dataGridView1atenciones.Columns.Add(colFormato);
 
             DataGridViewLinkColumn colReceta = new DataGridViewLinkColumn();
             colReceta.Name = "colReceta";
             colReceta.HeaderText = "Receta";
             colReceta.UseColumnTextForLinkValue = false;
-            dataGridView1.Columns.Add(colReceta);
+            dataGridView1atenciones.Columns.Add(colReceta);
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1atenciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void DibujarBordeGrueso(object sender, PaintEventArgs e)
