@@ -67,9 +67,11 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
-            groupBox1.Location = new Point(-5, 0);
+            groupBox1.Location = new Point(-6, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(795, 81);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(909, 108);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
@@ -78,18 +80,20 @@
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(tableLayoutPanel1);
-            groupBox2.Location = new Point(50, 134);
+            groupBox2.Location = new Point(57, 179);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(694, 76);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(793, 101);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 103F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.9704666F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 103F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.0295372F));
             tableLayoutPanel1.Controls.Add(textBox4, 3, 1);
             tableLayoutPanel1.Controls.Add(textBox3, 1, 0);
@@ -101,44 +105,49 @@
             tableLayoutPanel1.Controls.Add(label4, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            tableLayoutPanel1.Location = new Point(3, 19);
+            tableLayoutPanel1.Location = new Point(3, 24);
+            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(688, 54);
+            tableLayoutPanel1.Size = new Size(787, 73);
             tableLayoutPanel1.TabIndex = 14;
             // 
             // textBox4
             // 
             textBox4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox4.Location = new Point(441, 30);
+            textBox4.Location = new Point(505, 40);
+            textBox4.Margin = new Padding(3, 4, 3, 4);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(244, 27);
+            textBox4.Size = new Size(279, 32);
             textBox4.TabIndex = 13;
             // 
             // textBox3
             // 
             textBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.Location = new Point(93, 3);
+            textBox3.Location = new Point(106, 4);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(252, 27);
+            textBox3.Size = new Size(290, 32);
             textBox3.TabIndex = 10;
             // 
             // textBox2
             // 
             textBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Location = new Point(441, 3);
+            textBox2.Location = new Point(505, 4);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(244, 27);
+            textBox2.Size = new Size(279, 32);
             textBox2.TabIndex = 12;
             // 
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(93, 30);
+            textBox1.Location = new Point(106, 40);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(252, 27);
+            textBox1.Size = new Size(290, 32);
             textBox1.TabIndex = 11;
             // 
             // label5
@@ -146,9 +155,9 @@
             label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label5.Location = new Point(3, 30);
+            label5.Location = new Point(3, 42);
             label5.Name = "label5";
-            label5.Size = new Size(67, 20);
+            label5.Size = new Size(86, 25);
             label5.TabIndex = 5;
             label5.Text = "Nombre";
             // 
@@ -157,9 +166,9 @@
             label7.Anchor = AnchorStyles.Left;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label7.Location = new Point(351, 30);
+            label7.Location = new Point(402, 42);
             label7.Name = "label7";
-            label7.Size = new Size(49, 20);
+            label7.Size = new Size(62, 25);
             label7.TabIndex = 7;
             label7.Text = "Fecha";
             // 
@@ -168,9 +177,9 @@
             label6.Anchor = AnchorStyles.Left;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label6.Location = new Point(351, 3);
+            label6.Location = new Point(402, 5);
             label6.Name = "label6";
-            label6.Size = new Size(60, 20);
+            label6.Size = new Size(78, 25);
             label6.TabIndex = 6;
             label6.Text = "Carrera";
             // 
@@ -179,9 +188,9 @@
             label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label4.Location = new Point(3, 3);
+            label4.Location = new Point(3, 5);
             label4.Name = "label4";
-            label4.Size = new Size(75, 20);
+            label4.Size = new Size(96, 25);
             label4.TabIndex = 4;
             label4.Text = "Matricula";
             // 
@@ -189,9 +198,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label1.Location = new Point(49, 114);
+            label1.Location = new Point(56, 152);
             label1.Name = "label1";
-            label1.Size = new Size(113, 20);
+            label1.Size = new Size(143, 25);
             label1.TabIndex = 3;
             label1.Text = "Datos Paciente";
             // 
@@ -200,9 +209,11 @@
             groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.BackColor = Color.White;
             groupBox3.Controls.Add(dataGridView1);
-            groupBox3.Location = new Point(50, 248);
+            groupBox3.Location = new Point(57, 331);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(694, 214);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
+            groupBox3.Size = new Size(793, 285);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Enter += groupBox3_Enter;
@@ -216,15 +227,18 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colMedicamentos, colPresentación, colFrecuencia, colDuracion, colEliminar });
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.Location = new Point(3, 3);
+            dataGridView1.Location = new Point(3, 4);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(688, 208);
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(786, 277);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // colMedicamentos
             // 
             colMedicamentos.HeaderText = "Medicamento";
+            colMedicamentos.MinimumWidth = 6;
             colMedicamentos.Name = "colMedicamentos";
             colMedicamentos.Resizable = DataGridViewTriState.True;
             colMedicamentos.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -232,6 +246,7 @@
             // colPresentación
             // 
             colPresentación.HeaderText = "Presentación";
+            colPresentación.MinimumWidth = 6;
             colPresentación.Name = "colPresentación";
             colPresentación.Resizable = DataGridViewTriState.True;
             colPresentación.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -239,6 +254,7 @@
             // colFrecuencia
             // 
             colFrecuencia.HeaderText = "Frecuencia";
+            colFrecuencia.MinimumWidth = 6;
             colFrecuencia.Name = "colFrecuencia";
             colFrecuencia.Resizable = DataGridViewTriState.True;
             colFrecuencia.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -246,6 +262,7 @@
             // colDuracion
             // 
             colDuracion.HeaderText = "Duración";
+            colDuracion.MinimumWidth = 6;
             colDuracion.Name = "colDuracion";
             colDuracion.Resizable = DataGridViewTriState.True;
             colDuracion.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -253,15 +270,16 @@
             // colEliminar
             // 
             colEliminar.HeaderText = "Eliminar";
+            colEliminar.MinimumWidth = 6;
             colEliminar.Name = "colEliminar";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label2.Location = new Point(49, 222);
+            label2.Location = new Point(56, 296);
             label2.Name = "label2";
-            label2.Size = new Size(166, 20);
+            label2.Size = new Size(209, 25);
             label2.TabIndex = 5;
             label2.Text = "Medicamentos y Dosis";
             // 
@@ -270,9 +288,9 @@
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label3.Location = new Point(50, 483);
+            label3.Location = new Point(57, 644);
             label3.Name = "label3";
-            label3.Size = new Size(149, 20);
+            label3.Size = new Size(189, 25);
             label3.TabIndex = 6;
             label3.Text = "Indicaciones y Dosis";
             // 
@@ -280,10 +298,10 @@
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button5.BackColor = Color.FromArgb(204, 204, 204);
-            button5.Location = new Point(484, 524);
-            button5.Margin = new Padding(2);
+            button5.Location = new Point(553, 699);
+            button5.Margin = new Padding(2, 3, 2, 3);
             button5.Name = "button5";
-            button5.Size = new Size(118, 32);
+            button5.Size = new Size(135, 43);
             button5.TabIndex = 12;
             button5.Text = "Guardar";
             button5.UseVisualStyleBackColor = false;
@@ -292,10 +310,10 @@
             // 
             button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button6.BackColor = Color.FromArgb(204, 204, 204);
-            button6.Location = new Point(623, 524);
-            button6.Margin = new Padding(2);
+            button6.Location = new Point(712, 699);
+            button6.Margin = new Padding(2, 3, 2, 3);
             button6.Name = "button6";
-            button6.Size = new Size(118, 32);
+            button6.Size = new Size(135, 43);
             button6.TabIndex = 13;
             button6.Text = "Vista Previa";
             button6.UseVisualStyleBackColor = false;
@@ -304,10 +322,10 @@
             // 
             button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button7.BackColor = Color.FromArgb(204, 204, 204);
-            button7.Location = new Point(484, 560);
-            button7.Margin = new Padding(2);
+            button7.Location = new Point(553, 747);
+            button7.Margin = new Padding(2, 3, 2, 3);
             button7.Name = "button7";
-            button7.Size = new Size(118, 32);
+            button7.Size = new Size(135, 43);
             button7.TabIndex = 14;
             button7.Text = "Imprimir";
             button7.UseVisualStyleBackColor = false;
@@ -316,10 +334,10 @@
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Location = new Point(626, 560);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(715, 747);
+            button1.Margin = new Padding(2, 3, 2, 3);
             button1.Name = "button1";
-            button1.Size = new Size(118, 32);
+            button1.Size = new Size(135, 43);
             button1.TabIndex = 15;
             button1.Text = "Cancelar";
             button1.UseVisualStyleBackColor = false;
@@ -327,9 +345,10 @@
             // richTextBox1
             // 
             richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Location = new Point(49, 506);
+            richTextBox1.Location = new Point(56, 675);
+            richTextBox1.Margin = new Padding(3, 4, 3, 4);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(424, 96);
+            richTextBox1.Size = new Size(484, 127);
             richTextBox1.TabIndex = 7;
             richTextBox1.Text = "";
             // 
@@ -339,19 +358,20 @@
             button2.BackgroundImageLayout = ImageLayout.Zoom;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(221, 220);
+            button2.Location = new Point(253, 293);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
             button2.RightToLeft = RightToLeft.No;
-            button2.Size = new Size(25, 25);
+            button2.Size = new Size(29, 33);
             button2.TabIndex = 16;
             button2.UseVisualStyleBackColor = true;
             // 
             // frmGeneracionReceta
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(784, 641);
+            ClientSize = new Size(896, 855);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(button7);
@@ -364,6 +384,7 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(richTextBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmGeneracionReceta";
             Text = "GeneracionReceta";
             Load += frmGeneracionReceta_Load;
