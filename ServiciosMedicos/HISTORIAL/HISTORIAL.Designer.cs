@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HISTORIAL));
             groupBox1 = new GroupBox();
             groupBox2perfil = new GroupBox();
-            dataGridView2datos_d_paciente = new DataGridView();
-            textBoxpaciente = new TextBox();
+            PerfilPaciente = new DataGridView();
+            txtNombrePaciente = new TextBox();
             labelNOMBRE = new Label();
             pictureBox1usuario = new PictureBox();
             label2 = new Label();
@@ -53,7 +53,7 @@
             button1 = new Button();
             button2 = new Button();
             groupBox2perfil.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2datos_d_paciente).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PerfilPaciente).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             groupBox3atenciones.SuspendLayout();
@@ -76,8 +76,8 @@
             // 
             groupBox2perfil.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2perfil.BackColor = Color.White;
-            groupBox2perfil.Controls.Add(dataGridView2datos_d_paciente);
-            groupBox2perfil.Controls.Add(textBoxpaciente);
+            groupBox2perfil.Controls.Add(PerfilPaciente);
+            groupBox2perfil.Controls.Add(txtNombrePaciente);
             groupBox2perfil.Controls.Add(labelNOMBRE);
             groupBox2perfil.Controls.Add(pictureBox1usuario);
             groupBox2perfil.Controls.Add(label2);
@@ -91,25 +91,25 @@
             groupBox2perfil.TabStop = false;
             groupBox2perfil.Enter += groupBox2_Enter_1;
             // 
-            // dataGridView2datos_d_paciente
+            // PerfilPaciente
             // 
-            dataGridView2datos_d_paciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView2datos_d_paciente.BackgroundColor = Color.White;
-            dataGridView2datos_d_paciente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2datos_d_paciente.Location = new Point(259, 85);
-            dataGridView2datos_d_paciente.Name = "dataGridView2datos_d_paciente";
-            dataGridView2datos_d_paciente.RowHeadersWidth = 62;
-            dataGridView2datos_d_paciente.Size = new Size(767, 267);
-            dataGridView2datos_d_paciente.TabIndex = 7;
+            PerfilPaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PerfilPaciente.BackgroundColor = Color.White;
+            PerfilPaciente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            PerfilPaciente.Location = new Point(259, 85);
+            PerfilPaciente.Name = "PerfilPaciente";
+            PerfilPaciente.RowHeadersWidth = 62;
+            PerfilPaciente.Size = new Size(767, 267);
+            PerfilPaciente.TabIndex = 7;
             // 
-            // textBoxpaciente
+            // txtNombrePaciente
             // 
-            textBoxpaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxpaciente.Location = new Point(508, 41);
-            textBoxpaciente.Name = "textBoxpaciente";
-            textBoxpaciente.ReadOnly = true;
-            textBoxpaciente.Size = new Size(510, 31);
-            textBoxpaciente.TabIndex = 6;
+            txtNombrePaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtNombrePaciente.Location = new Point(508, 41);
+            txtNombrePaciente.Name = "txtNombrePaciente";
+            txtNombrePaciente.ReadOnly = true;
+            txtNombrePaciente.Size = new Size(510, 31);
+            txtNombrePaciente.TabIndex = 6;
             // 
             // labelNOMBRE
             // 
@@ -367,7 +367,7 @@
             Paint += DibujarBordeGrueso;
             groupBox2perfil.ResumeLayout(false);
             groupBox2perfil.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2datos_d_paciente).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PerfilPaciente).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -399,8 +399,8 @@
         private Button button2;
         private Button button1;
         private TableLayoutPanel tableLayoutPanel1;
-        private TextBox textBoxpaciente;
+        private TextBox txtNombrePaciente;
         private Label labelNOMBRE;
-        private DataGridView dataGridView2datos_d_paciente;
+        private DataGridView PerfilPaciente;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ServiciosMedicos.DataConexion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,6 +87,84 @@ namespace ServiciosMedicos.HISTORIAL
         }
         private void groupBox2_Enter_1(object sender, EventArgs e)
         {
+        }
+        public void CargarPerfilPaciente(string idPaciente, string tipoPaciente)
+        {
+            Conexion conexionBD = new Conexion();
+            MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
+
+            if (conexionAbierta != null)
+            {
+                try
+                {
+                    string query = "";
+
+                    if (tipoPaciente == "Alumno")
+                    {
+                        query = @"SELECT a.Nombre, a.Apellido_P, a.Apellido_M, 
+                                 e.TipoSangre AS 'Tipo de Sangre', 
+                                 e.Alergias, 
+                                 e.Enfermedades AS 'Enfermedades Crónicas',
+                                 e.Peso, 
+                                 e.Talla
+                          FROM Alumno a
+                          LEFT JOIN Consulta c ON a.Matricula = c.Matricula_Alumno
+                          LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico
+                          LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
+                          WHERE a.Matricula = @id 
+                          LIMIT 1;";
+                    }
+                    else if (tipoPaciente == "Trabajador")
+                    {
+                        query = @"SELECT t.Nombre, t.Apellido_P, t.Apellido_M, 
+                                 e.TipoSangre AS 'Tipo de Sangre', 
+                                 e.Alergias, 
+                                 e.Enfermedades AS 'Enfermedades Crónicas',
+                                 e.Peso, 
+                                 e.Talla
+                          FROM Trabajador t
+                          LEFT JOIN Consulta c ON t.Num_Trabajador = c.Num_Trabajador
+                          LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico
+                          LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
+                          WHERE t.Num_Trabajador = @id 
+                          LIMIT 1;";
+                    }
+
+                    MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
+                    comando.Parameters.AddWithValue("@id", idPaciente);
+
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(comando);
+                    DataTable tablaDatos = new DataTable();
+                    adaptador.Fill(tablaDatos);
+
+                    if (tablaDatos.Rows.Count > 0)
+                    {
+                        string nombre = tablaDatos.Rows[0]["Nombre"].ToString();
+                        string apellidoP = tablaDatos.Rows[0]["Apellido_P"].ToString();
+                        string apellidoM = tablaDatos.Rows[0]["Apellido_M"].ToString();
+
+                        txtNombrePaciente.Text = $"{nombre} {apellidoP} {apellidoM}";
+
+                        tablaDatos.Columns.Remove("Nombre");
+                        tablaDatos.Columns.Remove("Apellido_P");
+                        tablaDatos.Columns.Remove("Apellido_M");
+
+                        PerfilPaciente.DataSource = tablaDatos;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró al paciente en la base de datos.", "Aviso");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar el perfil: " + ex.Message, "Error");
+                }
+                finally
+                {
+                    conexionAbierta.Close();
+                }
+            }
         }
 
     }
