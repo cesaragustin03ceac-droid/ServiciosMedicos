@@ -41,7 +41,7 @@ namespace ServiciosMedicos.Busqueda
                          Nombre,
                          Apellido_P AS 'Apellido Paterno',
                          Apellido_M AS 'Apellido Materno',
-                         'Trabajdor' AS 'Tipo de trabajador'
+                         'Trabajador' AS 'Tipo de trabajador'
                          FROM Trabajador;";
 
                     MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
@@ -91,6 +91,16 @@ namespace ServiciosMedicos.Busqueda
 
                 ventanaPerfil.CargarPerfilPaciente(idSeleccionado, tipoSeleccionado);
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

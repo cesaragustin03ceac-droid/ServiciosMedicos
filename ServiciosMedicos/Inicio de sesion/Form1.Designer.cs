@@ -45,6 +45,7 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.White;
             panel1.Controls.Add(BtEntrar);
             panel1.Controls.Add(pictureBox2);
@@ -58,6 +59,7 @@
             // 
             // BtEntrar
             // 
+            BtEntrar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             BtEntrar.BackColor = Color.FromArgb(204, 204, 204);
             BtEntrar.Cursor = Cursors.IBeam;
             BtEntrar.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -93,6 +95,7 @@
             // 
             // TxbContrasena
             // 
+            TxbContrasena.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxbContrasena.BorderStyle = BorderStyle.FixedSingle;
             TxbContrasena.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxbContrasena.Location = new Point(136, 120);
@@ -103,6 +106,7 @@
             // 
             // TxbUsuario
             // 
+            TxbUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxbUsuario.BorderStyle = BorderStyle.FixedSingle;
             TxbUsuario.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxbUsuario.Location = new Point(136, 52);
@@ -113,6 +117,7 @@
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.FromArgb(132, 154, 174);
             panel2.Location = new Point(-7, 652);
             panel2.Name = "panel2";
@@ -140,6 +145,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Form1";
+            RightToLeft = RightToLeft.No;
             Text = "Inicio de sesion";
             Load += Form1_Load;
             panel1.ResumeLayout(false);

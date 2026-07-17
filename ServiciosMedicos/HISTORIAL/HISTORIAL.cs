@@ -74,7 +74,7 @@ namespace ServiciosMedicos.HISTORIAL
 
             using (Pen lapizNegro = new Pen(Color.Black, grosor))
             {
-             
+
                 Rectangle rectangulo = new Rectangle(
                     grosor / 2,
                     grosor / 2,
@@ -167,5 +167,9 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
+        private void HISTORIAL_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
