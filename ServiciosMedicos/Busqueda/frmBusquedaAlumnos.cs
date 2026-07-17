@@ -42,7 +42,7 @@ namespace ServiciosMedicos.Busqueda
                          Apellido_P AS 'Apellido Paterno',
                          Apellido_M AS 'Apellido Materno',
                          'Trabajdor' AS 'Tipo de trabajador'
-                         FROM Trabajador;"; 
+                         FROM Trabajador;";
 
                     MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(comando);
@@ -76,6 +76,21 @@ namespace ServiciosMedicos.Busqueda
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void RegistroAlumnos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string idSeleccionado = RegistroAlumnos.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string tipoSeleccionado = RegistroAlumnos.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+                ServiciosMedicos.HISTORIAL.HISTORIAL ventanaPerfil = new ServiciosMedicos.HISTORIAL.HISTORIAL();
+
+                ventanaPerfil.Show();
+
+                ventanaPerfil.CargarPerfilPaciente(idSeleccionado, tipoSeleccionado);
+            }
         }
     }
 }

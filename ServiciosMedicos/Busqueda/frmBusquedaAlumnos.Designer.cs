@@ -53,11 +53,11 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
-            groupBox1.Location = new Point(-8, 0);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Location = new Point(-10, 0);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(909, 133);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(1136, 166);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -67,55 +67,59 @@
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(RegistroAlumnos);
             groupBox2.Controls.Add(txtBusqueda);
-            groupBox2.Location = new Point(79, 201);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(99, 251);
+            groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(775, 555);
+            groupBox2.Padding = new Padding(4, 5, 4, 5);
+            groupBox2.Size = new Size(969, 694);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
             // RegistroAlumnos
             // 
             RegistroAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RegistroAlumnos.Location = new Point(41, 144);
-            RegistroAlumnos.Margin = new Padding(3, 4, 3, 4);
+            RegistroAlumnos.Location = new Point(51, 180);
+            RegistroAlumnos.Margin = new Padding(4, 5, 4, 5);
             RegistroAlumnos.Name = "RegistroAlumnos";
             RegistroAlumnos.RowHeadersWidth = 51;
-            RegistroAlumnos.Size = new Size(689, 350);
+            RegistroAlumnos.Size = new Size(861, 438);
             RegistroAlumnos.TabIndex = 1;
+            RegistroAlumnos.CellDoubleClick += RegistroAlumnos_CellDoubleClick;
             // 
             // txtBusqueda
             // 
-            txtBusqueda.Location = new Point(41, 55);
-            txtBusqueda.Margin = new Padding(3, 4, 3, 4);
+            txtBusqueda.Location = new Point(51, 69);
+            txtBusqueda.Margin = new Padding(4, 5, 4, 5);
             txtBusqueda.Name = "txtBusqueda";
-            txtBusqueda.Size = new Size(689, 27);
+            txtBusqueda.Size = new Size(860, 31);
             txtBusqueda.TabIndex = 0;
             // 
             // btnNuevo
             // 
-            btnNuevo.Location = new Point(157, 937);
+            btnNuevo.Location = new Point(196, 1171);
+            btnNuevo.Margin = new Padding(4, 4, 4, 4);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(94, 29);
+            btnNuevo.Size = new Size(118, 36);
             btnNuevo.TabIndex = 2;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = true;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(422, 937);
+            btnEditar.Location = new Point(528, 1171);
+            btnEditar.Margin = new Padding(4, 4, 4, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(94, 29);
+            btnEditar.Size = new Size(118, 36);
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(635, 937);
+            btnEliminar.Location = new Point(794, 1171);
+            btnEliminar.Margin = new Padding(4, 4, 4, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(94, 29);
+            btnEliminar.Size = new Size(118, 36);
             btnEliminar.TabIndex = 4;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
@@ -130,9 +134,11 @@
             groupBox3.Controls.Add(txtApellidoP);
             groupBox3.Controls.Add(txtNombre);
             groupBox3.Controls.Add(txtMatricula);
-            groupBox3.Location = new Point(79, 777);
+            groupBox3.Location = new Point(99, 971);
+            groupBox3.Margin = new Padding(4, 4, 4, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(775, 135);
+            groupBox3.Padding = new Padding(4, 4, 4, 4);
+            groupBox3.Size = new Size(969, 169);
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos del paciente";
@@ -140,18 +146,20 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(604, 38);
+            label4.Location = new Point(755, 48);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(126, 20);
+            label4.Size = new Size(150, 25);
             label4.TabIndex = 8;
             label4.Text = "Apellido Materno";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(398, 38);
+            label3.Location = new Point(498, 48);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(120, 20);
+            label3.Size = new Size(143, 25);
             label3.TabIndex = 7;
             label3.Text = "Apellido Paterno";
             label3.Click += label3_Click;
@@ -159,63 +167,69 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(200, 38);
+            label2.Location = new Point(250, 48);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(64, 20);
+            label2.Size = new Size(78, 25);
             label2.TabIndex = 6;
             label2.Text = "Nombre";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 38);
+            label1.Location = new Point(8, 48);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(71, 20);
+            label1.Size = new Size(84, 25);
             label1.TabIndex = 5;
             label1.Text = "Matricula";
             label1.Click += label1_Click;
             // 
             // txtApellidoM
             // 
-            txtApellidoM.Location = new Point(605, 75);
+            txtApellidoM.Location = new Point(756, 94);
+            txtApellidoM.Margin = new Padding(4, 4, 4, 4);
             txtApellidoM.Name = "txtApellidoM";
-            txtApellidoM.Size = new Size(125, 27);
+            txtApellidoM.Size = new Size(155, 31);
             txtApellidoM.TabIndex = 3;
             // 
             // txtApellidoP
             // 
-            txtApellidoP.Location = new Point(398, 75);
+            txtApellidoP.Location = new Point(498, 94);
+            txtApellidoP.Margin = new Padding(4, 4, 4, 4);
             txtApellidoP.Name = "txtApellidoP";
-            txtApellidoP.Size = new Size(133, 27);
+            txtApellidoP.Size = new Size(165, 31);
             txtApellidoP.TabIndex = 2;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(200, 75);
+            txtNombre.Location = new Point(250, 94);
+            txtNombre.Margin = new Padding(4, 4, 4, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(134, 27);
+            txtNombre.Size = new Size(166, 31);
             txtNombre.TabIndex = 1;
             // 
             // txtMatricula
             // 
-            txtMatricula.Location = new Point(6, 75);
+            txtMatricula.Location = new Point(8, 94);
+            txtMatricula.Margin = new Padding(4, 4, 4, 4);
             txtMatricula.Name = "txtMatricula";
-            txtMatricula.Size = new Size(125, 27);
+            txtMatricula.Size = new Size(155, 31);
             txtMatricula.TabIndex = 0;
             // 
             // frmBusquedaAlumnos
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 999);
+            ClientSize = new Size(1120, 1050);
             Controls.Add(groupBox3);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(btnNuevo);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "frmBusquedaAlumnos";
             Text = "frmBusquedaAlumnos";
             Load += frmBusquedaAlumnos_Load;
