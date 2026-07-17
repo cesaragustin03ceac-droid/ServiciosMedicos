@@ -90,6 +90,7 @@ namespace ServiciosMedicos.Busqueda
                 ventanaPerfil.Show();
 
                 ventanaPerfil.CargarPerfilPaciente(idSeleccionado, tipoSeleccionado);
+                this.Hide();
             }
         }
 

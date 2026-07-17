@@ -21,6 +21,7 @@ namespace ServiciosMedicos
                 MessageBox.Show("Ingresando", "Éxito");
                 frmBusquedaAlumnos ventanaBusqueda = new frmBusquedaAlumnos();
                 ventanaBusqueda.Show();
+                this.Hide();
 
             }
             else
