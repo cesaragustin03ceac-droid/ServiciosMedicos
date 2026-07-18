@@ -20,18 +20,12 @@ namespace ServiciosMedicos.GeneracionReceta
             groupBox2.Paint += DibujarBordeGrueso;
             groupBox3.Paint += DibujarBordeGrueso;
           
+        }
+
 
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
 
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void DibujarBordeGrueso(object sender, PaintEventArgs e)
         {
             Control control = (Control)sender;
@@ -39,7 +33,6 @@ namespace ServiciosMedicos.GeneracionReceta
 
             using (Pen lapizNegro = new Pen(Color.Black, grosor))
             {
-                // Ajustamos el rectángulo un poquito hacia adentro para que no se amoche
                 Rectangle rectangulo = new Rectangle(
                     grosor / 2,
                     grosor / 2,

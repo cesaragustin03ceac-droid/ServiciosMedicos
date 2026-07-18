@@ -23,7 +23,6 @@ namespace ServiciosMedicos.HISTORIAL
             button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
             dataGridView1atenciones.Rows.Add("14/07/2026", "Dolor de cabeza", "Migraña leve", "Ver Formato", "Ver Receta");    // ESTA LINA ES SOLO DE PRUEBA PARA VISUALIZAR EL FORMATO DE LA TABLA 
 
-
         }
         private void EstilarDataGridView()
         {
