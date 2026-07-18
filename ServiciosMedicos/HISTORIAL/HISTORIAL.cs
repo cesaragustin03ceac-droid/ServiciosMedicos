@@ -24,8 +24,7 @@ namespace ServiciosMedicos.HISTORIAL
             groupBox3atenciones.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
             button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
             button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
-            dataGridView1atenciones.Rows.Add("14/07/2026", "Dolor de cabeza", "Migraña leve", "Ver Formato", "Ver Receta");    // ESTA LINA ES SOLO DE PRUEBA PARA VISUALIZAR EL FORMATO DE LA TABLA 
-            button2.Click += new EventHandler(button2_Click);
+
 
         }
         private void EstilarDataGridView()
@@ -160,6 +159,7 @@ namespace ServiciosMedicos.HISTORIAL
                     {
                         MessageBox.Show("No se encontró al paciente en la base de datos.", "Aviso");
                     }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -188,5 +188,19 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiciosMedicos.GeneracionReceta.frmGeneracionReceta ventanaFormato = new ServiciosMedicos.GeneracionReceta.frmGeneracionReceta();
+
+                ventanaFormato.Show();
+                this.Hide();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("error");
+            }
+        }
     }
 }
