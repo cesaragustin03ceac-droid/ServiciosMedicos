@@ -81,13 +81,12 @@ namespace ServiciosMedicos.GeneracionReceta
 
                     if (lector.Read())
                     {
-                        // ⚠️ IMPORTANTE: Cambia estos nombres por el 'Name' real 
-                        // de los TextBox que tienes en tu interfaz de Receta:
+                        
                         txtMatricula.Text = lector["Matricula"].ToString();
                         txtNombre.Text = lector["NombreCompleto"].ToString();
                         txtCarrera.Text = lector["Carrera"].ToString();
 
-                        // Coloca la fecha de hoy de forma automática
+                        
                         txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
                     }
                     lector.Close();
@@ -113,7 +112,7 @@ namespace ServiciosMedicos.GeneracionReceta
 
             if (e.RowIndex >= 0 && dgvMedicamentos.Columns[e.ColumnIndex].Name == "colEliminar")
             {
-                // Validamos que no intente borrar la fila nueva automática (el asterisco)
+                
                 if (!dgvMedicamentos.Rows[e.RowIndex].IsNewRow)
                 {
                     dgvMedicamentos.Rows.RemoveAt(e.RowIndex);
