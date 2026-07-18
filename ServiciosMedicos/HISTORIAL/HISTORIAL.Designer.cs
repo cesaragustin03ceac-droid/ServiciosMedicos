@@ -369,7 +369,7 @@
             Margin = new Padding(2, 4, 2, 4);
             Name = "HISTORIAL";
             Text = "HISTORIAL";
-            Load += HISTORIAL_Load;
+            
             Paint += DibujarBordeGrueso;
             groupBox2perfil.ResumeLayout(false);
             groupBox2perfil.PerformLayout();

@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using ServiciosMedicos.DataConexion;
+using ServiciosMedicos.GeneracionReceta;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,8 @@ namespace ServiciosMedicos.HISTORIAL
 {
     public partial class HISTORIAL : Form
     {
+        private string idPacienteActual;
+        private string tipoPacienteActual;
         public HISTORIAL()
         {
             InitializeComponent();
@@ -89,6 +92,8 @@ namespace ServiciosMedicos.HISTORIAL
         }
         public void CargarPerfilPaciente(string idPaciente, string tipoPaciente)
         {
+            this.idPacienteActual = idPaciente;
+            this.tipoPacienteActual = tipoPaciente;
             Conexion conexionBD = new Conexion();
             MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
 
@@ -166,10 +171,21 @@ namespace ServiciosMedicos.HISTORIAL
                 }
             }
         }
-
-        private void HISTORIAL_Load(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(idPacienteActual))
+            {
+                // Reemplaza 'frmGeneracionReceta' por el nombre exacto de la clase de tu ventana de Recetas
+                frmGeneracionReceta ventanaReceta = new frmGeneracionReceta();
+                ventanaReceta.Show();
 
+                // Le enviamos los datos guardados en el historial
+                ventanaReceta.CargarDatosPaciente(this.idPacienteActual, this.tipoPacienteActual);
+            }
+            else
+            {
+                MessageBox.Show("No hay ningún paciente seleccionado actualmente.", "Error");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
