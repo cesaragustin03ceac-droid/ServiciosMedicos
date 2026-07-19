@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            comboBox1 = new ComboBox();
             textBox1 = new TextBox();
+            comboBox1 = new ComboBox();
             groupBox5 = new GroupBox();
             textBox2 = new TextBox();
             comboBox2 = new ComboBox();
@@ -43,7 +43,6 @@
             comboBox5 = new ComboBox();
             groupBox6 = new GroupBox();
             comboBox6 = new ComboBox();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
@@ -61,35 +60,38 @@
             groupBox1.BackColor = Color.White;
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(comboBox1);
-            groupBox1.Location = new Point(51, 90);
+            groupBox1.Location = new Point(25, 149);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(234, 161);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Motivo";
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(24, 97);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Otro Motivo";
+            textBox1.Size = new Size(163, 27);
+            textBox1.TabIndex = 1;
+            // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Motivo General" });
             comboBox1.Location = new Point(24, 47);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(163, 28);
             comboBox1.TabIndex = 0;
             comboBox1.Text = "Motivo General";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(24, 97);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(163, 27);
-            textBox1.TabIndex = 1;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // groupBox5
             // 
             groupBox5.BackColor = Color.White;
             groupBox5.Controls.Add(textBox2);
             groupBox5.Controls.Add(comboBox2);
-            groupBox5.Location = new Point(51, 284);
+            groupBox5.Location = new Point(25, 401);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(234, 161);
             groupBox5.TabIndex = 3;
@@ -100,6 +102,7 @@
             // 
             textBox2.Location = new Point(24, 97);
             textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "Otro Sintoma";
             textBox2.Size = new Size(163, 27);
             textBox2.TabIndex = 1;
             // 
@@ -116,7 +119,7 @@
             // 
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(textBox3);
-            groupBox2.Location = new Point(381, 90);
+            groupBox2.Location = new Point(329, 149);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(234, 161);
             groupBox2.TabIndex = 4;
@@ -125,8 +128,9 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(39, 72);
+            textBox3.Location = new Point(39, 71);
             textBox3.Name = "textBox3";
+            textBox3.PlaceholderText = "Malestar Anterior";
             textBox3.Size = new Size(163, 27);
             textBox3.TabIndex = 1;
             // 
@@ -135,7 +139,7 @@
             groupBox3.BackColor = Color.White;
             groupBox3.Controls.Add(textBox4);
             groupBox3.Controls.Add(comboBox4);
-            groupBox3.Location = new Point(381, 284);
+            groupBox3.Location = new Point(329, 401);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(234, 161);
             groupBox3.TabIndex = 5;
@@ -146,6 +150,7 @@
             // 
             textBox4.Location = new Point(39, 97);
             textBox4.Name = "textBox4";
+            textBox4.PlaceholderText = "Otro Diagnostico";
             textBox4.Size = new Size(163, 27);
             textBox4.TabIndex = 1;
             // 
@@ -162,7 +167,7 @@
             // 
             groupBox4.BackColor = Color.White;
             groupBox4.Controls.Add(comboBox5);
-            groupBox4.Location = new Point(719, 90);
+            groupBox4.Location = new Point(650, 149);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(234, 161);
             groupBox4.TabIndex = 6;
@@ -182,7 +187,7 @@
             // 
             groupBox6.BackColor = Color.White;
             groupBox6.Controls.Add(comboBox6);
-            groupBox6.Location = new Point(719, 274);
+            groupBox6.Location = new Point(650, 401);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(234, 161);
             groupBox6.TabIndex = 7;
@@ -200,7 +205,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(242, 492);
+            button1.Location = new Point(153, 667);
             button1.Name = "button1";
             button1.Size = new Size(153, 64);
             button1.TabIndex = 8;
@@ -210,7 +215,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(430, 492);
+            button2.Location = new Point(372, 667);
             button2.Name = "button2";
             button2.Size = new Size(153, 64);
             button2.TabIndex = 9;
@@ -219,22 +224,23 @@
             // 
             // button3
             // 
-            button3.Location = new Point(617, 492);
+            button3.Location = new Point(598, 667);
             button3.Name = "button3";
             button3.Size = new Size(153, 64);
             button3.TabIndex = 10;
             button3.Text = "Ir A La Receta";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // groupBox7
             // 
             groupBox7.BackColor = Color.Silver;
+            groupBox7.ForeColor = Color.Black;
             groupBox7.Location = new Point(1, 5);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(1015, 71);
+            groupBox7.Size = new Size(893, 92);
             groupBox7.TabIndex = 11;
             groupBox7.TabStop = false;
-            groupBox7.Text = "groupBox7";
             // 
             // FrmConsultas
             // 
@@ -242,7 +248,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnableAllowFocusChange;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(1014, 587);
+            ClientSize = new Size(896, 803);
             Controls.Add(groupBox7);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -253,7 +259,11 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox5);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FrmConsultas";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmConsultas";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -285,7 +295,6 @@
         private ComboBox comboBox5;
         private GroupBox groupBox6;
         private ComboBox comboBox6;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button button1;
         private Button button2;
         private Button button3;

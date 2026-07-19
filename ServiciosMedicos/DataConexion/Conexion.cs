@@ -22,7 +22,6 @@ namespace ServiciosMedicos.DataConexion
             {
                 MySqlConnection conexion = new MySqlConnection(cadena);
                 conexion.Open();
-                MessageBox.Show("Conectado corrextamente...");
                 return conexion;
             }
             catch (MySqlException ex)

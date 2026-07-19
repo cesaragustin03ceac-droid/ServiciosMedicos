@@ -13,9 +13,12 @@ namespace ServiciosMedicos.Busqueda
 {
     public partial class frmBusquedaAlumnos : Form
     {
+        public static string UsuarioNombre = "";
+        public static string UsuarioTipo = "";
         public frmBusquedaAlumnos()
         {
             InitializeComponent();
+
         }
 
         private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
@@ -27,6 +30,8 @@ namespace ServiciosMedicos.Busqueda
             {
                 try
                 {
+
+
                     string query = @"SELECT Matricula AS 'Tipo de id', 
                                 Nombre, 
                                 Apellido_P AS 'Apellido Paterno', 
@@ -61,6 +66,8 @@ namespace ServiciosMedicos.Busqueda
                     conexionAbierta.Close();
                 }
             }
+           
+            
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)

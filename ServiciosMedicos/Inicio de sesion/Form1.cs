@@ -1,4 +1,6 @@
+using MySql.Data.MySqlClient;
 using ServiciosMedicos.Busqueda;
+using ServiciosMedicos.DataConexion;
 
 namespace ServiciosMedicos
 {
@@ -16,17 +18,51 @@ namespace ServiciosMedicos
 
         private void BtEntrar_Click(object sender, EventArgs e)
         {
-            if (TxbUsuario.Text == "admin" && TxbContrasena.Text == "1234")
-            {
-                MessageBox.Show("Ingresando", "Éxito");
-                frmBusquedaAlumnos ventanaBusqueda = new frmBusquedaAlumnos();
-                ventanaBusqueda.Show();
-                this.Hide();
+            string usuario = TxbUsuario.Text;
+            string pass = TxbContrasena.Text;
 
-            }
-            else
+            Conexion conexionBD = new Conexion();
+            using (MySqlConnection conn = conexionBD.obtenerconexion())
             {
-                MessageBox.Show("error usuario o contraeña incorrecto", "Error de acceso");
+                if (conn != null)
+                {
+                    try
+                    {
+                        string query = @"
+                            SELECT Nombre FROM enfermera 
+                            WHERE Id_Enfermera = @user AND Contrasena = @pass
+                            UNION
+                            SELECT Nombre FROM doctora 
+                            WHERE Cedula = @user AND Contrasena = @pass;";
+
+                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@user", usuario);
+                            cmd.Parameters.AddWithValue("@pass", pass);
+
+                            using (MySqlDataReader lector = cmd.ExecuteReader())
+                            {
+                                if (lector.Read()) 
+                                {
+
+
+                                    frmBusquedaAlumnos ventanaBuscador = new frmBusquedaAlumnos();
+                                    ventanaBuscador.Show();
+
+                                    this.Hide();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Usuario o contraseña incorrectos.", "Acceso denegado");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error");
+                    }
+                }
             }
         }
 

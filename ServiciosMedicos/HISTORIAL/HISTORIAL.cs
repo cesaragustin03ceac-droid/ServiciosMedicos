@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
 using ServiciosMedicos.GeneracionReceta;
 using System;
@@ -159,7 +160,7 @@ namespace ServiciosMedicos.HISTORIAL
                     {
                         MessageBox.Show("No se encontró al paciente en la base de datos.", "Aviso");
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -171,35 +172,23 @@ namespace ServiciosMedicos.HISTORIAL
                 }
             }
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(idPacienteActual))
-            {
-                // Reemplaza 'frmGeneracionReceta' por el nombre exacto de la clase de tu ventana de Recetas
-                frmGeneracionReceta ventanaReceta = new frmGeneracionReceta();
-                ventanaReceta.Show();
+       
 
-                // Le enviamos los datos guardados en el historial
-                ventanaReceta.CargarDatosPaciente(this.idPacienteActual, this.tipoPacienteActual);
-            }
-            else
-            {
-                MessageBox.Show("No hay ningún paciente seleccionado actualmente.", "Error");
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ServiciosMedicos.GeneracionReceta.frmGeneracionReceta ventanaFormato = new ServiciosMedicos.GeneracionReceta.frmGeneracionReceta();
+                FrmConsultas ventanaConsulta = new FrmConsultas();
 
-                ventanaFormato.Show();
-                this.Hide();
+                ventanaConsulta.Show();
+
+                this.Close();
+
+         
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Error al abrir la consulta: " + ex.Message, "Error");
             }
         }
     }

@@ -65,7 +65,7 @@ namespace ServiciosMedicos.GeneracionReceta
 
                     if (tipo == "Alumno")
                     {
-                        query = "SELECT Matricula, CONCAT(Nombre, ' ', Apellido_P, ' ', IFNULL(Apellido_M, '')) AS NombreCompleto, Carrera " +
+                        query = @"SELECT Matricula, CONCAT(Nombre, ' ', Apellido_P, ' ', IFNULL(Apellido_M, '')) AS NombreCompleto, Carrera " +
                                 "FROM alumno WHERE Matricula = @id";
                     }
                     else if (tipo == "Trabajador")

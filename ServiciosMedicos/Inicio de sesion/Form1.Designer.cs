@@ -52,9 +52,9 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(TxbContrasena);
             panel1.Controls.Add(TxbUsuario);
-            panel1.Location = new Point(100, 190);
+            panel1.Location = new Point(109, 231);
             panel1.Name = "panel1";
-            panel1.Size = new Size(567, 262);
+            panel1.Size = new Size(681, 262);
             panel1.TabIndex = 0;
             // 
             // BtEntrar
@@ -65,7 +65,7 @@
             BtEntrar.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BtEntrar.Location = new Point(94, 190);
             BtEntrar.Name = "BtEntrar";
-            BtEntrar.Size = new Size(389, 38);
+            BtEntrar.Size = new Size(503, 38);
             BtEntrar.TabIndex = 4;
             BtEntrar.Text = "Entrar";
             BtEntrar.UseVisualStyleBackColor = false;
@@ -100,8 +100,9 @@
             TxbContrasena.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxbContrasena.Location = new Point(136, 120);
             TxbContrasena.Name = "TxbContrasena";
+            TxbContrasena.PasswordChar = '*';
             TxbContrasena.PlaceholderText = "Contraseña";
-            TxbContrasena.Size = new Size(347, 40);
+            TxbContrasena.Size = new Size(461, 40);
             TxbContrasena.TabIndex = 1;
             // 
             // TxbUsuario
@@ -112,22 +113,22 @@
             TxbUsuario.Location = new Point(136, 52);
             TxbUsuario.Name = "TxbUsuario";
             TxbUsuario.PlaceholderText = "Usuario";
-            TxbUsuario.Size = new Size(347, 40);
+            TxbUsuario.Size = new Size(461, 40);
             TxbUsuario.TabIndex = 0;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.FromArgb(132, 154, 174);
-            panel2.Location = new Point(-7, 652);
+            panel2.Location = new Point(-7, 702);
             panel2.Name = "panel2";
-            panel2.Size = new Size(795, 107);
+            panel2.Size = new Size(909, 107);
             panel2.TabIndex = 1;
             // 
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(100, 21);
+            pictureBox3.Location = new Point(168, 50);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(567, 101);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -140,12 +141,16 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(782, 753);
+            ClientSize = new Size(896, 803);
             Controls.Add(pictureBox3);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Form1";
             RightToLeft = RightToLeft.No;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio de sesion";
             Load += Form1_Load;
             panel1.ResumeLayout(false);
