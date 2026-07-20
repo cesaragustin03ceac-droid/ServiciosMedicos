@@ -11,7 +11,7 @@ namespace ServiciosMedicos.DataConexion
 
         public Conexion()
         {
-            cadena = "Server=127.0.0.1; Database=serviciosmedicos; Uid=root; Pwd=; Port=3306";
+            cadena = "Server=127.0.0.1; Database=serviciosmedico; Uid=root; Pwd=; Port=3306";
 
         }
 
