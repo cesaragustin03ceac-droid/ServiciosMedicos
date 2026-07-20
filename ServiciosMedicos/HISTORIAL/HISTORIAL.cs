@@ -25,7 +25,7 @@ namespace ServiciosMedicos.HISTORIAL
             groupBox3atenciones.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
             button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
             button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
-
+            btnGuardar.Paint += DibujarBordeGrueso;
 
         }
         private void EstilarDataGridView()
