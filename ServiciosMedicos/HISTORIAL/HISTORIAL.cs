@@ -161,6 +161,47 @@ namespace ServiciosMedicos.HISTORIAL
                         MessageBox.Show("No se encontró al paciente en la base de datos.", "Aviso");
                     }
 
+                    dataGridView1atenciones.Rows.Clear();
+
+                    string queryAtenciones = "";
+
+                    if (tipoPaciente == "Alumno")
+                    {
+                        queryAtenciones = @"SELECT c.Fecha AS FechaConsulta, e.Motivo_Consulta AS Motivo, d.Diagnostico AS Diagnostico                        
+                        FROM Consulta c                  
+                        LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico                  
+                        LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
+                        WHERE c.Matricula_Alumno = @id
+                        ORDER BY c.Fecha DESC;";
+                    }
+                    else if (tipoPaciente == "Trabajador")
+                    {
+                        queryAtenciones = @"SELECT c.Fecha AS FechaConsulta, e.Motivo_Consulta AS Motivo, d.Diagnostico AS Diagnostico                        
+                        FROM Consulta c                  
+                        LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico                  
+                        LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
+                        WHERE c.Num_Trabajador = @id
+                        ORDER BY c.Fecha DESC;";
+                    }
+
+                    using (MySqlCommand cmdAtenciones = new MySqlCommand(queryAtenciones, conexionAbierta))
+                    {
+                        cmdAtenciones.Parameters.AddWithValue("@id", idPaciente);
+
+                        using (MySqlDataReader lector = cmdAtenciones.ExecuteReader())
+                        {
+                            while (lector.Read())
+                            {
+
+                                string fecha = lector["FechaConsulta"] != DBNull.Value ? Convert.ToDateTime(lector["FechaConsulta"]).ToString("yyyy-MM-dd") : "";
+                                string motivo = lector["Motivo"] != DBNull.Value ? lector["Motivo"].ToString() : "";
+                                string diagnostico = lector["Diagnostico"] != DBNull.Value ? lector["Diagnostico"].ToString() : "";
+
+                                dataGridView1atenciones.Rows.Add(fecha, motivo, diagnostico, "Ver", "Ver");
+
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -170,9 +211,12 @@ namespace ServiciosMedicos.HISTORIAL
                 {
                     conexionAbierta.Close();
                 }
+
+
+
             }
         }
-       
+
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -184,11 +228,85 @@ namespace ServiciosMedicos.HISTORIAL
 
                 this.Close();
 
-         
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al abrir la consulta: " + ex.Message, "Error");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PerfilPaciente.ReadOnly = false;
+
+            if (PerfilPaciente.Rows.Count > 0)
+            {
+                PerfilPaciente.CurrentCell = PerfilPaciente.Rows[0].Cells[0];
+                PerfilPaciente.BeginEdit(true);
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (PerfilPaciente.Rows.Count > 0)
+            {
+                DataGridViewRow fila = PerfilPaciente.Rows[0];
+
+                string tipoSangre = fila.Cells["Tipo de Sangre"].Value?.ToString().Trim();
+                string alergias = fila.Cells["Alergias"].Value?.ToString().Trim();
+                string enfermedades = fila.Cells["Enfermedades Crónicas"].Value?.ToString().Trim();
+                string peso = fila.Cells["Peso"].Value?.ToString().Trim();
+                string talla = fila.Cells["Talla"].Value?.ToString().Trim();
+
+                Conexion conexionBD = new Conexion();
+                MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
+
+                if (conexionAbierta != null)
+                {
+                    try
+                    {
+                        string queryUpdate = @"UPDATE Expediente e
+                       INNER JOIN Diagnostico d ON e.Id_Expediente = d.Id_Expediente
+                       INNER JOIN Consulta c ON d.Id_Diagnostico = c.Id_Diagnostico
+                       SET e.TipoSangre = @sangre, 
+                           e.Alergias = @alergias, 
+                           e.Enfermedades = @enfermedades, 
+                           e.Peso = @peso, 
+                           e.Talla = @talla 
+                       WHERE c.Matricula_Alumno = @mat OR c.Num_Trabajador = @mat";
+                        using (MySqlCommand comando = new MySqlCommand(queryUpdate, conexionAbierta))
+                        {
+                            comando.Parameters.AddWithValue("@sangre", tipoSangre);
+                            comando.Parameters.AddWithValue("@alergias", alergias);
+                            comando.Parameters.AddWithValue("@enfermedades", enfermedades);
+                            comando.Parameters.AddWithValue("@peso", peso);
+                            comando.Parameters.AddWithValue("@talla", talla);
+                            comando.Parameters.AddWithValue("@mat", idPacienteActual);
+
+                            int filasAfectadas = comando.ExecuteNonQuery();
+
+                            if (filasAfectadas > 0)
+                            {
+                                MessageBox.Show("Expediente actualizado y guardado correctamente.", "Éxito");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontró el registro para actualizar.", "Aviso");
+                            }
+
+                            PerfilPaciente.ReadOnly = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al actualizar: " + ex.Message, "Error");
+                    }
+                    finally
+                    {
+                        conexionAbierta.Close();
+                    }
+                }
             }
         }
     }
