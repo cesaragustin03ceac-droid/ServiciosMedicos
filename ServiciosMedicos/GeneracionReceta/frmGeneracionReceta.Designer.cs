@@ -36,7 +36,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             txtFecha = new TextBox();
             txtMatricula = new TextBox();
-            txtCarrera = new TextBox();
+            txtArea = new TextBox();
             txtNombre = new TextBox();
             label5 = new Label();
             label7 = new Label();
@@ -98,7 +98,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.0295372F));
             tableLayoutPanel1.Controls.Add(txtFecha, 3, 1);
             tableLayoutPanel1.Controls.Add(txtMatricula, 1, 0);
-            tableLayoutPanel1.Controls.Add(txtCarrera, 3, 0);
+            tableLayoutPanel1.Controls.Add(txtArea, 3, 0);
             tableLayoutPanel1.Controls.Add(txtNombre, 1, 1);
             tableLayoutPanel1.Controls.Add(label5, 0, 1);
             tableLayoutPanel1.Controls.Add(label7, 2, 1);
@@ -135,15 +135,15 @@
             txtMatricula.Size = new Size(290, 32);
             txtMatricula.TabIndex = 10;
             // 
-            // txtCarrera
+            // txtArea
             // 
-            txtCarrera.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtCarrera.Location = new Point(505, 4);
-            txtCarrera.Margin = new Padding(3, 4, 3, 4);
-            txtCarrera.Name = "txtCarrera";
-            txtCarrera.ReadOnly = true;
-            txtCarrera.Size = new Size(279, 32);
-            txtCarrera.TabIndex = 12;
+            txtArea.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtArea.Location = new Point(505, 4);
+            txtArea.Margin = new Padding(3, 4, 3, 4);
+            txtArea.Name = "txtArea";
+            txtArea.ReadOnly = true;
+            txtArea.Size = new Size(279, 32);
+            txtArea.TabIndex = 12;
             // 
             // txtNombre
             // 
@@ -315,6 +315,7 @@
             btnGuardar.TabIndex = 12;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnVistaPrevia
             // 
@@ -403,6 +404,7 @@
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GeneracionReceta";
+            Load += frmGeneracionReceta_Load;
             groupBox2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -423,7 +425,7 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox txtFecha;
         private TextBox txtMatricula;
-        private TextBox txtCarrera;
+        private TextBox txtArea;
         private TextBox txtNombre;
         private Label label5;
         private Label label7;

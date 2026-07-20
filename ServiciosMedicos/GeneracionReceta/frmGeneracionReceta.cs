@@ -52,8 +52,10 @@ namespace ServiciosMedicos.GeneracionReceta
             }
         }
 
-        public void CargarDatosPaciente(string id, string tipo)
+        private void CargarDatosPacienteEnReceta()
         {
+
+
             Conexion conexionBD = new Conexion();
             MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
 
@@ -61,39 +63,33 @@ namespace ServiciosMedicos.GeneracionReceta
             {
                 try
                 {
-                    string query = "";
+                    string query = @"SELECT 
+                                c.Matricula_Alumno, c.Num_Trabajador,
+                                COALESCE(a.Matricula, t.Num_Trabajador) AS MatriculaFinal,
+                                CONCAT(COALESCE(a.Nombre, t.Nombre), ' ', COALESCE(a.Apellido_P, t.Apellido_P), ' ', COALESCE(a.Apellido_M, t.Apellido_M)) AS NombreCompleto,
+                                COALESCE(a.Carrera, t.Areas) AS AreaFinal
+                             FROM consulta c
+                             LEFT JOIN alumno a ON c.Matricula_Alumno = a.Matricula
+                             LEFT JOIN trabajador t ON c.Num_Trabajador = t.Num_Trabajador
+                             ORDER BY c.Id_Consulta DESC 
+                             LIMIT 1;";
 
-                    if (tipo == "Alumno")
+                    using (MySqlCommand cmd = new MySqlCommand(query, conexionAbierta))
                     {
-                        query = @"SELECT Matricula, CONCAT(Nombre, ' ', Apellido_P, ' ', IFNULL(Apellido_M, '')) AS NombreCompleto, Carrera " +
-                                "FROM alumno WHERE Matricula = @id";
+                        using (MySqlDataReader lector = cmd.ExecuteReader())
+                        {
+                            if (lector.Read())
+                            {
+                                txtMatricula.Text = lector["MatriculaFinal"].ToString();
+                                txtNombre.Text = lector["NombreCompleto"].ToString();
+                                txtArea.Text = lector["AreaFinal"].ToString();
+                            }
+                        }
                     }
-                    else if (tipo == "Trabajador")
-                    {
-                        query = "SELECT Num_Trabajador AS Matricula, CONCAT(Nombre, ' ', Apellido_P, ' ', IFNULL(Apellido_M, '')) AS NombreCompleto, Areas AS Carrera " +
-                                "FROM trabajador WHERE Num_Trabajador = @id";
-                    }
-
-                    MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
-                    comando.Parameters.AddWithValue("@id", id);
-
-                    MySqlDataReader lector = comando.ExecuteReader();
-
-                    if (lector.Read())
-                    {
-                        
-                        txtMatricula.Text = lector["Matricula"].ToString();
-                        txtNombre.Text = lector["NombreCompleto"].ToString();
-                        txtCarrera.Text = lector["Carrera"].ToString();
-
-                        
-                        txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    }
-                    lector.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar los datos en la receta: " + ex.Message);
+                    MessageBox.Show("Error al cargar los datos del paciente para la receta: " + ex.Message, "Error");
                 }
                 finally
                 {
@@ -112,12 +108,26 @@ namespace ServiciosMedicos.GeneracionReceta
 
             if (e.RowIndex >= 0 && dgvMedicamentos.Columns[e.ColumnIndex].Name == "colEliminar")
             {
-                
+
                 if (!dgvMedicamentos.Rows[e.RowIndex].IsNewRow)
                 {
                     dgvMedicamentos.Rows.RemoveAt(e.RowIndex);
                 }
             }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Form1 loginForm = new Form1();
+            loginForm.Show();
+
+            this.Close();
+        }
+
+        private void frmGeneracionReceta_Load(object sender, EventArgs e)
+        {
+            CargarDatosPacienteEnReceta();
+
         }
     }
 }
