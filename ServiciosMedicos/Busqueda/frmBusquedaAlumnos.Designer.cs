@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            lblpersona = new Label();
             groupBox2 = new GroupBox();
             RegistroAlumnos = new DataGridView();
             txtBusqueda = new TextBox();
@@ -36,6 +37,8 @@
             btnEditar = new Button();
             btnEliminar = new Button();
             groupBox3 = new GroupBox();
+            CmbTipoPaciente = new ComboBox();
+            lblTipo = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -44,7 +47,6 @@
             txtApellidoP = new TextBox();
             txtNombre = new TextBox();
             txtMatricula = new TextBox();
-            lblpersona = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
@@ -64,6 +66,15 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
+            // 
+            // lblpersona
+            // 
+            lblpersona.AutoSize = true;
+            lblpersona.Location = new Point(40, 34);
+            lblpersona.Name = "lblpersona";
+            lblpersona.Size = new Size(12, 20);
+            lblpersona.TabIndex = 0;
+            lblpersona.Text = ".";
             // 
             // groupBox2
             // 
@@ -91,6 +102,7 @@
             RegistroAlumnos.RowHeadersWidth = 51;
             RegistroAlumnos.Size = new Size(662, 349);
             RegistroAlumnos.TabIndex = 1;
+            RegistroAlumnos.CellClick += RegistroAlumnos_CellClick;
             RegistroAlumnos.CellDoubleClick += RegistroAlumnos_CellDoubleClick;
             // 
             // txtBusqueda
@@ -111,6 +123,7 @@
             btnNuevo.TabIndex = 2;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = true;
+            btnNuevo.Click += btnNuevo_Click;
             // 
             // btnEditar
             // 
@@ -121,6 +134,7 @@
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
@@ -131,10 +145,13 @@
             btnEliminar.TabIndex = 4;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            groupBox3.Controls.Add(CmbTipoPaciente);
+            groupBox3.Controls.Add(lblTipo);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
@@ -150,10 +167,27 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos del paciente";
             // 
+            // CmbTipoPaciente
+            // 
+            CmbTipoPaciente.FormattingEnabled = true;
+            CmbTipoPaciente.Location = new Point(602, 74);
+            CmbTipoPaciente.Name = "CmbTipoPaciente";
+            CmbTipoPaciente.Size = new Size(151, 28);
+            CmbTipoPaciente.TabIndex = 10;
+            // 
+            // lblTipo
+            // 
+            lblTipo.AutoSize = true;
+            lblTipo.Location = new Point(602, 37);
+            lblTipo.Name = "lblTipo";
+            lblTipo.Size = new Size(98, 20);
+            lblTipo.TabIndex = 9;
+            lblTipo.Text = "Tipo Paciente";
+            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(603, 37);
+            label4.Location = new Point(461, 37);
             label4.Name = "label4";
             label4.Size = new Size(126, 20);
             label4.TabIndex = 8;
@@ -162,7 +196,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(398, 37);
+            label3.Location = new Point(312, 37);
             label3.Name = "label3";
             label3.Size = new Size(120, 20);
             label3.TabIndex = 7;
@@ -172,7 +206,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(200, 37);
+            label2.Location = new Point(144, 37);
             label2.Name = "label2";
             label2.Size = new Size(64, 20);
             label2.TabIndex = 6;
@@ -190,21 +224,21 @@
             // 
             // txtApellidoM
             // 
-            txtApellidoM.Location = new Point(605, 75);
+            txtApellidoM.Location = new Point(461, 75);
             txtApellidoM.Name = "txtApellidoM";
             txtApellidoM.Size = new Size(125, 27);
             txtApellidoM.TabIndex = 3;
             // 
             // txtApellidoP
             // 
-            txtApellidoP.Location = new Point(398, 75);
+            txtApellidoP.Location = new Point(299, 75);
             txtApellidoP.Name = "txtApellidoP";
             txtApellidoP.Size = new Size(133, 27);
             txtApellidoP.TabIndex = 2;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(200, 75);
+            txtNombre.Location = new Point(144, 75);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(134, 27);
             txtNombre.TabIndex = 1;
@@ -215,15 +249,6 @@
             txtMatricula.Name = "txtMatricula";
             txtMatricula.Size = new Size(125, 27);
             txtMatricula.TabIndex = 0;
-            // 
-            // lblpersona
-            // 
-            lblpersona.AutoSize = true;
-            lblpersona.Location = new Point(40, 34);
-            lblpersona.Name = "lblpersona";
-            lblpersona.Size = new Size(12, 20);
-            lblpersona.TabIndex = 0;
-            lblpersona.Text = ".";
             // 
             // frmBusquedaAlumnos
             // 
@@ -274,5 +299,7 @@
         private Label label2;
         private Label label4;
         private Label lblpersona;
+        private ComboBox CmbTipoPaciente;
+        private Label lblTipo;
     }
 }
