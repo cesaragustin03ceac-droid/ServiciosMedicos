@@ -19,7 +19,7 @@ namespace ServiciosMedicos
         private void BtEntrar_Click(object sender, EventArgs e)
         {
             string usuario = TxbUsuario.Text;
-            string pass = TxbContrasena.Text;
+            string password = TxbContrasena.Text;
 
             Conexion conexionBD = new Conexion();
             using (MySqlConnection conn = conexionBD.obtenerconexion())
@@ -29,31 +29,38 @@ namespace ServiciosMedicos
                     try
                     {
                         string query = @"
-                            SELECT Nombre FROM enfermera 
-                            WHERE Id_Enfermera = @user AND Contrasena = @pass
-                            UNION
-                            SELECT Nombre FROM doctora 
-                            WHERE Cedula = @user AND Contrasena = @pass;";
+                    SELECT Nombre, Contrasena, 'enfermera' as Tipo FROM enfermera WHERE Id_Enfermera = @user
+                    UNION
+                    SELECT Nombre, Contrasena, 'doctora' as Tipo FROM doctora WHERE Cedula = @user;";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
                             cmd.Parameters.AddWithValue("@user", usuario);
-                            cmd.Parameters.AddWithValue("@pass", pass);
 
                             using (MySqlDataReader lector = cmd.ExecuteReader())
                             {
-                                if (lector.Read()) 
+                                if (lector.Read())
                                 {
+                                    string Cifrado = lector["Contrasena"].ToString();
+                                    bool esValida = BCrypt.Net.BCrypt.Verify(password, Cifrado);
 
+                                    if (esValida)
+                                    {
+                                        frmBusquedaAlumnos.UsuarioNombre = lector["Nombre"].ToString();
+                                        frmBusquedaAlumnos.UsuarioTipo = lector["Tipo"].ToString();
 
-                                    frmBusquedaAlumnos ventanaBuscador = new frmBusquedaAlumnos();
-                                    ventanaBuscador.Show();
-
-                                    this.Hide();
+                                        frmBusquedaAlumnos ventanaBuscador = new frmBusquedaAlumnos();
+                                        ventanaBuscador.Show();
+                                        this.Hide();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Contraseña incorrecta.", "Acceso denegado");
+                                    }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Usuario o contraseña incorrectos.", "Acceso denegado");
+                                    MessageBox.Show("El usuario no existe.", "Acceso denegado");
                                 }
                             }
                         }
