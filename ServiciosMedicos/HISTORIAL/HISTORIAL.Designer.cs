@@ -52,6 +52,7 @@
             dataGridView1atenciones = new DataGridView();
             button1 = new Button();
             button2 = new Button();
+            btnGuardar = new Button();
             groupBox2perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).BeginInit();
@@ -342,6 +343,7 @@
             button1.TabIndex = 2;
             button1.Text = "Editar Expediente ";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -356,12 +358,26 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click_1;
             // 
+            // btnGuardar
+            // 
+            btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGuardar.BackColor = Color.FromArgb(204, 204, 204);
+            btnGuardar.Location = new Point(387, 754);
+            btnGuardar.Margin = new Padding(2, 3, 2, 3);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(150, 36);
+            btnGuardar.TabIndex = 4;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
             // HISTORIAL
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(896, 803);
+            Controls.Add(btnGuardar);
             Controls.Add(button2);
             Controls.Add(groupBox3atenciones);
             Controls.Add(button1);
@@ -412,5 +428,6 @@
         private TextBox txtNombrePaciente;
         private Label labelNOMBRE;
         private DataGridView PerfilPaciente;
+        private Button btnGuardar;
     }
 }
