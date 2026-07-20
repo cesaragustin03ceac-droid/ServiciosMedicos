@@ -223,6 +223,7 @@ namespace ServiciosMedicos.HISTORIAL
             try
             {
                 FrmConsultas ventanaConsulta = new FrmConsultas();
+                ventanaConsulta.PassDatosPaciente(this.idPacienteActual, this.tipoPacienteActual);
 
                 ventanaConsulta.Show();
 
