@@ -30,10 +30,15 @@ namespace ServiciosMedicos.HISTORIAL
         }
         private void EstilarDataGridView()
         {
+            // Limpiamos la tabla y desactivamos estilos de Windows
             dataGridView1atenciones.Columns.Clear();
             dataGridView1atenciones.EnableHeadersVisualStyles = false;
 
-            // Color Azul de la Guía de Estilos (#6FA8DC)
+            // Bloqueamos la modificación manual de tamaños
+            dataGridView1atenciones.AllowUserToResizeColumns = false;
+            dataGridView1atenciones.AllowUserToResizeRows = false;
+
+            // Color Azul de la Guía de Estilos (#6FA8DC) y formato de encabezados
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#6FA8DC");
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -41,7 +46,7 @@ namespace ServiciosMedicos.HISTORIAL
             dataGridView1atenciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView1atenciones.ColumnHeadersHeight = 35;
 
-            // Formato general de celdas y rejilla
+            //  Formato general de celdas y rejilla
             dataGridView1atenciones.BackgroundColor = Color.White;
             dataGridView1atenciones.BorderStyle = BorderStyle.FixedSingle;
             dataGridView1atenciones.CellBorderStyle = DataGridViewCellBorderStyle.Single;
@@ -50,11 +55,12 @@ namespace ServiciosMedicos.HISTORIAL
             dataGridView1atenciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1atenciones.AllowUserToAddRows = false;
 
-            // Crear las 5 columnas vacías
+            // Crear las 3 columnas de texto normales
             dataGridView1atenciones.Columns.Add("colFecha", "Fecha");
             dataGridView1atenciones.Columns.Add("colMotivo", "Motivo");
             dataGridView1atenciones.Columns.Add("colDiagnostico", "Diagnostico");
 
+            // Crear las columnas de tipo Enlace (Links)
             DataGridViewLinkColumn colFormato = new DataGridViewLinkColumn();
             colFormato.Name = "colFormato";
             colFormato.HeaderText = "Formato";
@@ -67,7 +73,15 @@ namespace ServiciosMedicos.HISTORIAL
             colReceta.UseColumnTextForLinkValue = false;
             dataGridView1atenciones.Columns.Add(colReceta);
 
+            // Activamos el relleno automático para abarcar todo el ancho
             dataGridView1atenciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            //Asignamos el porcentaje de ancho a cada columna 
+            dataGridView1atenciones.Columns["colFecha"].FillWeight = 70;
+            dataGridView1atenciones.Columns["colMotivo"].FillWeight = 90;
+            dataGridView1atenciones.Columns["colDiagnostico"].FillWeight = 240; // Se lleva casi la mitad de la tabla
+            dataGridView1atenciones.Columns["colFormato"].FillWeight = 50;     // Queda pequeño solo para "Ver"
+            dataGridView1atenciones.Columns["colReceta"].FillWeight = 50;      // Queda pequeño solo para "Ver"
         }
 
         private void DibujarBordeGrueso(object sender, PaintEventArgs e)
