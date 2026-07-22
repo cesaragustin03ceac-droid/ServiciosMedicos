@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,10 @@ namespace ServiciosMedicos.GeneracionReceta
         public frmGeneracionReceta()
         {
             InitializeComponent();
-            button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
+            btonCancelar.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
             btnGuardar.Paint += DibujarBordeGrueso;
             btnVistaPrevia.Paint += DibujarBordeGrueso;
-            button7.Paint += DibujarBordeGrueso;
+            btnImprimir.Paint += DibujarBordeGrueso;
             groupBox2.Paint += DibujarBordeGrueso;
             groupBox3.Paint += DibujarBordeGrueso;
             FechaConsulta();
@@ -128,6 +129,14 @@ namespace ServiciosMedicos.GeneracionReceta
         {
             CargarDatosPacienteEnReceta();
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+           FrmConsultas frmcondultas = new FrmConsultas();
+            frmcondultas.Show();
+
+            this.Close();
         }
     }
 }
