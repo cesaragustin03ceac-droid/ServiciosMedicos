@@ -53,6 +53,8 @@
             button1 = new Button();
             button2 = new Button();
             btnGuardar = new Button();
+            BtnAtras = new Button();
+            groupBox1.SuspendLayout();
             groupBox2perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1usuario).BeginInit();
@@ -65,6 +67,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
+            groupBox1.Controls.Add(BtnAtras);
             groupBox1.Location = new Point(3, 0);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
@@ -371,6 +374,18 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // BtnAtras
+            // 
+            BtnAtras.BackColor = Color.FromArgb(217, 217, 217);
+            BtnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            BtnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnAtras.Location = new Point(31, 27);
+            BtnAtras.Name = "BtnAtras";
+            BtnAtras.Size = new Size(96, 41);
+            BtnAtras.TabIndex = 5;
+            BtnAtras.UseVisualStyleBackColor = false;
+            BtnAtras.Click += BtnAtras_Click;
+            // 
             // HISTORIAL
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -391,6 +406,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HISTORIAL";
             Paint += DibujarBordeGrueso;
+            groupBox1.ResumeLayout(false);
             groupBox2perfil.ResumeLayout(false);
             groupBox2perfil.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).EndInit();
@@ -429,5 +445,6 @@
         private Label labelNOMBRE;
         private DataGridView PerfilPaciente;
         private Button btnGuardar;
+        private Button BtnAtras;
     }
 }

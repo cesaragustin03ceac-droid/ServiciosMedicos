@@ -47,12 +47,14 @@
             groupBox7 = new GroupBox();
             btnEditar = new Button();
             btnGuardar = new Button();
+            btnAtras = new Button();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox6.SuspendLayout();
+            groupBox7.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -162,6 +164,7 @@
             cboDiagnostico.Size = new Size(163, 28);
             cboDiagnostico.TabIndex = 0;
             cboDiagnostico.Text = "Diagnostico General";
+            cboDiagnostico.SelectedIndexChanged += cboDiagnostico_SelectedIndexChanged;
             // 
             // groupBox4
             // 
@@ -214,6 +217,7 @@
             // groupBox7
             // 
             groupBox7.BackColor = Color.Silver;
+            groupBox7.Controls.Add(btnAtras);
             groupBox7.ForeColor = Color.Black;
             groupBox7.Location = new Point(1, 5);
             groupBox7.Name = "groupBox7";
@@ -240,6 +244,18 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
+            // 
+            // btnAtras
+            // 
+            btnAtras.BackColor = Color.FromArgb(217, 217, 217);
+            btnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            btnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            btnAtras.Location = new Point(31, 27);
+            btnAtras.Name = "btnAtras";
+            btnAtras.Size = new Size(96, 41);
+            btnAtras.TabIndex = 0;
+            btnAtras.UseVisualStyleBackColor = false;
+            btnAtras.Click += btnAtras_Click;
             // 
             // FrmConsultas
             // 
@@ -277,6 +293,7 @@
             groupBox4.PerformLayout();
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
+            groupBox7.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -305,5 +322,6 @@
         private TextBox txtTemperatura;
         private Button btnEditar;
         private Button btnGuardar;
+        private Button btnAtras;
     }
 }

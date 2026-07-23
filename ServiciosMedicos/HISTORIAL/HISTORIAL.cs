@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using ServiciosMedicos.Busqueda;
 using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
 using ServiciosMedicos.GeneracionReceta;
@@ -323,6 +324,14 @@ namespace ServiciosMedicos.HISTORIAL
                     }
                 }
             }
+        }
+
+        private void BtnAtras_Click(object sender, EventArgs e)
+        {
+            frmBusquedaAlumnos FrmBusquedaPacientes = new frmBusquedaAlumnos();
+            FrmBusquedaPacientes.Show();
+
+            this.Close();
         }
     }
 }

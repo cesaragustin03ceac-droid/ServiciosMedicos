@@ -133,7 +133,15 @@ namespace ServiciosMedicos.GeneracionReceta
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-           FrmConsultas frmcondultas = new FrmConsultas();
+            FrmConsultas frmcondultas = new FrmConsultas();
+            frmcondultas.Show();
+
+            this.Close();
+        }
+
+        private void BtnAtras_Click(object sender, EventArgs e)
+        {
+            FrmConsultas frmcondultas = new FrmConsultas();
             frmcondultas.Show();
 
             this.Close();
