@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HISTORIAL));
             groupBox1 = new GroupBox();
+            label8 = new Label();
+            BtnAtras = new Button();
             groupBox2perfil = new GroupBox();
             PerfilPaciente = new DataGridView();
             txtNombrePaciente = new TextBox();
@@ -53,7 +55,6 @@
             button1 = new Button();
             button2 = new Button();
             btnGuardar = new Button();
-            BtnAtras = new Button();
             groupBox1.SuspendLayout();
             groupBox2perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).BeginInit();
@@ -67,6 +68,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
+            groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(BtnAtras);
             groupBox1.Location = new Point(3, 0);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
@@ -75,6 +77,28 @@
             groupBox1.Size = new Size(893, 92);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(300, 27);
+            label8.Name = "label8";
+            label8.Size = new Size(304, 41);
+            label8.TabIndex = 5;
+            label8.Text = "Historial y Expediente";
+            // 
+            // BtnAtras
+            // 
+            BtnAtras.BackColor = Color.FromArgb(217, 217, 217);
+            BtnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            BtnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnAtras.Location = new Point(31, 27);
+            BtnAtras.Name = "BtnAtras";
+            BtnAtras.Size = new Size(96, 41);
+            BtnAtras.TabIndex = 5;
+            BtnAtras.UseVisualStyleBackColor = false;
+            BtnAtras.Click += BtnAtras_Click;
             // 
             // groupBox2perfil
             // 
@@ -374,18 +398,6 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // BtnAtras
-            // 
-            BtnAtras.BackColor = Color.FromArgb(217, 217, 217);
-            BtnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
-            BtnAtras.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnAtras.Location = new Point(31, 27);
-            BtnAtras.Name = "BtnAtras";
-            BtnAtras.Size = new Size(96, 41);
-            BtnAtras.TabIndex = 5;
-            BtnAtras.UseVisualStyleBackColor = false;
-            BtnAtras.Click += BtnAtras_Click;
-            // 
             // HISTORIAL
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -405,8 +417,10 @@
             Name = "HISTORIAL";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HISTORIAL";
+            Load += HISTORIAL_Load;
             Paint += DibujarBordeGrueso;
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             groupBox2perfil.ResumeLayout(false);
             groupBox2perfil.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).EndInit();
@@ -446,5 +460,6 @@
         private DataGridView PerfilPaciente;
         private Button btnGuardar;
         private Button BtnAtras;
+        private Label label8;
     }
 }

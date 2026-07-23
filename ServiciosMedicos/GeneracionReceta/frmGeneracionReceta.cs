@@ -67,8 +67,7 @@ namespace ServiciosMedicos.GeneracionReceta
                     string query = @"SELECT 
                                 c.Matricula_Alumno, c.Num_Trabajador,
                                 COALESCE(a.Matricula, t.Num_Trabajador) AS MatriculaFinal,
-                                CONCAT(COALESCE(a.Nombre, t.Nombre), ' ', COALESCE(a.Apellido_P, t.Apellido_P), ' ', COALESCE(a.Apellido_M, t.Apellido_M)) AS NombreCompleto,
-                                COALESCE(a.Carrera, t.Areas) AS AreaFinal
+                                CONCAT(COALESCE(a.Nombre, t.Nombre), ' ', COALESCE(a.Apellido_P, t.Apellido_P), ' ', COALESCE(a.Apellido_M, t.Apellido_M)) AS NombreCompleto
                              FROM consulta c
                              LEFT JOIN alumno a ON c.Matricula_Alumno = a.Matricula
                              LEFT JOIN trabajador t ON c.Num_Trabajador = t.Num_Trabajador
@@ -83,7 +82,6 @@ namespace ServiciosMedicos.GeneracionReceta
                             {
                                 txtMatricula.Text = lector["MatriculaFinal"].ToString();
                                 txtNombre.Text = lector["NombreCompleto"].ToString();
-                                txtArea.Text = lector["AreaFinal"].ToString();
                             }
                         }
                     }
@@ -145,6 +143,11 @@ namespace ServiciosMedicos.GeneracionReceta
             frmcondultas.Show();
 
             this.Close();
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
