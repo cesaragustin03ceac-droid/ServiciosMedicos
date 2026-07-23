@@ -45,9 +45,10 @@
             txtTemperatura = new TextBox();
             btnReceta = new Button();
             groupBox7 = new GroupBox();
+            label1 = new Label();
+            btnAtras = new Button();
             btnEditar = new Button();
             btnGuardar = new Button();
-            btnAtras = new Button();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -72,10 +73,13 @@
             // txtMotivo
             // 
             txtMotivo.Location = new Point(24, 97);
+            txtMotivo.Multiline = true;
             txtMotivo.Name = "txtMotivo";
             txtMotivo.PlaceholderText = "Otro Motivo";
+            txtMotivo.ReadOnly = true;
             txtMotivo.Size = new Size(163, 27);
             txtMotivo.TabIndex = 1;
+            txtMotivo.TextChanged += txtMotivo_TextChanged;
             // 
             // CboMotivo
             // 
@@ -105,6 +109,7 @@
             txtSintomas.Location = new Point(24, 97);
             txtSintomas.Name = "txtSintomas";
             txtSintomas.PlaceholderText = "Otro Sintoma";
+            txtSintomas.ReadOnly = true;
             txtSintomas.Size = new Size(163, 27);
             txtSintomas.TabIndex = 1;
             // 
@@ -116,6 +121,7 @@
             cboSintomas.Size = new Size(163, 28);
             cboSintomas.TabIndex = 0;
             cboSintomas.Text = "Sintomas Generales";
+            cboSintomas.SelectedIndexChanged += cboSintomas_SelectedIndexChanged;
             // 
             // groupBox2
             // 
@@ -153,6 +159,7 @@
             TxtDiagnostico.Location = new Point(39, 97);
             TxtDiagnostico.Name = "TxtDiagnostico";
             TxtDiagnostico.PlaceholderText = "Otro Diagnostico";
+            TxtDiagnostico.ReadOnly = true;
             TxtDiagnostico.Size = new Size(163, 27);
             TxtDiagnostico.TabIndex = 1;
             // 
@@ -217,6 +224,7 @@
             // groupBox7
             // 
             groupBox7.BackColor = Color.Silver;
+            groupBox7.Controls.Add(label1);
             groupBox7.Controls.Add(btnAtras);
             groupBox7.ForeColor = Color.Black;
             groupBox7.Location = new Point(1, 5);
@@ -224,6 +232,28 @@
             groupBox7.Size = new Size(893, 92);
             groupBox7.TabIndex = 11;
             groupBox7.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(300, 27);
+            label1.Name = "label1";
+            label1.Size = new Size(249, 38);
+            label1.TabIndex = 1;
+            label1.Text = "Formato de Signos";
+            // 
+            // btnAtras
+            // 
+            btnAtras.BackColor = Color.FromArgb(217, 217, 217);
+            btnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            btnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            btnAtras.Location = new Point(31, 27);
+            btnAtras.Name = "btnAtras";
+            btnAtras.Size = new Size(96, 41);
+            btnAtras.TabIndex = 0;
+            btnAtras.UseVisualStyleBackColor = false;
+            btnAtras.Click += btnAtras_Click;
             // 
             // btnEditar
             // 
@@ -244,18 +274,6 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
-            // 
-            // btnAtras
-            // 
-            btnAtras.BackColor = Color.FromArgb(217, 217, 217);
-            btnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
-            btnAtras.BackgroundImageLayout = ImageLayout.Zoom;
-            btnAtras.Location = new Point(31, 27);
-            btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(96, 41);
-            btnAtras.TabIndex = 0;
-            btnAtras.UseVisualStyleBackColor = false;
-            btnAtras.Click += btnAtras_Click;
             // 
             // FrmConsultas
             // 
@@ -294,6 +312,7 @@
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
             groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -323,5 +342,6 @@
         private Button btnEditar;
         private Button btnGuardar;
         private Button btnAtras;
+        private Label label1;
     }
 }

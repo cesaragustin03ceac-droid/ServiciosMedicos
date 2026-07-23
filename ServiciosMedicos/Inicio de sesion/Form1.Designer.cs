@@ -147,6 +147,7 @@
             btnModoNegro.Size = new Size(96, 41);
             btnModoNegro.TabIndex = 3;
             btnModoNegro.UseVisualStyleBackColor = false;
+            btnModoNegro.Click += btnModoNegro_Click;
             // 
             // Form1
             // 

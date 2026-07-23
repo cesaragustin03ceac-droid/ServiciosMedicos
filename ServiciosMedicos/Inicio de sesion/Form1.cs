@@ -10,6 +10,8 @@ namespace ServiciosMedicos
         {
             InitializeComponent();
         }
+        private bool modoOscuro = false;
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -79,5 +81,12 @@ namespace ServiciosMedicos
         {
 
         }
+
+        private void btnModoNegro_Click(object sender, EventArgs e)
+        {
+    
+
+        }                         
     }
 }
+

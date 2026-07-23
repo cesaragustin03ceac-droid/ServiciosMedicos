@@ -27,19 +27,21 @@ namespace ServiciosMedicos.Consultas
             CboMotivo.Items.Add("Chequeo general de rutina");
             CboMotivo.Items.Add("Malestar general");
             CboMotivo.Items.Add("Dolor");
+            CboMotivo.Items.Add("Otro");
             CboMotivo.SelectedIndex = -1;
 
             cboSintomas.Items.Clear();
             cboSintomas.Items.Add("Fiebre y escalofríos");
             cboSintomas.Items.Add("Dolor de cabeza");
             cboSintomas.Items.Add("Tos y congestión nasal");
-
+            cboSintomas.Items.Add("Otro");
             cboSintomas.SelectedIndex = -1;
 
             cboDiagnostico.Items.Clear();
             cboDiagnostico.Items.Add("Infecion de estomago");
             cboDiagnostico.Items.Add("Resfriado común)");
             cboDiagnostico.Items.Add("Gastroenteritis aguda");
+            cboDiagnostico.Items.Add("Otro");
             cboDiagnostico.SelectedIndex = -1;
         }
         private string idPaciente;
@@ -77,6 +79,16 @@ namespace ServiciosMedicos.Consultas
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            if (CboMotivo.Text == "Otro")
+            {
+                txtMotivo.ReadOnly = false;
+
+            }
+            else
+            {
+                txtMotivo.Clear();
+                txtMotivo.ReadOnly = true;
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -198,7 +210,15 @@ namespace ServiciosMedicos.Consultas
 
         private void cboDiagnostico_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cboDiagnostico.Text == "Otro")
+            {
+                TxtDiagnostico.ReadOnly = false;
+            }
+            else
+            {
+                TxtDiagnostico.Clear();
+                TxtDiagnostico.ReadOnly = true;
+            }
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
@@ -207,6 +227,27 @@ namespace ServiciosMedicos.Consultas
             frmHistorial.Show();
 
             this.Close();
+        }
+
+        private void txtMotivo_TextChanged(object sender, EventArgs e)
+        {
+
+
+
+
+        }
+
+        private void cboSintomas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSintomas.Text == "Otro")
+            {
+                txtSintomas.ReadOnly = false;
+            }
+            else
+            {
+                txtSintomas.Clear();
+                txtSintomas.ReadOnly = true;
+            }
         }
     }
 }

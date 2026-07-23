@@ -333,5 +333,10 @@ namespace ServiciosMedicos.HISTORIAL
 
             this.Close();
         }
+
+        private void HISTORIAL_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
+            label4 = new Label();
             BtnAtras = new Button();
             groupBox2 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -70,6 +71,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
+            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(BtnAtras);
             groupBox1.Location = new Point(-6, 0);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
@@ -78,6 +80,16 @@
             groupBox1.Size = new Size(903, 92);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(300, 27);
+            label4.Name = "label4";
+            label4.Size = new Size(281, 38);
+            label4.TabIndex = 1;
+            label4.Text = "Generacion de receta";
             // 
             // BtnAtras
             // 
@@ -169,6 +181,7 @@
             txtNombre.ReadOnly = true;
             txtNombre.Size = new Size(290, 32);
             txtNombre.TabIndex = 11;
+            txtNombre.TextChanged += txtNombre_TextChanged;
             // 
             // label5
             // 
@@ -422,6 +435,7 @@
             Text = "GeneracionReceta";
             Load += frmGeneracionReceta_Load;
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -461,5 +475,6 @@
         private DataGridViewTextBoxColumn colDuracion;
         private DataGridViewImageColumn colEliminar;
         private Button BtnAtras;
+        private Label label4;
     }
 }
