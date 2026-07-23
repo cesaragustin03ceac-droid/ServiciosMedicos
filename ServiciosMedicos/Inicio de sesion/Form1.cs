@@ -14,6 +14,8 @@ namespace ServiciosMedicos
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ActiveControl = BtEntrar;
+            this.AcceptButton = BtEntrar;
+
         }
 
         private void BtEntrar_Click(object sender, EventArgs e)

@@ -31,14 +31,14 @@ namespace ServiciosMedicos.Consultas
 
             cboSintomas.Items.Clear();
             cboSintomas.Items.Add("Fiebre y escalofríos");
-            cboSintomas.Items.Add("Dolor de cabeza (Cefalea)");
+            cboSintomas.Items.Add("Dolor de cabeza");
             cboSintomas.Items.Add("Tos y congestión nasal");
 
             cboSintomas.SelectedIndex = -1;
 
             cboDiagnostico.Items.Clear();
-            cboDiagnostico.Items.Add("Paciente sano, signos vitales estables");
-            cboDiagnostico.Items.Add("Infección de vías respiratorias altas (Resfriado común)");
+            cboDiagnostico.Items.Add("Infecion de estomago");
+            cboDiagnostico.Items.Add("Resfriado común)");
             cboDiagnostico.Items.Add("Gastroenteritis aguda");
             cboDiagnostico.SelectedIndex = -1;
         }
@@ -53,7 +53,7 @@ namespace ServiciosMedicos.Consultas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -194,6 +194,19 @@ namespace ServiciosMedicos.Consultas
                 btnReceta.Enabled = true;
                 btnReceta.Visible = true;
             }
+        }
+
+        private void cboDiagnostico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            HISTORIAL.HISTORIAL frmHistorial = new HISTORIAL.HISTORIAL();
+            frmHistorial.Show();
+
+            this.Close();
         }
     }
 }

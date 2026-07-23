@@ -37,6 +37,7 @@
             TxbUsuario = new TextBox();
             panel2 = new Panel();
             pictureBox3 = new PictureBox();
+            btnModoNegro = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -136,12 +137,24 @@
             pictureBox3.TabStop = false;
             pictureBox3.Click += pictureBox3_Click;
             // 
+            // btnModoNegro
+            // 
+            btnModoNegro.BackColor = Color.FromArgb(182, 208, 214);
+            btnModoNegro.BackgroundImage = Properties.Resources.luna;
+            btnModoNegro.BackgroundImageLayout = ImageLayout.Zoom;
+            btnModoNegro.Location = new Point(767, 655);
+            btnModoNegro.Name = "btnModoNegro";
+            btnModoNegro.Size = new Size(96, 41);
+            btnModoNegro.TabIndex = 3;
+            btnModoNegro.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(896, 803);
+            Controls.Add(btnModoNegro);
             Controls.Add(pictureBox3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -171,5 +184,6 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
+        private Button btnModoNegro;
     }
 }

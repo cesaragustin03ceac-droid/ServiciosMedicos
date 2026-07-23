@@ -47,6 +47,7 @@
             txtApellidoP = new TextBox();
             txtNombre = new TextBox();
             txtMatricula = new TextBox();
+            BtnSalir = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
@@ -57,6 +58,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
+            groupBox1.Controls.Add(BtnSalir);
             groupBox1.Controls.Add(lblpersona);
             groupBox1.Location = new Point(-8, 0);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
@@ -111,8 +113,10 @@
             txtBusqueda.Location = new Point(41, 55);
             txtBusqueda.Margin = new Padding(3, 4, 3, 4);
             txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.PlaceholderText = "Ingrese el matricula para buscar";
             txtBusqueda.Size = new Size(662, 27);
             txtBusqueda.TabIndex = 0;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // btnNuevo
             // 
@@ -250,6 +254,18 @@
             txtMatricula.Size = new Size(125, 27);
             txtMatricula.TabIndex = 0;
             // 
+            // BtnSalir
+            // 
+            BtnSalir.BackColor = Color.FromArgb(217, 217, 217);
+            BtnSalir.BackgroundImage = Properties.Resources.Salir;
+            BtnSalir.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnSalir.Location = new Point(31, 27);
+            BtnSalir.Name = "BtnSalir";
+            BtnSalir.Size = new Size(96, 41);
+            BtnSalir.TabIndex = 1;
+            BtnSalir.UseVisualStyleBackColor = false;
+            BtnSalir.Click += BtnSalir_Click;
+            // 
             // frmBusquedaAlumnos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -301,5 +317,6 @@
         private Label lblpersona;
         private ComboBox CmbTipoPaciente;
         private Label lblTipo;
+        private Button BtnSalir;
     }
 }

@@ -260,7 +260,9 @@ namespace ServiciosMedicos.Busqueda
                 return;
             }
 
-            DialogResult confirmacion = MessageBox.Show("¿Estás seguro de eliminar este registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult confirmacion = MessageBox.Show(
+                "¿Estás seguro de eliminar este registro? Se eliminarán también todas sus consultas médicas.",
+                "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirmacion == DialogResult.Yes)
             {
@@ -269,50 +271,84 @@ namespace ServiciosMedicos.Busqueda
 
                 if (conexionAbierta != null)
                 {
+                    MySqlTransaction transaccion = null;
                     try
                     {
-                        string queryDelete = "";
+                        transaccion = conexionAbierta.BeginTransaction();
 
                         if (tipoPaciente.Equals("Alumno", StringComparison.OrdinalIgnoreCase))
                         {
-                            queryDelete = "DELETE FROM Alumno WHERE Matricula = @mat";
+                            string queryDeleteConsultas = "DELETE FROM Consulta WHERE Matricula_Alumno = @mat";
+                            using (MySqlCommand cmd = new MySqlCommand(queryDeleteConsultas, conexionAbierta, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@mat", matricula);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string queryDeleteAlumno = "DELETE FROM Alumno WHERE Matricula = @mat";
+                            using (MySqlCommand cmd = new MySqlCommand(queryDeleteAlumno, conexionAbierta, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@mat", matricula);
+                                int filas = cmd.ExecuteNonQuery();
+
+                                if (filas > 0)
+                                {
+                                    transaccion.Commit();
+                                    MessageBox.Show("Registro y consultas eliminados correctamente.", "Éxito");
+                                }
+                                else
+                                {
+                                    transaccion.Rollback();
+                                    MessageBox.Show("No se encontró el alumno.", "Aviso");
+                                    return;
+                                }
+                            }
                         }
                         else if (tipoPaciente.Equals("Trabajador", StringComparison.OrdinalIgnoreCase))
                         {
-                            queryDelete = "DELETE FROM Trabajador WHERE Num_Trabajador = @mat";
+                            string queryDeleteConsultas = "DELETE FROM Consulta WHERE Num_Trabajador = @mat";
+                            using (MySqlCommand cmd = new MySqlCommand(queryDeleteConsultas, conexionAbierta, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@mat", matricula);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string queryDeleteTrabajador = "DELETE FROM Trabajador WHERE Num_Trabajador = @mat";
+                            using (MySqlCommand cmd = new MySqlCommand(queryDeleteTrabajador, conexionAbierta, transaccion))
+                            {
+                                cmd.Parameters.AddWithValue("@mat", matricula);
+                                int filas = cmd.ExecuteNonQuery();
+
+                                if (filas > 0)
+                                {
+                                    transaccion.Commit();
+                                    MessageBox.Show("Registro y consultas eliminados correctamente.", "Éxito");
+                                }
+                                else
+                                {
+                                    transaccion.Rollback();
+                                    MessageBox.Show("No se encontró el trabajador.", "Aviso");
+                                    return;
+                                }
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Selecciona si el paciente es 'Alumno' o 'Trabajador' para saber de qué tabla eliminar.", "Aviso");
-                            conexionAbierta.Close();
+                            MessageBox.Show("Selecciona si el paciente es 'Alumno' o 'Trabajador'.", "Aviso");
+                            transaccion?.Rollback();
                             return;
                         }
 
-                        using (MySqlCommand comando = new MySqlCommand(queryDelete, conexionAbierta))
-                        {
-                            comando.Parameters.AddWithValue("@mat", matricula);
-
-                            int filasAfectadas = comando.ExecuteNonQuery();
-
-                            if (filasAfectadas > 0)
-                            {
-                                MessageBox.Show("Registro eliminado correctamente.", "Éxito");
-
-                                CargarDatos();
-                                txtMatricula.Clear();
-                                txtNombre.Clear();
-                                txtApellidoP.Clear();
-                                txtApellidoM.Clear();
-                                CmbTipoPaciente.SelectedIndex = -1;
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se encontró ningún registro con esa clave.", "Aviso");
-                            }
-                        }
+                        CargarDatos();
+                        txtMatricula.Clear();
+                        txtNombre.Clear();
+                        txtApellidoP.Clear();
+                        txtApellidoM.Clear();
+                        CmbTipoPaciente.SelectedIndex = -1;
                     }
                     catch (Exception ex)
                     {
+                        transaccion?.Rollback();
                         MessageBox.Show("Error al eliminar el registro: " + ex.Message);
                     }
                     finally
@@ -335,6 +371,31 @@ namespace ServiciosMedicos.Busqueda
                 txtApellidoM.Text = fila.Cells[3].Value.ToString();
                 CmbTipoPaciente.Text = fila.Cells[4].Value.ToString();
             }
+        }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtBusqueda.Text.Trim();
+
+            if (RegistroAlumnos.DataSource is DataTable tabla)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    tabla.DefaultView.RowFilter = "";
+                }
+                else
+                {
+                    tabla.DefaultView.RowFilter = string.Format(
+                        "[Tipo de id] LIKE '%{0}%'",
+                        filtro.Replace("'", "''")
+                    );
+                }
+            }
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
