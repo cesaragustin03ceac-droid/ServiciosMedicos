@@ -53,9 +53,10 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(TxbContrasena);
             panel1.Controls.Add(TxbUsuario);
-            panel1.Location = new Point(109, 231);
+            panel1.Location = new Point(95, 173);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(681, 262);
+            panel1.Size = new Size(596, 196);
             panel1.TabIndex = 0;
             // 
             // BtEntrar
@@ -64,9 +65,10 @@
             BtEntrar.BackColor = Color.FromArgb(204, 204, 204);
             BtEntrar.Cursor = Cursors.IBeam;
             BtEntrar.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BtEntrar.Location = new Point(94, 190);
+            BtEntrar.Location = new Point(82, 142);
+            BtEntrar.Margin = new Padding(3, 2, 3, 2);
             BtEntrar.Name = "BtEntrar";
-            BtEntrar.Size = new Size(503, 38);
+            BtEntrar.Size = new Size(440, 28);
             BtEntrar.TabIndex = 4;
             BtEntrar.Text = "Entrar";
             BtEntrar.UseVisualStyleBackColor = false;
@@ -76,9 +78,10 @@
             // 
             pictureBox2.BackColor = Color.FromArgb(77, 115, 147);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(94, 119);
+            pictureBox2.Location = new Point(82, 89);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(45, 41);
+            pictureBox2.Size = new Size(39, 31);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
@@ -87,9 +90,10 @@
             // 
             pictureBox1.BackColor = Color.FromArgb(77, 115, 147);
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(94, 51);
+            pictureBox1.Location = new Point(82, 38);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(45, 41);
+            pictureBox1.Size = new Size(39, 31);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -99,11 +103,12 @@
             TxbContrasena.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxbContrasena.BorderStyle = BorderStyle.FixedSingle;
             TxbContrasena.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxbContrasena.Location = new Point(136, 120);
+            TxbContrasena.Location = new Point(119, 90);
+            TxbContrasena.Margin = new Padding(3, 2, 3, 2);
             TxbContrasena.Name = "TxbContrasena";
             TxbContrasena.PasswordChar = '*';
             TxbContrasena.PlaceholderText = "Contraseña";
-            TxbContrasena.Size = new Size(461, 40);
+            TxbContrasena.Size = new Size(404, 33);
             TxbContrasena.TabIndex = 1;
             // 
             // TxbUsuario
@@ -111,27 +116,30 @@
             TxbUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TxbUsuario.BorderStyle = BorderStyle.FixedSingle;
             TxbUsuario.Font = new Font("Comic Sans MS", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxbUsuario.Location = new Point(136, 52);
+            TxbUsuario.Location = new Point(119, 39);
+            TxbUsuario.Margin = new Padding(3, 2, 3, 2);
             TxbUsuario.Name = "TxbUsuario";
             TxbUsuario.PlaceholderText = "Usuario";
-            TxbUsuario.Size = new Size(461, 40);
+            TxbUsuario.Size = new Size(404, 33);
             TxbUsuario.TabIndex = 0;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.FromArgb(132, 154, 174);
-            panel2.Location = new Point(-7, 702);
+            panel2.Location = new Point(-6, 526);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(909, 107);
+            panel2.Size = new Size(795, 80);
             panel2.TabIndex = 1;
             // 
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(168, 50);
+            pictureBox3.Location = new Point(147, 38);
+            pictureBox3.Margin = new Padding(3, 2, 3, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(567, 101);
+            pictureBox3.Size = new Size(496, 76);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 2;
             pictureBox3.TabStop = false;
@@ -140,26 +148,30 @@
             // btnModoNegro
             // 
             btnModoNegro.BackColor = Color.FromArgb(182, 208, 214);
-            btnModoNegro.BackgroundImage = Properties.Resources.luna;
+            btnModoNegro.BackgroundImage = (Image)resources.GetObject("btnModoNegro.BackgroundImage");
             btnModoNegro.BackgroundImageLayout = ImageLayout.Zoom;
-            btnModoNegro.Location = new Point(767, 655);
+            btnModoNegro.FlatAppearance.BorderSize = 0;
+            btnModoNegro.FlatStyle = FlatStyle.Flat;
+            btnModoNegro.Location = new Point(699, 475);
+            btnModoNegro.Margin = new Padding(3, 2, 3, 2);
             btnModoNegro.Name = "btnModoNegro";
-            btnModoNegro.Size = new Size(96, 41);
+            btnModoNegro.Size = new Size(47, 47);
             btnModoNegro.TabIndex = 3;
             btnModoNegro.UseVisualStyleBackColor = false;
             btnModoNegro.Click += btnModoNegro_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 803);
+            ClientSize = new Size(784, 562);
             Controls.Add(btnModoNegro);
             Controls.Add(pictureBox3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Form1";
