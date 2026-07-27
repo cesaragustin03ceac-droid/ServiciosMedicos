@@ -63,24 +63,21 @@
             groupBox1.BackColor = Color.White;
             groupBox1.Controls.Add(txtMotivo);
             groupBox1.Controls.Add(CboMotivo);
-            groupBox1.Location = new Point(22, 112);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Location = new Point(25, 149);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(205, 121);
+            groupBox1.Size = new Size(234, 161);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Motivo";
             // 
             // txtMotivo
             // 
-            txtMotivo.Location = new Point(21, 73);
-            txtMotivo.Margin = new Padding(3, 2, 3, 2);
+            txtMotivo.Location = new Point(24, 97);
             txtMotivo.Multiline = true;
             txtMotivo.Name = "txtMotivo";
             txtMotivo.PlaceholderText = "Otro Motivo";
             txtMotivo.ReadOnly = true;
-            txtMotivo.Size = new Size(143, 21);
+            txtMotivo.Size = new Size(163, 27);
             txtMotivo.TabIndex = 1;
             txtMotivo.TextChanged += txtMotivo_TextChanged;
             // 
@@ -88,10 +85,9 @@
             // 
             CboMotivo.FormattingEnabled = true;
             CboMotivo.Items.AddRange(new object[] { "Motivo General" });
-            CboMotivo.Location = new Point(21, 35);
-            CboMotivo.Margin = new Padding(3, 2, 3, 2);
+            CboMotivo.Location = new Point(24, 47);
             CboMotivo.Name = "CboMotivo";
-            CboMotivo.Size = new Size(143, 23);
+            CboMotivo.Size = new Size(163, 28);
             CboMotivo.TabIndex = 0;
             CboMotivo.Text = "Motivo General";
             CboMotivo.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -101,32 +97,28 @@
             groupBox5.BackColor = Color.White;
             groupBox5.Controls.Add(txtSintomas);
             groupBox5.Controls.Add(cboSintomas);
-            groupBox5.Location = new Point(22, 301);
-            groupBox5.Margin = new Padding(3, 2, 3, 2);
+            groupBox5.Location = new Point(25, 401);
             groupBox5.Name = "groupBox5";
-            groupBox5.Padding = new Padding(3, 2, 3, 2);
-            groupBox5.Size = new Size(205, 121);
+            groupBox5.Size = new Size(234, 161);
             groupBox5.TabIndex = 3;
             groupBox5.TabStop = false;
             groupBox5.Text = "Sintomas";
             // 
             // txtSintomas
             // 
-            txtSintomas.Location = new Point(21, 73);
-            txtSintomas.Margin = new Padding(3, 2, 3, 2);
+            txtSintomas.Location = new Point(24, 97);
             txtSintomas.Name = "txtSintomas";
             txtSintomas.PlaceholderText = "Otro Sintoma";
             txtSintomas.ReadOnly = true;
-            txtSintomas.Size = new Size(143, 23);
+            txtSintomas.Size = new Size(163, 27);
             txtSintomas.TabIndex = 1;
             // 
             // cboSintomas
             // 
             cboSintomas.FormattingEnabled = true;
-            cboSintomas.Location = new Point(21, 38);
-            cboSintomas.Margin = new Padding(3, 2, 3, 2);
+            cboSintomas.Location = new Point(24, 51);
             cboSintomas.Name = "cboSintomas";
-            cboSintomas.Size = new Size(143, 23);
+            cboSintomas.Size = new Size(163, 28);
             cboSintomas.TabIndex = 0;
             cboSintomas.Text = "Sintomas Generales";
             cboSintomas.SelectedIndexChanged += cboSintomas_SelectedIndexChanged;
@@ -135,22 +127,19 @@
             // 
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(txtMalestarA);
-            groupBox2.Location = new Point(288, 112);
-            groupBox2.Margin = new Padding(3, 2, 3, 2);
+            groupBox2.Location = new Point(329, 149);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(205, 121);
+            groupBox2.Size = new Size(234, 161);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Antecedentes";
             // 
             // txtMalestarA
             // 
-            txtMalestarA.Location = new Point(34, 53);
-            txtMalestarA.Margin = new Padding(3, 2, 3, 2);
+            txtMalestarA.Location = new Point(39, 71);
             txtMalestarA.Name = "txtMalestarA";
             txtMalestarA.PlaceholderText = "Malestar Anterior";
-            txtMalestarA.Size = new Size(143, 23);
+            txtMalestarA.Size = new Size(163, 27);
             txtMalestarA.TabIndex = 1;
             // 
             // groupBox3
@@ -158,32 +147,28 @@
             groupBox3.BackColor = Color.White;
             groupBox3.Controls.Add(TxtDiagnostico);
             groupBox3.Controls.Add(cboDiagnostico);
-            groupBox3.Location = new Point(288, 301);
-            groupBox3.Margin = new Padding(3, 2, 3, 2);
+            groupBox3.Location = new Point(329, 401);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(205, 121);
+            groupBox3.Size = new Size(234, 161);
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Diagnostico";
             // 
             // TxtDiagnostico
             // 
-            TxtDiagnostico.Location = new Point(34, 73);
-            TxtDiagnostico.Margin = new Padding(3, 2, 3, 2);
+            TxtDiagnostico.Location = new Point(39, 97);
             TxtDiagnostico.Name = "TxtDiagnostico";
             TxtDiagnostico.PlaceholderText = "Otro Diagnostico";
             TxtDiagnostico.ReadOnly = true;
-            TxtDiagnostico.Size = new Size(143, 23);
+            TxtDiagnostico.Size = new Size(163, 27);
             TxtDiagnostico.TabIndex = 1;
             // 
             // cboDiagnostico
             // 
             cboDiagnostico.FormattingEnabled = true;
-            cboDiagnostico.Location = new Point(34, 38);
-            cboDiagnostico.Margin = new Padding(3, 2, 3, 2);
+            cboDiagnostico.Location = new Point(39, 51);
             cboDiagnostico.Name = "cboDiagnostico";
-            cboDiagnostico.Size = new Size(143, 23);
+            cboDiagnostico.Size = new Size(163, 28);
             cboDiagnostico.TabIndex = 0;
             cboDiagnostico.Text = "Diagnostico General";
             cboDiagnostico.SelectedIndexChanged += cboDiagnostico_SelectedIndexChanged;
@@ -192,52 +177,45 @@
             // 
             groupBox4.BackColor = Color.White;
             groupBox4.Controls.Add(txtPrecion);
-            groupBox4.Location = new Point(569, 112);
-            groupBox4.Margin = new Padding(3, 2, 3, 2);
+            groupBox4.Location = new Point(650, 149);
             groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(3, 2, 3, 2);
-            groupBox4.Size = new Size(205, 121);
+            groupBox4.Size = new Size(234, 161);
             groupBox4.TabIndex = 6;
             groupBox4.TabStop = false;
             groupBox4.Text = "Presion";
             // 
             // txtPrecion
             // 
-            txtPrecion.Location = new Point(29, 53);
-            txtPrecion.Margin = new Padding(3, 2, 3, 2);
+            txtPrecion.Location = new Point(33, 71);
             txtPrecion.Name = "txtPrecion";
             txtPrecion.PlaceholderText = "Ingrese la Precion";
-            txtPrecion.Size = new Size(143, 23);
+            txtPrecion.Size = new Size(163, 27);
             txtPrecion.TabIndex = 2;
             // 
             // groupBox6
             // 
             groupBox6.BackColor = Color.White;
             groupBox6.Controls.Add(txtTemperatura);
-            groupBox6.Location = new Point(569, 301);
-            groupBox6.Margin = new Padding(3, 2, 3, 2);
+            groupBox6.Location = new Point(650, 401);
             groupBox6.Name = "groupBox6";
-            groupBox6.Padding = new Padding(3, 2, 3, 2);
-            groupBox6.Size = new Size(205, 121);
+            groupBox6.Size = new Size(234, 161);
             groupBox6.TabIndex = 7;
             groupBox6.TabStop = false;
             groupBox6.Text = "Temperatura";
             // 
             // txtTemperatura
             // 
-            txtTemperatura.Location = new Point(29, 61);
-            txtTemperatura.Margin = new Padding(3, 2, 3, 2);
+            txtTemperatura.Location = new Point(33, 81);
             txtTemperatura.Name = "txtTemperatura";
             txtTemperatura.PlaceholderText = "Ingrese la Temperatura";
-            txtTemperatura.Size = new Size(143, 23);
+            txtTemperatura.Size = new Size(163, 27);
             txtTemperatura.TabIndex = 3;
             // 
             // btnReceta
             // 
-            btnReceta.Location = new Point(523, 500);
-            btnReceta.Margin = new Padding(3, 2, 3, 2);
+            btnReceta.Location = new Point(598, 667);
             btnReceta.Name = "btnReceta";
-            btnReceta.Size = new Size(134, 48);
+            btnReceta.Size = new Size(153, 64);
             btnReceta.TabIndex = 10;
             btnReceta.Text = "Ir A La Receta";
             btnReceta.UseVisualStyleBackColor = true;
@@ -249,11 +227,9 @@
             groupBox7.Controls.Add(label1);
             groupBox7.Controls.Add(btnAtras);
             groupBox7.ForeColor = Color.Black;
-            groupBox7.Location = new Point(1, 4);
-            groupBox7.Margin = new Padding(3, 2, 3, 2);
+            groupBox7.Location = new Point(1, 5);
             groupBox7.Name = "groupBox7";
-            groupBox7.Padding = new Padding(3, 2, 3, 2);
-            groupBox7.Size = new Size(781, 69);
+            groupBox7.Size = new Size(893, 92);
             groupBox7.TabIndex = 11;
             groupBox7.TabStop = false;
             // 
@@ -261,9 +237,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(262, 20);
+            label1.Location = new Point(299, 27);
             label1.Name = "label1";
-            label1.Size = new Size(228, 32);
+            label1.Size = new Size(282, 41);
             label1.TabIndex = 1;
             label1.Text = "Formato de Signos";
             // 
@@ -275,20 +251,18 @@
             btnAtras.BackgroundImageLayout = ImageLayout.Zoom;
             btnAtras.FlatAppearance.BorderSize = 0;
             btnAtras.FlatStyle = FlatStyle.Flat;
-            btnAtras.Location = new Point(27, 20);
-            btnAtras.Margin = new Padding(3, 2, 3, 2);
+            btnAtras.Location = new Point(31, 27);
             btnAtras.Name = "btnAtras";
-            btnAtras.Size = new Size(84, 31);
+            btnAtras.Size = new Size(96, 41);
             btnAtras.TabIndex = 0;
             btnAtras.UseVisualStyleBackColor = false;
             btnAtras.Click += btnAtras_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(307, 500);
-            btnEditar.Margin = new Padding(3, 2, 3, 2);
+            btnEditar.Location = new Point(351, 667);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(134, 48);
+            btnEditar.Size = new Size(153, 64);
             btnEditar.TabIndex = 12;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
@@ -296,10 +270,9 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(93, 500);
-            btnGuardar.Margin = new Padding(3, 2, 3, 2);
+            btnGuardar.Location = new Point(106, 667);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(134, 48);
+            btnGuardar.Size = new Size(153, 64);
             btnGuardar.TabIndex = 13;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -307,11 +280,11 @@
             // 
             // FrmConsultas
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnableAllowFocusChange;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(784, 562);
+            ClientSize = new Size(896, 803);
             Controls.Add(btnGuardar);
             Controls.Add(btnEditar);
             Controls.Add(groupBox7);
@@ -323,7 +296,6 @@
             Controls.Add(groupBox5);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FrmConsultas";
