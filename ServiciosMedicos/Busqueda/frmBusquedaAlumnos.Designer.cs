@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             groupBox1 = new GroupBox();
             label5 = new Label();
             BtnSalir = new Button();
@@ -49,10 +50,12 @@
             txtApellidoP = new TextBox();
             txtNombre = new TextBox();
             txtMatricula = new TextBox();
+            errorProvider1 = new ErrorProvider(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -285,6 +288,10 @@
             txtMatricula.Size = new Size(110, 23);
             txtMatricula.TabIndex = 0;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // frmBusquedaAlumnos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -311,6 +318,7 @@
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -337,5 +345,6 @@
         private Label lblTipo;
         private Button BtnSalir;
         private Label label5;
+        private ErrorProvider errorProvider1;
     }
 }
