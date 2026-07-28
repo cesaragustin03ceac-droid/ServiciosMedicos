@@ -397,5 +397,10 @@ namespace ServiciosMedicos.Busqueda
         {
             Application.Exit();
         }
+
+        private void RegistroAlumnos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             groupBox1 = new GroupBox();
             label5 = new Label();
             BtnSalir = new Button();
@@ -50,12 +49,10 @@
             txtApellidoP = new TextBox();
             txtNombre = new TextBox();
             txtMatricula = new TextBox();
-            errorProvider1 = new ErrorProvider(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -134,6 +131,7 @@
             RegistroAlumnos.Size = new Size(662, 349);
             RegistroAlumnos.TabIndex = 1;
             RegistroAlumnos.CellClick += RegistroAlumnos_CellClick;
+            RegistroAlumnos.CellContentClick += RegistroAlumnos_CellContentClick;
             RegistroAlumnos.CellDoubleClick += RegistroAlumnos_CellDoubleClick;
             // 
             // txtBusqueda
@@ -183,7 +181,9 @@
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            groupBox3.Controls.Add(btnEliminar);
             groupBox3.Controls.Add(CmbTipoPaciente);
+            groupBox3.Controls.Add(btnNuevo);
             groupBox3.Controls.Add(lblTipo);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label3);
@@ -283,10 +283,6 @@
             txtMatricula.Size = new Size(125, 27);
             txtMatricula.TabIndex = 0;
             // 
-            // errorProvider1
-            // 
-            errorProvider1.ContainerControl = this;
-            // 
             // frmBusquedaAlumnos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -296,7 +292,7 @@
             Controls.Add(groupBox3);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
-            Controls.Add(btnNuevo);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -314,7 +310,6 @@
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -341,6 +336,5 @@
         private Label lblTipo;
         private Button BtnSalir;
         private Label label5;
-        private ErrorProvider errorProvider1;
     }
 }

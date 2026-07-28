@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneracionReceta));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
             label4 = new Label();
             BtnAtras = new Button();
@@ -255,8 +255,8 @@
             // dgvMedicamentos
             // 
             dgvMedicamentos.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dgvMedicamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dgvMedicamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvMedicamentos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvMedicamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMedicamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -417,11 +417,12 @@
             ClientSize = new Size(896, 749);
             Controls.Add(btnAgregar);
             Controls.Add(btonCancelar);
-            Controls.Add(btnImprimir);
             Controls.Add(btnVistaPrevia);
-            Controls.Add(btnGuardar);
+            Controls.Add(btnAgregar);
+            Controls.Add(btnImprimir);
             Controls.Add(label3);
             Controls.Add(label2);
+            Controls.Add(btnGuardar);
             Controls.Add(groupBox3);
             Controls.Add(label1);
             Controls.Add(groupBox2);
