@@ -46,14 +46,14 @@ namespace ServiciosMedicos.Busqueda
                                 Nombre, 
                                 Apellido_P AS 'Apellido Paterno', 
                                 Apellido_M AS 'Apellido Materno',
-                                'Alumno' AS 'Tipo de trabajador'
+                                'Alumno' AS 'Tipo de Paciente'
                          FROM Alumno
                          UNION ALL
                          SELECT Num_Trabajador AS 'Tipo de id',
                          Nombre,
                          Apellido_P AS 'Apellido Paterno',
                          Apellido_M AS 'Apellido Materno',
-                         'Trabajador' AS 'Tipo de trabajador'
+                         'Trabajador' AS 'Tipo de Paciente'
                          FROM Trabajador;";
 
                     MySqlCommand comando = new MySqlCommand(query, conexionAbierta);

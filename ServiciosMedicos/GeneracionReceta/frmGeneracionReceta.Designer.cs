@@ -73,7 +73,7 @@
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(BtnAtras);
-            groupBox1.Location = new Point(-6, 27);
+            groupBox1.Location = new Point(-6, 0);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
@@ -266,8 +266,8 @@
             dgvMedicamentos.Margin = new Padding(3, 4, 3, 4);
             dgvMedicamentos.Name = "dgvMedicamentos";
             dgvMedicamentos.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dgvMedicamentos.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dgvMedicamentos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvMedicamentos.Size = new Size(786, 277);
             dgvMedicamentos.TabIndex = 0;
             dgvMedicamentos.CellContentClick += dgvMedicamentos_CellClick;
@@ -328,7 +328,7 @@
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label3.Location = new Point(59, 616);
+            label3.Location = new Point(59, 619);
             label3.Name = "label3";
             label3.Size = new Size(122, 25);
             label3.TabIndex = 6;
@@ -338,7 +338,7 @@
             // 
             btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnGuardar.BackColor = Color.FromArgb(204, 204, 204);
-            btnGuardar.Location = new Point(556, 655);
+            btnGuardar.Location = new Point(553, 663);
             btnGuardar.Margin = new Padding(2, 3, 2, 3);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(135, 43);
@@ -351,7 +351,7 @@
             // 
             btnVistaPrevia.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnVistaPrevia.BackColor = Color.FromArgb(204, 204, 204);
-            btnVistaPrevia.Location = new Point(715, 739);
+            btnVistaPrevia.Location = new Point(710, 663);
             btnVistaPrevia.Margin = new Padding(2, 3, 2, 3);
             btnVistaPrevia.Name = "btnVistaPrevia";
             btnVistaPrevia.Size = new Size(135, 43);
@@ -363,7 +363,7 @@
             // 
             btnImprimir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnImprimir.BackColor = Color.FromArgb(204, 204, 204);
-            btnImprimir.Location = new Point(556, 739);
+            btnImprimir.Location = new Point(553, 748);
             btnImprimir.Margin = new Padding(2, 3, 2, 3);
             btnImprimir.Name = "btnImprimir";
             btnImprimir.Size = new Size(135, 43);
@@ -375,7 +375,7 @@
             // 
             btonCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btonCancelar.BackColor = Color.FromArgb(204, 204, 204);
-            btonCancelar.Location = new Point(715, 655);
+            btonCancelar.Location = new Point(709, 747);
             btonCancelar.Margin = new Padding(2, 3, 2, 3);
             btonCancelar.Name = "btonCancelar";
             btonCancelar.Size = new Size(135, 43);
@@ -387,7 +387,7 @@
             // richTextBox1
             // 
             richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Location = new Point(56, 655);
+            richTextBox1.Location = new Point(56, 663);
             richTextBox1.Margin = new Padding(3, 4, 3, 4);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(484, 127);
@@ -414,7 +414,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 803);
+            ClientSize = new Size(896, 749);
+            Controls.Add(btnAgregar);
             Controls.Add(btonCancelar);
             Controls.Add(btnVistaPrevia);
             Controls.Add(btnAgregar);

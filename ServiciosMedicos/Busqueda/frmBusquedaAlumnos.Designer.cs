@@ -66,7 +66,7 @@
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(903, 92);
+            groupBox1.Size = new Size(912, 92);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
@@ -110,11 +110,11 @@
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(RegistroAlumnos);
             groupBox2.Controls.Add(txtBusqueda);
-            groupBox2.Location = new Point(99, 121);
+            groupBox2.Location = new Point(85, 107);
             groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(718, 494);
+            groupBox2.Size = new Size(747, 489);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Enter += groupBox2_Enter;
@@ -123,12 +123,12 @@
             // 
             RegistroAlumnos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             RegistroAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RegistroAlumnos.Location = new Point(42, 102);
+            RegistroAlumnos.Location = new Point(41, 100);
             RegistroAlumnos.Margin = new Padding(3, 4, 3, 4);
             RegistroAlumnos.Name = "RegistroAlumnos";
             RegistroAlumnos.ReadOnly = true;
             RegistroAlumnos.RowHeadersWidth = 51;
-            RegistroAlumnos.Size = new Size(637, 349);
+            RegistroAlumnos.Size = new Size(662, 349);
             RegistroAlumnos.TabIndex = 1;
             RegistroAlumnos.CellClick += RegistroAlumnos_CellClick;
             RegistroAlumnos.CellContentClick += RegistroAlumnos_CellContentClick;
@@ -140,15 +140,15 @@
             txtBusqueda.Location = new Point(41, 55);
             txtBusqueda.Margin = new Padding(3, 4, 3, 4);
             txtBusqueda.Name = "txtBusqueda";
-            txtBusqueda.PlaceholderText = "Ingrese el matricula para buscar";
-            txtBusqueda.Size = new Size(638, 27);
+            txtBusqueda.PlaceholderText = "Ingrese la matricula o No. de trabajador ";
+            txtBusqueda.Size = new Size(662, 27);
             txtBusqueda.TabIndex = 0;
             txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // btnNuevo
             // 
             btnNuevo.Anchor = AnchorStyles.Bottom;
-            btnNuevo.Location = new Point(338, 126);
+            btnNuevo.Location = new Point(150, 763);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(94, 29);
             btnNuevo.TabIndex = 2;
@@ -159,7 +159,7 @@
             // btnEditar
             // 
             btnEditar.Anchor = AnchorStyles.Bottom;
-            btnEditar.Location = new Point(121, 756);
+            btnEditar.Location = new Point(411, 763);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(94, 29);
             btnEditar.TabIndex = 3;
@@ -170,7 +170,7 @@
             // btnEliminar
             // 
             btnEliminar.Anchor = AnchorStyles.Bottom;
-            btnEliminar.Location = new Point(586, 126);
+            btnEliminar.Location = new Point(673, 763);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(94, 29);
             btnEliminar.TabIndex = 4;
@@ -193,9 +193,9 @@
             groupBox3.Controls.Add(txtApellidoP);
             groupBox3.Controls.Add(txtNombre);
             groupBox3.Controls.Add(txtMatricula);
-            groupBox3.Location = new Point(84, 630);
+            groupBox3.Location = new Point(85, 621);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(761, 170);
+            groupBox3.Size = new Size(753, 135);
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Agregar, Modicar o Eliminar";
@@ -250,9 +250,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(6, 37);
             label1.Name = "label1";
-            label1.Size = new Size(71, 20);
+            label1.Size = new Size(24, 20);
             label1.TabIndex = 5;
-            label1.Text = "Matricula";
+            label1.Text = "ID";
             label1.Click += label1_Click;
             // 
             // txtApellidoM
@@ -288,7 +288,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 803);
+            ClientSize = new Size(896, 749);
+            Controls.Add(groupBox3);
+            Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
