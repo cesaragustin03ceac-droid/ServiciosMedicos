@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVistaPrevia));
             groupBox1 = new GroupBox();
-            label13 = new Label();
-            label5 = new Label();
-            label3 = new Label();
-            richTextBox1 = new RichTextBox();
-            groupBox4 = new GroupBox();
             dataGridView1 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
+            label13 = new Label();
+            label5 = new Label();
+            label3 = new Label();
+            richTextBox1 = new RichTextBox();
+            groupBox4 = new GroupBox();
             groupBox3 = new GroupBox();
             tableLayoutPanel3 = new TableLayoutPanel();
             lblFecha = new Label();
@@ -96,6 +96,43 @@
             groupBox1.TabStop = false;
             groupBox1.Text = " ";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
+            dataGridView1.Location = new Point(47, 472);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(562, 143);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Medicamentos";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Presentación";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Dosis y Frecuencia";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Duración";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            // 
             // label13
             // 
             label13.AutoSize = true;
@@ -147,43 +184,6 @@
             groupBox4.Size = new Size(562, 143);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
-            dataGridView1.Location = new Point(47, 472);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(562, 143);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Medicamentos";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Presentación";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Dosis y Frecuencia";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Duración";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
             // 
             // groupBox3
             // 
@@ -478,6 +478,7 @@
             Controls.Add(groupBox1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "frmVistaPrevia";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmVistaPrevia";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

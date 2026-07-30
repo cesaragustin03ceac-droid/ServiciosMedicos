@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneracionReceta));
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
             label4 = new Label();
             BtnAtras = new Button();
@@ -48,9 +47,7 @@
             groupBox3 = new GroupBox();
             dgvMedicamentos = new DataGridView();
             colMedicamentos = new DataGridViewTextBoxColumn();
-            colPresentación = new DataGridViewTextBoxColumn();
-            colFrecuencia = new DataGridViewTextBoxColumn();
-            colDuracion = new DataGridViewTextBoxColumn();
+            colindicaciones = new DataGridViewTextBoxColumn();
             colEliminar = new DataGridViewImageColumn();
             label2 = new Label();
             label3 = new Label();
@@ -73,7 +70,7 @@
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(BtnAtras);
-            groupBox1.Location = new Point(-6, 0);
+            groupBox1.Location = new Point(-6, 4);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
@@ -255,19 +252,17 @@
             // dgvMedicamentos
             // 
             dgvMedicamentos.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dgvMedicamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dgvMedicamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvMedicamentos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvMedicamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMedicamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMedicamentos.Columns.AddRange(new DataGridViewColumn[] { colMedicamentos, colPresentación, colFrecuencia, colDuracion, colEliminar });
+            dgvMedicamentos.Columns.AddRange(new DataGridViewColumn[] { colMedicamentos, colindicaciones, colEliminar });
             dgvMedicamentos.EnableHeadersVisualStyles = false;
             dgvMedicamentos.Location = new Point(3, 4);
             dgvMedicamentos.Margin = new Padding(3, 4, 3, 4);
             dgvMedicamentos.Name = "dgvMedicamentos";
             dgvMedicamentos.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dgvMedicamentos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvMedicamentos.Size = new Size(786, 277);
             dgvMedicamentos.TabIndex = 0;
             dgvMedicamentos.CellContentClick += dgvMedicamentos_CellClick;
@@ -280,29 +275,11 @@
             colMedicamentos.Resizable = DataGridViewTriState.True;
             colMedicamentos.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
-            // colPresentación
+            // colindicaciones
             // 
-            colPresentación.HeaderText = "Presentación";
-            colPresentación.MinimumWidth = 6;
-            colPresentación.Name = "colPresentación";
-            colPresentación.Resizable = DataGridViewTriState.True;
-            colPresentación.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colFrecuencia
-            // 
-            colFrecuencia.HeaderText = "Frecuencia";
-            colFrecuencia.MinimumWidth = 6;
-            colFrecuencia.Name = "colFrecuencia";
-            colFrecuencia.Resizable = DataGridViewTriState.True;
-            colFrecuencia.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colDuracion
-            // 
-            colDuracion.HeaderText = "Duración";
-            colDuracion.MinimumWidth = 6;
-            colDuracion.Name = "colDuracion";
-            colDuracion.Resizable = DataGridViewTriState.True;
-            colDuracion.SortMode = DataGridViewColumnSortMode.NotSortable;
+            colindicaciones.HeaderText = "Indicaciones";
+            colindicaciones.MinimumWidth = 6;
+            colindicaciones.Name = "colindicaciones";
             // 
             // colEliminar
             // 
@@ -328,7 +305,7 @@
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label3.Location = new Point(59, 619);
+            label3.Location = new Point(56, 618);
             label3.Name = "label3";
             label3.Size = new Size(122, 25);
             label3.TabIndex = 6;
@@ -338,7 +315,7 @@
             // 
             btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnGuardar.BackColor = Color.FromArgb(204, 204, 204);
-            btnGuardar.Location = new Point(553, 663);
+            btnGuardar.Location = new Point(555, 663);
             btnGuardar.Margin = new Padding(2, 3, 2, 3);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(135, 43);
@@ -351,7 +328,7 @@
             // 
             btnVistaPrevia.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnVistaPrevia.BackColor = Color.FromArgb(204, 204, 204);
-            btnVistaPrevia.Location = new Point(710, 663);
+            btnVistaPrevia.Location = new Point(715, 663);
             btnVistaPrevia.Margin = new Padding(2, 3, 2, 3);
             btnVistaPrevia.Name = "btnVistaPrevia";
             btnVistaPrevia.Size = new Size(135, 43);
@@ -363,7 +340,7 @@
             // 
             btnImprimir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnImprimir.BackColor = Color.FromArgb(204, 204, 204);
-            btnImprimir.Location = new Point(553, 748);
+            btnImprimir.Location = new Point(555, 747);
             btnImprimir.Margin = new Padding(2, 3, 2, 3);
             btnImprimir.Name = "btnImprimir";
             btnImprimir.Size = new Size(135, 43);
@@ -375,7 +352,7 @@
             // 
             btonCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btonCancelar.BackColor = Color.FromArgb(204, 204, 204);
-            btonCancelar.Location = new Point(709, 747);
+            btonCancelar.Location = new Point(715, 748);
             btonCancelar.Margin = new Padding(2, 3, 2, 3);
             btonCancelar.Name = "btonCancelar";
             btonCancelar.Size = new Size(135, 43);
@@ -414,8 +391,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 749);
-            Controls.Add(btnAgregar);
+            ClientSize = new Size(896, 803);
             Controls.Add(btonCancelar);
             Controls.Add(btnVistaPrevia);
             Controls.Add(btnAgregar);
@@ -472,12 +448,10 @@
         private Button btonCancelar;
         private RichTextBox richTextBox1;
         private Button btnAgregar;
-        private DataGridViewTextBoxColumn colMedicamentos;
-        private DataGridViewTextBoxColumn colPresentación;
-        private DataGridViewTextBoxColumn colFrecuencia;
-        private DataGridViewTextBoxColumn colDuracion;
-        private DataGridViewImageColumn colEliminar;
         private Button BtnAtras;
         private Label label4;
+        private DataGridViewTextBoxColumn colMedicamentos;
+        private DataGridViewTextBoxColumn colindicaciones;
+        private DataGridViewImageColumn colEliminar;
     }
 }

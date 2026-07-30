@@ -2,25 +2,23 @@
 using ServiciosMedicos.Busqueda;
 using ServiciosMedicos.DataConexion;
 using ServiciosMedicos.GeneracionReceta;
+using ServiciosMedicos.HISTORIAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ServiciosMedicos.Consultas
 {
     public partial class FrmConsultas : Form
     {
+        private string idPaciente;
+        private string tipoPaciente;
 
         public FrmConsultas()
         {
             InitializeComponent();
             CargarOpcionesGenerales();
-
         }
+
         private void CargarOpcionesGenerales()
         {
             CboMotivo.Items.Clear();
@@ -30,60 +28,185 @@ namespace ServiciosMedicos.Consultas
             CboMotivo.Items.Add("Otro");
             CboMotivo.SelectedIndex = -1;
 
-            cboSintomas.Items.Clear();
-            cboSintomas.Items.Add("Fiebre y escalofríos");
-            cboSintomas.Items.Add("Dolor de cabeza");
-            cboSintomas.Items.Add("Tos y congestión nasal");
-            cboSintomas.Items.Add("Otro");
-            cboSintomas.SelectedIndex = -1;
-
             cboDiagnostico.Items.Clear();
-            cboDiagnostico.Items.Add("Infecion de estomago");
-            cboDiagnostico.Items.Add("Resfriado común)");
+            cboDiagnostico.Items.Add("Infeccion de estomago");
+            cboDiagnostico.Items.Add("Resfriado comun");
             cboDiagnostico.Items.Add("Gastroenteritis aguda");
             cboDiagnostico.Items.Add("Otro");
             cboDiagnostico.SelectedIndex = -1;
         }
-        private string idPaciente;
-        private string tipoPaciente;
 
         public void PassDatosPaciente(string id, string tipo)
         {
             this.idPaciente = id;
             this.tipoPaciente = tipo;
+            CargarNombrePaciente();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CargarNombrePaciente()
         {
+            if (string.IsNullOrEmpty(idPaciente)) return;
 
+            Conexion conexionBD = new Conexion();
+            MySqlConnection conn = conexionBD.obtenerconexion();
+            if (conn == null) return;
+
+            try
+            {
+                string query = tipoPaciente == "Alumno"
+                    ? "SELECT nombre, apellido_p, apellido_m FROM alumno WHERE matricula = @id LIMIT 1;"
+                    : "SELECT nombre, apellido_p, apellido_m FROM trabajador WHERE num_trabajador = @id LIMIT 1;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idPaciente);
+                    using (MySqlDataReader lector = cmd.ExecuteReader())
+                    {
+                        if (lector.Read())
+                        {
+                            string nombre = $"{lector["nombre"]} {lector["apellido_p"]} {lector["apellido_m"]}".Trim();
+                            this.Text = $"Consulta - {nombre}";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar paciente: " + ex.Message, "Error");
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
+        // ============================================================
+        // GUARDAR: Solo Motivo y Diagnostico
+        // ============================================================
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            string motivoFinal = !string.IsNullOrWhiteSpace(txtMotivo.Text) ? txtMotivo.Text.Trim() : CboMotivo.SelectedItem?.ToString();
+            string diagnosticoFinal = !string.IsNullOrWhiteSpace(TxtDiagnostico.Text) ? TxtDiagnostico.Text.Trim() : cboDiagnostico.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(motivoFinal) || string.IsNullOrEmpty(diagnosticoFinal))
+            {
+                MessageBox.Show("Motivo y Diagnóstico son obligatorios.", "Campos Incompletos");
+                return;
+            }
+
+            Conexion conexionBD = new Conexion();
+            MySqlConnection conn = conexionBD.obtenerconexion();
+            if (conn == null) return;
+
+            MySqlTransaction trans = null;
+
+            try
+            {
+                trans = conn.BeginTransaction();
+
+                // 1. BUSCAR EXPEDIENTE POR CURP
+                int idExpediente = 0;
+                string queryBuscarExp = "SELECT id_expediente FROM expediente WHERE curp = @id LIMIT 1;";
+
+                using (MySqlCommand cmd = new MySqlCommand(queryBuscarExp, conn, trans))
+                {
+                    cmd.Parameters.AddWithValue("@id", idPaciente);
+                    object resultado = cmd.ExecuteScalar();
+                    if (resultado != null && resultado != DBNull.Value)
+                        idExpediente = Convert.ToInt32(resultado);
+                }
+
+                if (idExpediente == 0)
+                {
+                    throw new Exception("El paciente no tiene expediente. Créalo primero en Agregar Paciente.");
+                }
+
+                // 2. INSERTAR CONSULTA (primero, porque diagnostico la necesita)
+                string queryConsulta = @"INSERT INTO consulta 
+                    (fecha_consulta, matricula_alumno, num_trabajador, cedula_doctora, id_enfermera) 
+                    VALUES 
+                    (CURDATE(), @matAlu, @numTrab, NULL, NULL);";
+
+                long idConsulta = 0;
+
+                using (MySqlCommand cmd = new MySqlCommand(queryConsulta, conn, trans))
+                {
+                    cmd.Parameters.AddWithValue("@matAlu", tipoPaciente == "Alumno" ? idPaciente : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@numTrab", tipoPaciente == "Trabajador" ? Convert.ToInt32(idPaciente) : (object)DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                    idConsulta = cmd.LastInsertedId;
+                }
+
+                // 3. INSERTAR DIAGNOSTICO (apuntando a la consulta y al expediente)
+                string queryDiag = @"INSERT INTO diagnostico 
+                    (diagnostico, id_consulta, id_expediente) 
+                    VALUES 
+                    (@diag, @idCon, @idExp);";
+
+                using (MySqlCommand cmd = new MySqlCommand(queryDiag, conn, trans))
+                {
+                    cmd.Parameters.AddWithValue("@diag", diagnosticoFinal);
+                    cmd.Parameters.AddWithValue("@idCon", idConsulta);
+                    cmd.Parameters.AddWithValue("@idExp", idExpediente);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 4. ACTUALIZAR MOTIVO EN EXPEDIENTE
+                string queryUpdateExp = "UPDATE expediente SET motivo_consulta = @motivo WHERE id_expediente = @idExp;";
+
+                using (MySqlCommand cmd = new MySqlCommand(queryUpdateExp, conn, trans))
+                {
+                    cmd.Parameters.AddWithValue("@motivo", motivoFinal);
+                    cmd.Parameters.AddWithValue("@idExp", idExpediente);
+                    cmd.ExecuteNonQuery();
+                }
+
+                trans.Commit();
+                MessageBox.Show("Consulta guardada correctamente.", "Éxito");
+            }
+            catch (Exception ex)
+            {
+                trans?.Rollback();
+                MessageBox.Show("Error al guardar: " + ex.Message, "Error");
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        // ============================================================
+        // BOTÓN ATRÁS → REGRESA AL HISTORIAL
+        // ============================================================
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        // ============================================================
+        // BOTÓN IR A RECETA
+        // ============================================================
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                frmGeneracionReceta ventanaConsulta = new frmGeneracionReceta();
-
-                ventanaConsulta.Show();
-
+                frmGeneracionReceta ventana = new frmGeneracionReceta();
+                ventana.Show();
                 this.Close();
-
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir la consulta: " + ex.Message, "Error");
+                MessageBox.Show("Error: " + ex.Message, "Error");
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        // ============================================================
+        // EVENTOS COMBOS "OTRO"
+        // ============================================================
+        private void CboMotivo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (CboMotivo.Text == "Otro")
-            {
                 txtMotivo.ReadOnly = false;
-
-            }
             else
             {
                 txtMotivo.Clear();
@@ -91,107 +214,15 @@ namespace ServiciosMedicos.Consultas
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void cboDiagnostico_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string motivoFinal = !string.IsNullOrWhiteSpace(txtMotivo.Text) ? txtMotivo.Text.Trim() : CboMotivo.SelectedItem?.ToString();
-            string sintomasFinal = !string.IsNullOrWhiteSpace(txtSintomas.Text) ? txtSintomas.Text.Trim() : cboSintomas.SelectedItem?.ToString();
-            string diagnosticoFinal = !string.IsNullOrWhiteSpace(TxtDiagnostico.Text) ? TxtDiagnostico.Text.Trim() : cboDiagnostico.SelectedItem?.ToString();
-
-            string presion = txtPrecion?.Text.Trim() ?? "";
-            string temperatura = txtTemperatura?.Text.Trim() ?? "";
-
-            if (string.IsNullOrEmpty(motivoFinal) || string.IsNullOrEmpty(diagnosticoFinal))
+            if (cboDiagnostico.Text == "Otro")
+                TxtDiagnostico.ReadOnly = false;
+            else
             {
-                MessageBox.Show("Por favor, seleccione o escriba al menos el Motivo y el Diagnóstico.", "Campos Incompletos");
-                return;
+                TxtDiagnostico.Clear();
+                TxtDiagnostico.ReadOnly = true;
             }
-
-            Conexion conexionBD = new Conexion();
-            MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
-
-            if (conexionAbierta != null)
-            {
-                MySqlTransaction transaccion = null;
-                try
-                {
-                    transaccion = conexionAbierta.BeginTransaction();
-
-                    int idExpediente = 0;
-                    string queryBuscarExp = @"SELECT d.Id_Expediente 
-                                      FROM Consulta c
-                                      INNER JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico
-                                      WHERE c.Matricula_Alumno = @id OR c.Num_Trabajador = @id 
-                                      LIMIT 1;";
-
-                    using (MySqlCommand cmdBuscar = new MySqlCommand(queryBuscarExp, conexionAbierta, transaccion))
-                    {
-                        cmdBuscar.Parameters.AddWithValue("@id", idPaciente);
-                        object resultado = cmdBuscar.ExecuteScalar();
-                        if (resultado != null)
-                        {
-                            idExpediente = Convert.ToInt32(resultado);
-                        }
-                    }
-
-                    if (idExpediente == 0)
-                    {
-                        throw new Exception("No se encontró el expediente asociado a este paciente.");
-                    }
-
-                    string queryDiag = "INSERT INTO diagnostico (Diagnostico, Id_Expediente) VALUES (@diag, @idExp);";
-                    long idNuevoDiagnostico = 0;
-
-                    using (MySqlCommand cmdDiag = new MySqlCommand(queryDiag, conexionAbierta, transaccion))
-                    {
-                        cmdDiag.Parameters.AddWithValue("@diag", diagnosticoFinal);
-                        cmdDiag.Parameters.AddWithValue("@idExp", idExpediente);
-                        cmdDiag.ExecuteNonQuery();
-                        idNuevoDiagnostico = cmdDiag.LastInsertedId;
-                    }
-
-                    string queryUpdateExp = "UPDATE expediente SET Motivo_Consulta = @motivo WHERE Id_Expediente = @idExp;";
-
-                    using (MySqlCommand cmdUpdateExp = new MySqlCommand(queryUpdateExp, conexionAbierta, transaccion))
-                    {
-                        cmdUpdateExp.Parameters.AddWithValue("@motivo", motivoFinal);
-                        cmdUpdateExp.Parameters.AddWithValue("@idExp", idExpediente);
-                        cmdUpdateExp.ExecuteNonQuery();
-                    }
-
-                    string queryConsulta = @"INSERT INTO consulta (Matricula_Alumno, Num_Trabajador, Cedula_Doctora, Id_Enfermera, Id_Diagnostico, Fecha, Sintomas, Presion, Temperatura) 
-                                     VALUES (@matAlu, @numTrab, NULL, NULL, @idDiag, CURDATE(), @sintomas, @presion, @temperatura);";
-
-                    using (MySqlCommand cmdConsulta = new MySqlCommand(queryConsulta, conexionAbierta, transaccion))
-                    {
-                        cmdConsulta.Parameters.AddWithValue("@matAlu", tipoPaciente == "Alumno" ? idPaciente : (object)DBNull.Value);
-                        cmdConsulta.Parameters.AddWithValue("@numTrab", tipoPaciente == "Trabajador" ? idPaciente : (object)DBNull.Value);
-                        cmdConsulta.Parameters.AddWithValue("@idDiag", idNuevoDiagnostico);
-                        cmdConsulta.Parameters.AddWithValue("@sintomas", sintomasFinal);
-                        cmdConsulta.Parameters.AddWithValue("@presion", presion);
-                        cmdConsulta.Parameters.AddWithValue("@temperatura", temperatura);
-
-                        cmdConsulta.ExecuteNonQuery();
-                    }
-
-                    transaccion.Commit();
-                    MessageBox.Show("Consulta guardada correctamente en la base de datos.", "Éxito");
-
-                }
-                catch (Exception ex)
-                {
-                    transaccion?.Rollback();
-                    MessageBox.Show("Error al registrar la consulta: " + ex.Message, "Error");
-                }
-                finally
-                {
-                    conexionAbierta.Close();
-                }
-            }
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void FrmConsultas_Load(object sender, EventArgs e)
@@ -208,46 +239,8 @@ namespace ServiciosMedicos.Consultas
             }
         }
 
-        private void cboDiagnostico_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboDiagnostico.Text == "Otro")
-            {
-                TxtDiagnostico.ReadOnly = false;
-            }
-            else
-            {
-                TxtDiagnostico.Clear();
-                TxtDiagnostico.ReadOnly = true;
-            }
-        }
-
-        private void btnAtras_Click(object sender, EventArgs e)
-        {
-            HISTORIAL.HISTORIAL frmHistorial = new HISTORIAL.HISTORIAL();
-            frmHistorial.Show();
-
-            this.Close();
-        }
-
-        private void txtMotivo_TextChanged(object sender, EventArgs e)
-        {
-
-
-
-
-        }
-
-        private void cboSintomas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboSintomas.Text == "Otro")
-            {
-                txtSintomas.ReadOnly = false;
-            }
-            else
-            {
-                txtSintomas.Clear();
-                txtSintomas.ReadOnly = true;
-            }
-        }
+        private void btnEditar_Click(object sender, EventArgs e) { }
+        private void txtMotivo_TextChanged(object sender, EventArgs e) { }
+        private void cboSintomas_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }

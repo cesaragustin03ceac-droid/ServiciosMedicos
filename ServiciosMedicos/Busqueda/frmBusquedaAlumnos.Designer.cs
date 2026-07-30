@@ -35,24 +35,11 @@
             groupBox2 = new GroupBox();
             RegistroAlumnos = new DataGridView();
             txtBusqueda = new TextBox();
-            btnNuevo = new Button();
-            btnEditar = new Button();
-            btnEliminar = new Button();
-            groupBox3 = new GroupBox();
-            CmbTipoPaciente = new ComboBox();
-            lblTipo = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            txtApellidoM = new TextBox();
-            txtApellidoP = new TextBox();
-            txtNombre = new TextBox();
-            txtMatricula = new TextBox();
+            btnExpedientePaciente = new Button();
+            btnAgregarPaciente = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
-            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -110,7 +97,7 @@
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(RegistroAlumnos);
             groupBox2.Controls.Add(txtBusqueda);
-            groupBox2.Location = new Point(85, 107);
+            groupBox2.Location = new Point(85, 129);
             groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
@@ -130,7 +117,6 @@
             RegistroAlumnos.RowHeadersWidth = 51;
             RegistroAlumnos.Size = new Size(662, 349);
             RegistroAlumnos.TabIndex = 1;
-            RegistroAlumnos.CellClick += RegistroAlumnos_CellClick;
             RegistroAlumnos.CellContentClick += RegistroAlumnos_CellContentClick;
             RegistroAlumnos.CellDoubleClick += RegistroAlumnos_CellDoubleClick;
             // 
@@ -145,154 +131,34 @@
             txtBusqueda.TabIndex = 0;
             txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
-            // btnNuevo
+            // btnExpedientePaciente
             // 
-            btnNuevo.Anchor = AnchorStyles.Bottom;
-            btnNuevo.Location = new Point(150, 763);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(94, 29);
-            btnNuevo.TabIndex = 2;
-            btnNuevo.Text = "Nuevo";
-            btnNuevo.UseVisualStyleBackColor = true;
-            btnNuevo.Click += btnNuevo_Click;
+            btnExpedientePaciente.Location = new Point(177, 677);
+            btnExpedientePaciente.Name = "btnExpedientePaciente";
+            btnExpedientePaciente.Size = new Size(155, 61);
+            btnExpedientePaciente.TabIndex = 2;
+            btnExpedientePaciente.Text = "Ir al expediente del Paciente";
+            btnExpedientePaciente.UseVisualStyleBackColor = true;
+            btnExpedientePaciente.Click += btnExpedientePaciente_Click;
             // 
-            // btnEditar
+            // btnAgregarPaciente
             // 
-            btnEditar.Anchor = AnchorStyles.Bottom;
-            btnEditar.Location = new Point(411, 763);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(94, 29);
-            btnEditar.TabIndex = 3;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += btnEditar_Click;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Anchor = AnchorStyles.Bottom;
-            btnEliminar.Location = new Point(673, 763);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(94, 29);
-            btnEliminar.TabIndex = 4;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
-            // 
-            // groupBox3
-            // 
-            groupBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            groupBox3.Controls.Add(btnEliminar);
-            groupBox3.Controls.Add(CmbTipoPaciente);
-            groupBox3.Controls.Add(btnNuevo);
-            groupBox3.Controls.Add(lblTipo);
-            groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(label2);
-            groupBox3.Controls.Add(label1);
-            groupBox3.Controls.Add(txtApellidoM);
-            groupBox3.Controls.Add(txtApellidoP);
-            groupBox3.Controls.Add(txtNombre);
-            groupBox3.Controls.Add(txtMatricula);
-            groupBox3.Location = new Point(85, 621);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(753, 135);
-            groupBox3.TabIndex = 5;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Agregar, Modicar o Eliminar";
-            // 
-            // CmbTipoPaciente
-            // 
-            CmbTipoPaciente.FormattingEnabled = true;
-            CmbTipoPaciente.Location = new Point(602, 75);
-            CmbTipoPaciente.Name = "CmbTipoPaciente";
-            CmbTipoPaciente.Size = new Size(151, 28);
-            CmbTipoPaciente.TabIndex = 10;
-            // 
-            // lblTipo
-            // 
-            lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(602, 37);
-            lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(98, 20);
-            lblTipo.TabIndex = 9;
-            lblTipo.Text = "Tipo Paciente";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(461, 37);
-            label4.Name = "label4";
-            label4.Size = new Size(126, 20);
-            label4.TabIndex = 8;
-            label4.Text = "Apellido Materno";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(312, 37);
-            label3.Name = "label3";
-            label3.Size = new Size(120, 20);
-            label3.TabIndex = 7;
-            label3.Text = "Apellido Paterno";
-            label3.Click += label3_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(144, 37);
-            label2.Name = "label2";
-            label2.Size = new Size(64, 20);
-            label2.TabIndex = 6;
-            label2.Text = "Nombre";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(6, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(24, 20);
-            label1.TabIndex = 5;
-            label1.Text = "ID";
-            label1.Click += label1_Click;
-            // 
-            // txtApellidoM
-            // 
-            txtApellidoM.Location = new Point(461, 75);
-            txtApellidoM.Name = "txtApellidoM";
-            txtApellidoM.Size = new Size(125, 27);
-            txtApellidoM.TabIndex = 3;
-            // 
-            // txtApellidoP
-            // 
-            txtApellidoP.Location = new Point(299, 75);
-            txtApellidoP.Name = "txtApellidoP";
-            txtApellidoP.Size = new Size(133, 27);
-            txtApellidoP.TabIndex = 2;
-            // 
-            // txtNombre
-            // 
-            txtNombre.Location = new Point(144, 75);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(134, 27);
-            txtNombre.TabIndex = 1;
-            // 
-            // txtMatricula
-            // 
-            txtMatricula.Location = new Point(6, 75);
-            txtMatricula.Name = "txtMatricula";
-            txtMatricula.Size = new Size(125, 27);
-            txtMatricula.TabIndex = 0;
+            btnAgregarPaciente.Location = new Point(403, 677);
+            btnAgregarPaciente.Name = "btnAgregarPaciente";
+            btnAgregarPaciente.Size = new Size(155, 61);
+            btnAgregarPaciente.TabIndex = 3;
+            btnAgregarPaciente.Text = "Agregar un nuvo Paciente";
+            btnAgregarPaciente.UseVisualStyleBackColor = true;
+            btnAgregarPaciente.Click += btnAgregarPaciente_Click;
             // 
             // frmBusquedaAlumnos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(896, 749);
-            Controls.Add(groupBox3);
-            Controls.Add(btnEliminar);
-            Controls.Add(btnEditar);
-            Controls.Add(groupBox3);
+            ClientSize = new Size(896, 803);
+            Controls.Add(btnAgregarPaciente);
+            Controls.Add(btnExpedientePaciente);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -308,8 +174,6 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -319,22 +183,10 @@
         private GroupBox groupBox2;
         private TextBox txtBusqueda;
         private DataGridView RegistroAlumnos;
-        private Button btnNuevo;
-        private Button btnEditar;
-        private Button btnEliminar;
-        private GroupBox groupBox3;
-        private TextBox txtApellidoM;
-        private TextBox txtApellidoP;
-        private TextBox txtNombre;
-        private TextBox txtMatricula;
-        private Label label1;
-        private Label label3;
-        private Label label2;
-        private Label label4;
         private Label lblpersona;
-        private ComboBox CmbTipoPaciente;
-        private Label lblTipo;
         private Button BtnSalir;
         private Label label5;
+        private Button btnExpedientePaciente;
+        private Button btnAgregarPaciente;
     }
 }

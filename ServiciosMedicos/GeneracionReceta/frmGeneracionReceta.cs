@@ -99,7 +99,10 @@ namespace ServiciosMedicos.GeneracionReceta
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            dgvMedicamentos.Rows.Add("");
+            Medicamentos frmmedicamento = new Medicamentos();
+            frmmedicamento.Show();
+
+            this.Close();
         }
 
         private void dgvMedicamentos_CellClick(object sender, DataGridViewCellEventArgs e)

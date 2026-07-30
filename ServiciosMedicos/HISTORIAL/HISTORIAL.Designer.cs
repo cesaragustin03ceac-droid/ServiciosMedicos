@@ -33,6 +33,10 @@
             label8 = new Label();
             BtnAtras = new Button();
             groupBox2perfil = new GroupBox();
+            txtArea = new TextBox();
+            txtEdad = new TextBox();
+            label10 = new Label();
+            label9 = new Label();
             PerfilPaciente = new DataGridView();
             txtNombrePaciente = new TextBox();
             labelNOMBRE = new Label();
@@ -54,7 +58,6 @@
             dataGridView1atenciones = new DataGridView();
             button1 = new Button();
             button2 = new Button();
-            btnGuardar = new Button();
             groupBox1.SuspendLayout();
             groupBox2perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PerfilPaciente).BeginInit();
@@ -108,6 +111,10 @@
             // 
             groupBox2perfil.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2perfil.BackColor = Color.White;
+            groupBox2perfil.Controls.Add(txtArea);
+            groupBox2perfil.Controls.Add(txtEdad);
+            groupBox2perfil.Controls.Add(label10);
+            groupBox2perfil.Controls.Add(label9);
             groupBox2perfil.Controls.Add(PerfilPaciente);
             groupBox2perfil.Controls.Add(txtNombrePaciente);
             groupBox2perfil.Controls.Add(labelNOMBRE);
@@ -123,17 +130,60 @@
             groupBox2perfil.TabStop = false;
             groupBox2perfil.Enter += groupBox2_Enter_1;
             // 
+            // txtArea
+            // 
+            txtArea.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtArea.Location = new Point(278, 109);
+            txtArea.Margin = new Padding(2);
+            txtArea.Name = "txtArea";
+            txtArea.ReadOnly = true;
+            txtArea.Size = new Size(433, 27);
+            txtArea.TabIndex = 11;
+            // 
+            // txtEdad
+            // 
+            txtEdad.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtEdad.Location = new Point(281, 74);
+            txtEdad.Margin = new Padding(2);
+            txtEdad.Name = "txtEdad";
+            txtEdad.ReadOnly = true;
+            txtEdad.Size = new Size(433, 27);
+            txtEdad.TabIndex = 10;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(216, 108);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(58, 25);
+            label10.TabIndex = 9;
+            label10.Text = "Area:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.Location = new Point(216, 74);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(61, 25);
+            label9.TabIndex = 8;
+            label9.Text = "Edad:";
+            label9.Click += label9_Click;
+            // 
             // PerfilPaciente
             // 
             PerfilPaciente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             PerfilPaciente.BackgroundColor = Color.White;
             PerfilPaciente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PerfilPaciente.Location = new Point(216, 71);
+            PerfilPaciente.Location = new Point(216, 152);
             PerfilPaciente.Margin = new Padding(2);
             PerfilPaciente.Name = "PerfilPaciente";
             PerfilPaciente.ReadOnly = true;
             PerfilPaciente.RowHeadersWidth = 62;
-            PerfilPaciente.Size = new Size(646, 222);
+            PerfilPaciente.Size = new Size(646, 141);
             PerfilPaciente.TabIndex = 7;
             // 
             // txtNombrePaciente
@@ -367,7 +417,7 @@
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.BackColor = Color.FromArgb(204, 204, 204);
-            button1.Location = new Point(339, 756);
+            button1.Location = new Point(538, 756);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(150, 36);
@@ -389,19 +439,6 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click_1;
             // 
-            // btnGuardar
-            // 
-            btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnGuardar.BackColor = Color.FromArgb(204, 204, 204);
-            btnGuardar.Location = new Point(522, 756);
-            btnGuardar.Margin = new Padding(2);
-            btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(150, 36);
-            btnGuardar.TabIndex = 4;
-            btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = false;
-            btnGuardar.Click += btnGuardar_Click;
-            // 
             // HISTORIAL
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -412,7 +449,6 @@
             Controls.Add(groupBox3atenciones);
             Controls.Add(button2);
             Controls.Add(groupBox2perfil);
-            Controls.Add(btnGuardar);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(2);
@@ -462,8 +498,11 @@
         private TextBox txtNombrePaciente;
         private Label labelNOMBRE;
         private DataGridView PerfilPaciente;
-        private Button btnGuardar;
         private Button BtnAtras;
         private Label label8;
+        private Label label9;
+        private TextBox txtArea;
+        private TextBox txtEdad;
+        private Label label10;
     }
 }
