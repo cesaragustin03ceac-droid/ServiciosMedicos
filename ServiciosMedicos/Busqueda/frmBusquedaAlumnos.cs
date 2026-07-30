@@ -15,6 +15,7 @@ namespace ServiciosMedicos.Busqueda
     {
         public static string UsuarioNombre = "";
         public static string UsuarioTipo = "";
+        public static string UsuarioId = "";
         public frmBusquedaAlumnos()
         {
             InitializeComponent();

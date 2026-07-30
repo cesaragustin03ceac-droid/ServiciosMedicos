@@ -103,7 +103,7 @@
             label5.Size = new Size(279, 20);
             label5.TabIndex = 7;
             label5.Text = "INDICACIONES Y RECOMENDACIONES";
-            label5.Click += label5_Click;
+            
             // 
             // label3
             // 
@@ -114,7 +114,7 @@
             label3.Size = new Size(226, 20);
             label3.TabIndex = 6;
             label3.Text = "MEDICAMENTOS PREESCRITOS";
-            label3.Click += label3_Click;
+            
             // 
             // richTextBox1
             // 
@@ -143,7 +143,6 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(492, 107);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Column1
             // 
@@ -176,7 +175,7 @@
             groupBox3.Size = new Size(492, 96);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
-            groupBox3.Enter += groupBox3_Enter;
+        
             // 
             // tableLayoutPanel3
             // 

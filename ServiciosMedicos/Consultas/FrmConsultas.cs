@@ -63,7 +63,7 @@ namespace ServiciosMedicos.Consultas
             try
             {
                 frmGeneracionReceta ventanaConsulta = new frmGeneracionReceta();
-
+                ventanaConsulta.PassDatosPaciente(this.idPaciente, this.tipoPaciente);
                 ventanaConsulta.Show();
 
                 this.Close();

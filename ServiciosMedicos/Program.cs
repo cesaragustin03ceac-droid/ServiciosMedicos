@@ -1,4 +1,5 @@
 using ServiciosMedicos.Busqueda;
+using ServiciosMedicos.Consultas;
 using ServiciosMedicos.GeneracionReceta;
 using ServiciosMedicos.HISTORIAL;
 using ServiciosMedicos.VistaPrevia;
@@ -15,7 +16,7 @@ namespace ServiciosMedicos
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmVistaPrevia());
+            Application.Run(new Form1());
 
         }
     }

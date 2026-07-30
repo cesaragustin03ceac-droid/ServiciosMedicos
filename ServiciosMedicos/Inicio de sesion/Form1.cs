@@ -33,9 +33,9 @@ namespace ServiciosMedicos
                     try
                     {
                         string query = @"
-                    SELECT Nombre, Contrasena, 'enfermera' as Tipo FROM enfermera WHERE Id_Enfermera = @user
-                    UNION
-                    SELECT Nombre, Contrasena, 'doctora' as Tipo FROM doctora WHERE Cedula = @user;";
+                     SELECT id_Enfermera, Nombre, apellido_p, apellido_m, Contrasena, 'enfermera' as Tipo FROM enfermera WHERE Id_Enfermera = @user
+                     UNION
+                     SELECT Cedula, Nombre, apellido_p, apellido_m, Contrasena, 'doctora' as Tipo FROM doctora WHERE Cedula = @user;";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
@@ -52,6 +52,7 @@ namespace ServiciosMedicos
                                     {
                                         frmBusquedaAlumnos.UsuarioNombre = lector["Nombre"].ToString();
                                         frmBusquedaAlumnos.UsuarioTipo = lector["Tipo"].ToString();
+                                        frmBusquedaAlumnos.UsuarioId = lector["id_Enfermera"].ToString();
 
                                         frmBusquedaAlumnos ventanaBuscador = new frmBusquedaAlumnos();
                                         ventanaBuscador.Show();

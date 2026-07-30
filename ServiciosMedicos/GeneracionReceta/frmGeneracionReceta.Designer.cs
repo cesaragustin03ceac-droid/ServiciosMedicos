@@ -347,6 +347,7 @@
             btnVistaPrevia.TabIndex = 13;
             btnVistaPrevia.Text = "Vista Previa";
             btnVistaPrevia.UseVisualStyleBackColor = false;
+            btnVistaPrevia.Click += btnVistaPrevia_Click;
             // 
             // btnImprimir
             // 
