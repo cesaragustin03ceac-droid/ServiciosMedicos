@@ -13,6 +13,7 @@ namespace ServiciosMedicos.VistaPrevia
         public frmVistaPrevia()
         {
             InitializeComponent();
+            this.FormClosed += (s, e) => Application.Exit();
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)

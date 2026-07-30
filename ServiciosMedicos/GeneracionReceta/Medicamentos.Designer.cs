@@ -29,31 +29,31 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            txtCantidadDar = new TextBox();
+            label4 = new Label();
             btnInvemtario = new Button();
-            comboBox1 = new ComboBox();
-            textBox2 = new TextBox();
+            cboMedicamento = new ComboBox();
+            txtCantidadMedicamento = new TextBox();
             label2 = new Label();
             label1 = new Label();
             groupBox2 = new GroupBox();
-            richTextBox1 = new RichTextBox();
+            txtIndicaciones = new RichTextBox();
             label3 = new Label();
-            BtnAgregar = new Button();
+            btnAgregar = new Button();
             btnEditar = new Button();
-            BtnGuardar = new Button();
+            btnGuardar = new Button();
             groupBox3 = new GroupBox();
-            label4 = new Label();
-            textBox1 = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtCantidadDar);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(btnInvemtario);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(cboMedicamento);
+            groupBox1.Controls.Add(txtCantidadMedicamento);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(32, 113);
@@ -62,6 +62,22 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Busqueda de medicamentos";
+            // 
+            // txtCantidadDar
+            // 
+            txtCantidadDar.Location = new Point(175, 198);
+            txtCantidadDar.Name = "txtCantidadDar";
+            txtCantidadDar.Size = new Size(198, 27);
+            txtCantidadDar.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(42, 201);
+            label4.Name = "label4";
+            label4.Size = new Size(111, 20);
+            label4.TabIndex = 6;
+            label4.Text = "Cantidad a dar ";
             // 
             // btnInvemtario
             // 
@@ -73,20 +89,21 @@
             btnInvemtario.UseVisualStyleBackColor = true;
             btnInvemtario.Click += btnInvemtario_Click;
             // 
-            // comboBox1
+            // cboMedicamento
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(161, 55);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(360, 28);
-            comboBox1.TabIndex = 4;
+            cboMedicamento.FormattingEnabled = true;
+            cboMedicamento.Location = new Point(161, 55);
+            cboMedicamento.Name = "cboMedicamento";
+            cboMedicamento.Size = new Size(360, 28);
+            cboMedicamento.TabIndex = 4;
             // 
-            // textBox2
+            // txtCantidadMedicamento
             // 
-            textBox2.Location = new Point(250, 132);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(198, 27);
-            textBox2.TabIndex = 3;
+            txtCantidadMedicamento.Location = new Point(250, 132);
+            txtCantidadMedicamento.Name = "txtCantidadMedicamento";
+            txtCantidadMedicamento.ReadOnly = true;
+            txtCantidadMedicamento.Size = new Size(198, 27);
+            txtCantidadMedicamento.TabIndex = 3;
             // 
             // label2
             // 
@@ -108,7 +125,7 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(richTextBox1);
+            groupBox2.Controls.Add(txtIndicaciones);
             groupBox2.Controls.Add(label3);
             groupBox2.Location = new Point(32, 412);
             groupBox2.Name = "groupBox2";
@@ -117,13 +134,13 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Indicaciones del medicamento";
             // 
-            // richTextBox1
+            // txtIndicaciones
             // 
-            richTextBox1.Location = new Point(42, 107);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(556, 167);
-            richTextBox1.TabIndex = 5;
-            richTextBox1.Text = "";
+            txtIndicaciones.Location = new Point(42, 107);
+            txtIndicaciones.Name = "txtIndicaciones";
+            txtIndicaciones.Size = new Size(556, 167);
+            txtIndicaciones.TabIndex = 5;
+            txtIndicaciones.Text = "";
             // 
             // label3
             // 
@@ -134,14 +151,14 @@
             label3.TabIndex = 4;
             label3.Text = "Indicaciones";
             // 
-            // BtnAgregar
+            // btnAgregar
             // 
-            BtnAgregar.Location = new Point(614, 738);
-            BtnAgregar.Name = "BtnAgregar";
-            BtnAgregar.Size = new Size(169, 53);
-            BtnAgregar.TabIndex = 2;
-            BtnAgregar.Text = "Agregar";
-            BtnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Location = new Point(614, 738);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(169, 53);
+            btnAgregar.TabIndex = 2;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnEditar
             // 
@@ -152,14 +169,14 @@
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
             // 
-            // BtnGuardar
+            // btnGuardar
             // 
-            BtnGuardar.Location = new Point(193, 738);
-            BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(169, 53);
-            BtnGuardar.TabIndex = 4;
-            BtnGuardar.Text = "Guardar";
-            BtnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Location = new Point(193, 738);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(169, 53);
+            btnGuardar.TabIndex = 4;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -170,22 +187,6 @@
             groupBox3.TabIndex = 6;
             groupBox3.TabStop = false;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(42, 201);
-            label4.Name = "label4";
-            label4.Size = new Size(111, 20);
-            label4.TabIndex = 6;
-            label4.Text = "Cantidad a dar ";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(175, 198);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(198, 27);
-            textBox1.TabIndex = 7;
-            // 
             // Medicamentos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -193,9 +194,9 @@
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(896, 803);
             Controls.Add(groupBox3);
-            Controls.Add(BtnGuardar);
+            Controls.Add(btnGuardar);
             Controls.Add(btnEditar);
-            Controls.Add(BtnAgregar);
+            Controls.Add(btnAgregar);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             MaximizeBox = false;
@@ -215,17 +216,17 @@
         private GroupBox groupBox1;
         private Label label2;
         private Label label1;
-        private TextBox textBox2;
+        private TextBox txtCantidadMedicamento;
         private GroupBox groupBox2;
         private Label label3;
-        private ComboBox comboBox1;
-        private RichTextBox richTextBox1;
-        private Button BtnAgregar;
+        private ComboBox cboMedicamento;
+        private RichTextBox txtIndicaciones;
+        private Button btnAgregar;
         private Button btnEditar;
-        private Button BtnGuardar;
+        private Button btnGuardar;
         private Button btnInvemtario;
         private GroupBox groupBox3;
-        private TextBox textBox1;
+        private TextBox txtCantidadDar;
         private Label label4;
     }
 }
