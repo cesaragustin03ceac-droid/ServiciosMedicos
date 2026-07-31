@@ -126,7 +126,7 @@
             label5.Size = new Size(354, 25);
             label5.TabIndex = 7;
             label5.Text = "INDICACIONES Y RECOMENDACIONES";
-            
+            label5.Click += label5_Click;
             // 
             // label3
             // 
@@ -137,7 +137,7 @@
             label3.Size = new Size(288, 25);
             label3.TabIndex = 6;
             label3.Text = "MEDICAMENTOS PREESCRITOS";
-            
+            label3.Click += label3_Click;
             // 
             // richTextBox1
             // 
@@ -159,36 +159,6 @@
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
-            dataGridView1.Location = new Point(1, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(492, 107);
-            dataGridView1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Medicamentos";
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Presentación";
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Dosis y Frecuencia";
-            Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Duración";
-            Column4.Name = "Column4";
-            // 
             // groupBox3
             // 
             groupBox3.BackColor = Color.FromArgb(217, 217, 217);
@@ -202,7 +172,7 @@
             groupBox3.Size = new Size(562, 128);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
-        
+            groupBox3.Enter += groupBox3_Enter;
             // 
             // tableLayoutPanel3
             // 

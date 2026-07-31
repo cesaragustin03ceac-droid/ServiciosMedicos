@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using ServiciosMedicos.Busqueda;
 using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
 using ServiciosMedicos.VistaPrevia;
@@ -34,18 +33,6 @@ namespace ServiciosMedicos.GeneracionReceta
             FechaConsulta();
             dgvMedicamentos.DataError += (s, ev) => { ev.ThrowException = false; };
         }
-        private string idPaciente;
-        private string tipoPaciente;
-
-
-        public void PassDatosPaciente(string id, string tipo)
-        {
-            this.idPaciente = id;
-            this.tipoPaciente = tipo;
-        }
-
-
-
 
         public void FechaConsulta()
         {
@@ -76,28 +63,17 @@ namespace ServiciosMedicos.GeneracionReceta
             {
                 try
                 {
-                    string query = "";
-                    if (tipoPaciente == "Alumno")
-                    {
-                        query = @"SELECT  c.Matricula_Alumno AS MatriculaFinal, CONCAT(a.Nombre, ' ', a.Apellido_P, ' ', a.Apellido_M) AS NombreCompleto
-                         FROM Consulta c                  
-                         LEFT JOIN alumno a ON c.Matricula_Alumno = a.Matricula     
-                         WHERE c.Matricula_Alumno = @id;";
-
-                    }
-                    else if (tipoPaciente == "Trabajador")
-                    {
-                        query = @"SELECT  c.Num_Trabajador  AS MatriculaFinal, CONCAT(t.Nombre, ' ', t.Apellido_P , ' ', t.Apellido_M ) AS NombreCompleto
-                         FROM Consulta c                  
-                         LEFT JOIN trabajador t ON c.Num_Trabajador = t.Num_Trabajador
-                         WHERE c.Num_Trabajador = @id;";
-
-
-                    }
-
+                    string query = @"SELECT 
+                                c.Matricula_Alumno, c.Num_Trabajador,
+                                COALESCE(a.Matricula, t.Num_Trabajador) AS MatriculaFinal,
+                                CONCAT(COALESCE(a.Nombre, t.Nombre), ' ', COALESCE(a.Apellido_P, t.Apellido_P), ' ', COALESCE(a.Apellido_M, t.Apellido_M)) AS NombreCompleto
+                             FROM consulta c
+                             LEFT JOIN alumno a ON c.Matricula_Alumno = a.Matricula
+                             LEFT JOIN trabajador t ON c.Num_Trabajador = t.Num_Trabajador
+                             ORDER BY c.Id_Consulta DESC 
+                             LIMIT 1;";
                     using (MySqlCommand cmd = new MySqlCommand(query, conexionAbierta))
                     {
-                        cmd.Parameters.AddWithValue("@id", idPaciente);
                         using (MySqlDataReader lector = cmd.ExecuteReader())
                         {
                             if (lector.Read())
@@ -275,16 +251,19 @@ namespace ServiciosMedicos.GeneracionReceta
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            frmVistaPrevia frmconsultas = new frmVistaPrevia(frmBusquedaAlumnos.UsuarioNombre, frmBusquedaAlumnos.UsuarioId);
+      
+        }
 
-            frmconsultas.Show();
+        private void btnVistaPrevia_Click_1(object sender, EventArgs e)
+        {
 
-            
+            frmVistaPrevia vistaP = new frmVistaPrevia();
+            vistaP.Show();
+            this.Hide();
         }
     }
 }
