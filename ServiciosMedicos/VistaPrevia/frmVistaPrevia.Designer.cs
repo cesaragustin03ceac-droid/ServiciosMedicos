@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVistaPrevia));
             groupBox1 = new GroupBox();
+            button2 = new Button();
+            btnAtras = new Button();
             dgvMP = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -62,8 +64,8 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            button1 = new Button();
-            button2 = new Button();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMP).BeginInit();
             groupBox3.SuspendLayout();
@@ -78,7 +80,7 @@
             // 
             groupBox1.BackColor = Color.White;
             groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(btnAtras);
             groupBox1.Controls.Add(dgvMP);
             groupBox1.Controls.Add(label13);
             groupBox1.Controls.Add(label5);
@@ -95,6 +97,34 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = " ";
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Transparent;
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Zoom;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(502, 42);
+            button2.Name = "button2";
+            button2.Size = new Size(84, 31);
+            button2.TabIndex = 10;
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
+            // btnAtras
+            // 
+            btnAtras.BackColor = Color.Transparent;
+            btnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            btnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            btnAtras.FlatAppearance.BorderSize = 0;
+            btnAtras.FlatStyle = FlatStyle.Flat;
+            btnAtras.Location = new Point(0, 42);
+            btnAtras.Name = "btnAtras";
+            btnAtras.Size = new Size(84, 31);
+            btnAtras.TabIndex = 9;
+            btnAtras.UseVisualStyleBackColor = false;
+            btnAtras.Click += btnAtras_Click;
             // 
             // dgvMP
             // 
@@ -441,31 +471,20 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // printDocument1
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = Properties.Resources.Flecha_para_atras2;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(0, 42);
-            button1.Name = "button1";
-            button1.Size = new Size(84, 31);
-            button1.TabIndex = 9;
-            button1.UseVisualStyleBackColor = false;
+            printDocument1.PrintPage += printDocument1_PrintPage;
             // 
-            // button2
+            // printPreviewDialog1
             // 
-            button2.BackColor = Color.Transparent;
-            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(502, 42);
-            button2.Name = "button2";
-            button2.Size = new Size(84, 31);
-            button2.TabIndex = 10;
-            button2.UseVisualStyleBackColor = false;
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
             // 
             // frmVistaPrevia
             // 
@@ -529,7 +548,9 @@
         private Label label13;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private Button button1;
+        private Button btnAtras;
         private Button button2;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }
