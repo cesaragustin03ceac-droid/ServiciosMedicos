@@ -54,9 +54,10 @@ namespace ServiciosMedicos
                 string apellido = "";
                 string hash = "";
                 string tipo = ""; // Aquí guardamos si es doctora o enfermera
+                string id = "";
 
                 // 4. Busca primero en la tabla Doctora
-                string queryDoc = "SELECT nombre, apellido_p, contrasena FROM Doctora WHERE cedula = @user;";
+                string queryDoc = "SELECT cedula, nombre, apellido_p, contrasena FROM Doctora WHERE cedula = @user;";
 
                 using (MySqlCommand cmd = new MySqlCommand(queryDoc, conn))
                 {
@@ -70,6 +71,7 @@ namespace ServiciosMedicos
                             apellido = lector["apellido_p"].ToString();
                             hash = lector["contrasena"].ToString();
                             tipo = "doctora";
+                            id = lector["cedula"].ToString();
                         }
                     }
                 }
@@ -77,7 +79,7 @@ namespace ServiciosMedicos
                 // 5. Si no estaba en Doctora, busca en Enfermera
                 if (string.IsNullOrEmpty(tipo))
                 {
-                    string queryEnf = "SELECT nombre, apellido_p, contrasena FROM Enfermera WHERE id_enfermera = @user;";
+                    string queryEnf = "SELECT id_enfermera, nombre, apellido_p, contrasena FROM Enfermera WHERE id_enfermera = @user;";
 
                     using (MySqlCommand cmd = new MySqlCommand(queryEnf, conn))
                     {
@@ -91,6 +93,7 @@ namespace ServiciosMedicos
                                 apellido = lector["apellido_p"].ToString();
                                 hash = lector["contrasena"].ToString();
                                 tipo = "enfermera";
+                                id = lector["id_enfermera"].ToString();
                             }
                         }
                     }
@@ -109,7 +112,7 @@ namespace ServiciosMedicos
                     // 8. Guarda datos del usuario logueado para usarlos después
                     frmBusquedaAlumnos.UsuarioNombre = $"{nombre} {apellido}";
                     frmBusquedaAlumnos.UsuarioTipo = tipo;
-
+                    frmBusquedaAlumnos.UsuarioId = id;
                     // 9. Abre la ventana principal y cierra el login
                     frmBusquedaAlumnos ventana = new frmBusquedaAlumnos();
                     ventana.Show();
