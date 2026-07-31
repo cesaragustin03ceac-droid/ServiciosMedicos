@@ -1,4 +1,5 @@
 using ServiciosMedicos.Busqueda;
+using ServiciosMedicos.Consultas;
 using ServiciosMedicos.GeneracionReceta;
 using ServiciosMedicos.HISTORIAL;
 using ServiciosMedicos.VistaPrevia;

@@ -43,20 +43,14 @@ namespace ServiciosMedicos
 
             if (conn == null)
             {
-                MessageBox.Show("No se pudo conectar a la base de datos.", "Error");
-                return;
-            }
-
-            try
-            {
-                // Variables para guardar lo que traiga la base de datos
-                string nombre = "";
-                string apellido = "";
-                string hash = "";
-                string tipo = ""; // Aquí guardamos si es doctora o enfermera
-
-                // 4. Busca primero en la tabla Doctora
-                string queryDoc = "SELECT nombre, apellido_p, contrasena FROM Doctora WHERE cedula = @user;";
+                if (conn != null)
+                {
+                    try
+                    {
+                        string query = @"
+                     SELECT id_Enfermera, Nombre, apellido_p, apellido_m, Contrasena, 'enfermera' as Tipo FROM enfermera WHERE Id_Enfermera = @user
+                     UNION
+                     SELECT Cedula, Nombre, apellido_p, apellido_m, Contrasena, 'doctora' as Tipo FROM doctora WHERE Cedula = @user;";
 
                 using (MySqlCommand cmd = new MySqlCommand(queryDoc, conn))
                 {
@@ -79,9 +73,11 @@ namespace ServiciosMedicos
                 {
                     string queryEnf = "SELECT nombre, apellido_p, contrasena FROM Enfermera WHERE id_enfermera = @user;";
 
-                    using (MySqlCommand cmd = new MySqlCommand(queryEnf, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@user", usuario);
+                                    if (esValida)
+                                    {
+                                        frmBusquedaAlumnos.UsuarioNombre = lector["Nombre"].ToString();
+                                        frmBusquedaAlumnos.UsuarioTipo = lector["Tipo"].ToString();
+                                        frmBusquedaAlumnos.UsuarioId = lector["id_Enfermera"].ToString();
 
                         using (MySqlDataReader lector = cmd.ExecuteReader())
                         {

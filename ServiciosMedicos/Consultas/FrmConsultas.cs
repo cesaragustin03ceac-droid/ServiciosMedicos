@@ -53,26 +53,27 @@ namespace ServiciosMedicos.Consultas
 
             try
             {
-                string query = tipoPaciente == "Alumno"
-                    ? "SELECT nombre, apellido_p, apellido_m FROM alumno WHERE matricula = @id LIMIT 1;"
-                    : "SELECT nombre, apellido_p, apellido_m FROM trabajador WHERE num_trabajador = @id LIMIT 1;";
+                frmGeneracionReceta ventanaConsulta = new frmGeneracionReceta();
+                ventanaConsulta.PassDatosPaciente(this.idPaciente, this.tipoPaciente);
+                ventanaConsulta.Show();
 
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", idPaciente);
-                    using (MySqlDataReader lector = cmd.ExecuteReader())
-                    {
-                        if (lector.Read())
-                        {
-                            string nombre = $"{lector["nombre"]} {lector["apellido_p"]} {lector["apellido_m"]}".Trim();
-                            this.Text = $"Consulta - {nombre}";
-                        }
-                    }
-                }
+                this.Close();
+
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar paciente: " + ex.Message, "Error");
+                MessageBox.Show("Error al abrir la consulta: " + ex.Message, "Error");
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (CboMotivo.Text == "Otro")
+            {
+                txtMotivo.ReadOnly = false;
+
             }
             finally
             {

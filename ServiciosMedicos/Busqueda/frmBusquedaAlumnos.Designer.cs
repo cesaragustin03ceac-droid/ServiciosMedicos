@@ -35,11 +35,24 @@
             groupBox2 = new GroupBox();
             RegistroAlumnos = new DataGridView();
             txtBusqueda = new TextBox();
-            btnExpedientePaciente = new Button();
-            btnAgregarPaciente = new Button();
+            btnNuevo = new Button();
+            btnEditar = new Button();
+            btnEliminar = new Button();
+            groupBox3 = new GroupBox();
+            CmbTipoPaciente = new ComboBox();
+            lblTipo = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            txtApellidoM = new TextBox();
+            txtApellidoP = new TextBox();
+            txtNombre = new TextBox();
+            txtMatricula = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).BeginInit();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -143,13 +156,113 @@
             // 
             // btnAgregarPaciente
             // 
-            btnAgregarPaciente.Location = new Point(403, 677);
-            btnAgregarPaciente.Name = "btnAgregarPaciente";
-            btnAgregarPaciente.Size = new Size(155, 61);
-            btnAgregarPaciente.TabIndex = 3;
-            btnAgregarPaciente.Text = "Agregar un nuvo Paciente";
-            btnAgregarPaciente.UseVisualStyleBackColor = true;
-            btnAgregarPaciente.Click += btnAgregarPaciente_Click;
+            groupBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            groupBox3.Controls.Add(CmbTipoPaciente);
+            groupBox3.Controls.Add(lblTipo);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(txtApellidoM);
+            groupBox3.Controls.Add(txtApellidoP);
+            groupBox3.Controls.Add(txtNombre);
+            groupBox3.Controls.Add(txtMatricula);
+            groupBox3.Location = new Point(74, 466);
+            groupBox3.Margin = new Padding(3, 2, 3, 2);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(3, 2, 3, 2);
+            groupBox3.Size = new Size(659, 101);
+            groupBox3.TabIndex = 5;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Agregar, Modicar o Eliminar";
+            // 
+            // CmbTipoPaciente
+            // 
+            CmbTipoPaciente.FormattingEnabled = true;
+            CmbTipoPaciente.Location = new Point(527, 56);
+            CmbTipoPaciente.Margin = new Padding(3, 2, 3, 2);
+            CmbTipoPaciente.Name = "CmbTipoPaciente";
+            CmbTipoPaciente.Size = new Size(133, 23);
+            CmbTipoPaciente.TabIndex = 10;
+            // 
+            // lblTipo
+            // 
+            lblTipo.AutoSize = true;
+            lblTipo.Location = new Point(527, 28);
+            lblTipo.Name = "lblTipo";
+            lblTipo.Size = new Size(79, 15);
+            lblTipo.TabIndex = 9;
+            lblTipo.Text = "Tipo Paciente";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(403, 28);
+            label4.Name = "label4";
+            label4.Size = new Size(99, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Apellido Materno";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(273, 28);
+            label3.Name = "label3";
+            label3.Size = new Size(95, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Apellido Paterno";
+            label3.Click += label3_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(126, 28);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Nombre";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(5, 28);
+            label1.Name = "label1";
+            label1.Size = new Size(57, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Matricula";
+            label1.Click += label1_Click;
+            // 
+            // txtApellidoM
+            // 
+            txtApellidoM.Location = new Point(403, 56);
+            txtApellidoM.Margin = new Padding(3, 2, 3, 2);
+            txtApellidoM.Name = "txtApellidoM";
+            txtApellidoM.Size = new Size(110, 23);
+            txtApellidoM.TabIndex = 3;
+            // 
+            // txtApellidoP
+            // 
+            txtApellidoP.Location = new Point(262, 56);
+            txtApellidoP.Margin = new Padding(3, 2, 3, 2);
+            txtApellidoP.Name = "txtApellidoP";
+            txtApellidoP.Size = new Size(117, 23);
+            txtApellidoP.TabIndex = 2;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(126, 56);
+            txtNombre.Margin = new Padding(3, 2, 3, 2);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(118, 23);
+            txtNombre.TabIndex = 1;
+            // 
+            // txtMatricula
+            // 
+            txtMatricula.Location = new Point(5, 56);
+            txtMatricula.Margin = new Padding(3, 2, 3, 2);
+            txtMatricula.Name = "txtMatricula";
+            txtMatricula.Size = new Size(110, 23);
+            txtMatricula.TabIndex = 0;
             // 
             // frmBusquedaAlumnos
             // 
@@ -174,6 +287,8 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)RegistroAlumnos).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -186,7 +301,5 @@
         private Label lblpersona;
         private Button BtnSalir;
         private Label label5;
-        private Button btnExpedientePaciente;
-        private Button btnAgregarPaciente;
     }
 }

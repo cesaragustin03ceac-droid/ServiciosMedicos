@@ -12,7 +12,7 @@ namespace ServiciosMedicos.Busqueda
         // Guarda quién inició sesión (nombre y tipo: doctora/enfermera)
         public static string UsuarioNombre = "";
         public static string UsuarioTipo = "";
-
+        public static string UsuarioId = "";
         public frmBusquedaAlumnos()
         {
             InitializeComponent();
