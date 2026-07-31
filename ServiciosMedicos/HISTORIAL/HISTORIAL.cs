@@ -2,13 +2,9 @@
 using ServiciosMedicos.Busqueda;
 using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
-using ServiciosMedicos.GeneracionReceta;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ServiciosMedicos.HISTORIAL
@@ -17,32 +13,32 @@ namespace ServiciosMedicos.HISTORIAL
     {
         private string idPacienteActual;
         private string tipoPacienteActual;
+        private string idExpedienteActual;
+
         public HISTORIAL()
         {
             InitializeComponent();
-            EstilarDataGridView(); //ESTIRA LA TABLA DE ABAJPO 
-            groupBox1.Paint += DibujarBordeGrueso;  // BORDES DFEL GRUPÓ BOX 1 INFORMACION DEL PACIENTE 
-            groupBox2perfil.Paint += DibujarBordeGrueso;   // BORDES DFEL GRUPÓ BOX  3 PARTE GRIS DED ARIIBA 
-            groupBox3atenciones.Paint += DibujarBordeGrueso;   // BORDE DEL GRUPO BOX DE LA TABLA DE ATENCIONES PASADAS
-            button1.Paint += DibujarBordeGrueso;       // BORDE DEL BOTON EDITAR  EXPEDIENTE 
-            button2.Paint += DibujarBordeGrueso;     // BORDE DE IR AL FORMATO 
-            btnGuardar.Paint += DibujarBordeGrueso;
-
+            EstilarDataGridView();
+            groupBox1.Paint += DibujarBordeGrueso;
+            groupBox2perfil.Paint += DibujarBordeGrueso;
+            groupBox3atenciones.Paint += DibujarBordeGrueso;
+            button1.Paint += DibujarBordeGrueso;
+            button2.Paint += DibujarBordeGrueso;
         }
+
         private void EstilarDataGridView()
         {
+            // === ATENCIONES PASADAS ===
             dataGridView1atenciones.Columns.Clear();
             dataGridView1atenciones.EnableHeadersVisualStyles = false;
-
-            // Color Azul de la Guía de Estilos (#6FA8DC)
+            dataGridView1atenciones.AllowUserToResizeColumns = false;
+            dataGridView1atenciones.AllowUserToResizeRows = false;
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#6FA8DC");
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             dataGridView1atenciones.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1atenciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView1atenciones.ColumnHeadersHeight = 35;
-
-            // Formato general de celdas y rejilla
             dataGridView1atenciones.BackgroundColor = Color.White;
             dataGridView1atenciones.BorderStyle = BorderStyle.FixedSingle;
             dataGridView1atenciones.CellBorderStyle = DataGridViewCellBorderStyle.Single;
@@ -50,8 +46,9 @@ namespace ServiciosMedicos.HISTORIAL
             dataGridView1atenciones.RowHeadersVisible = false;
             dataGridView1atenciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1atenciones.AllowUserToAddRows = false;
+            dataGridView1atenciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Crear las 5 columnas vacías
+            // Agregar columnas
             dataGridView1atenciones.Columns.Add("colFecha", "Fecha");
             dataGridView1atenciones.Columns.Add("colMotivo", "Motivo");
             dataGridView1atenciones.Columns.Add("colDiagnostico", "Diagnostico");
@@ -68,169 +65,230 @@ namespace ServiciosMedicos.HISTORIAL
             colReceta.UseColumnTextForLinkValue = false;
             dataGridView1atenciones.Columns.Add(colReceta);
 
-            dataGridView1atenciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1atenciones.Columns["colFecha"].FillWeight = 70;
+            dataGridView1atenciones.Columns["colMotivo"].FillWeight = 90;
+            dataGridView1atenciones.Columns["colDiagnostico"].FillWeight = 240;
+            dataGridView1atenciones.Columns["colFormato"].FillWeight = 50;
+            dataGridView1atenciones.Columns["colReceta"].FillWeight = 50;
         }
 
         private void DibujarBordeGrueso(object sender, PaintEventArgs e)
         {
             Control control = (Control)sender;
             int grosor = 3;
-
             using (Pen lapizNegro = new Pen(Color.Black, grosor))
             {
-
                 Rectangle rectangulo = new Rectangle(
                     grosor / 2,
                     grosor / 2,
                     control.Width - grosor,
                     control.Height - grosor
                 );
-
                 e.Graphics.DrawRectangle(lapizNegro, rectangulo);
             }
         }
-        private void groupBox2_Enter_1(object sender, EventArgs e)
-        {
-        }
+
+        // ============================================================
+        // CARGAR PERFIL COMPLETO
+        // ============================================================
         public void CargarPerfilPaciente(string idPaciente, string tipoPaciente)
         {
             this.idPacienteActual = idPaciente;
             this.tipoPacienteActual = tipoPaciente;
+            this.idExpedienteActual = null;
+
             Conexion conexionBD = new Conexion();
-            MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
+            MySqlConnection conn = conexionBD.obtenerconexion();
+            if (conn == null) return;
 
-            if (conexionAbierta != null)
+            try
             {
-                try
+                string query = "";
+
+                if (tipoPaciente == "Alumno")
                 {
-                    string query = "";
+                    query = @"SELECT a.matricula AS id, a.nombre, a.apellido_p, a.apellido_m,
+                                     ar.nombre_area, 
+                                     e.id_expediente, e.edad, e.nss, e.curp, e.sexo, 
+                                     e.tipo_sangre, e.peso, e.talla, e.alergias, 
+                                     e.enfermedades, e.revision_ocular
+                              FROM alumno a
+                              LEFT JOIN areas ar ON a.id_area = ar.id_area
+                              LEFT JOIN expediente e ON e.curp = a.matricula
+                              WHERE a.matricula = @id
+                              LIMIT 1;";
+                }
+                else
+                {
+                    query = @"SELECT t.num_trabajador AS id, t.nombre, t.apellido_p, t.apellido_m,
+                                     ar.nombre_area, 
+                                     e.id_expediente, e.edad, e.nss, e.curp, e.sexo, 
+                                     e.tipo_sangre, e.peso, e.talla, e.alergias, 
+                                     e.enfermedades, e.revision_ocular
+                              FROM trabajador t
+                              LEFT JOIN areas ar ON t.id_area = ar.id_area
+                              LEFT JOIN expediente e ON e.curp = CAST(t.num_trabajador AS CHAR)
+                              WHERE t.num_trabajador = @id
+                              LIMIT 1;";
+                }
 
-                    if (tipoPaciente == "Alumno")
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idPaciente);
+
+                    using (MySqlDataReader lector = cmd.ExecuteReader())
                     {
-                        query = @"SELECT a.Nombre, a.Apellido_P, a.Apellido_M, 
-                                 e.TipoSangre AS 'Tipo de Sangre', 
-                                 e.Alergias, 
-                                 e.Enfermedades AS 'Enfermedades Crónicas',
-                                 e.Peso, 
-                                 e.Talla
-                          FROM Alumno a
-                          LEFT JOIN Consulta c ON a.Matricula = c.Matricula_Alumno
-                          LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico
-                          LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
-                          WHERE a.Matricula = @id 
-                          LIMIT 1;";
-                    }
-                    else if (tipoPaciente == "Trabajador")
-                    {
-                        query = @"SELECT t.Nombre, t.Apellido_P, t.Apellido_M, 
-                                 e.TipoSangre AS 'Tipo de Sangre', 
-                                 e.Alergias, 
-                                 e.Enfermedades AS 'Enfermedades Crónicas',
-                                 e.Peso, 
-                                 e.Talla
-                          FROM Trabajador t
-                          LEFT JOIN Consulta c ON t.Num_Trabajador = c.Num_Trabajador
-                          LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico
-                          LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
-                          WHERE t.Num_Trabajador = @id 
-                          LIMIT 1;";
-                    }
-
-                    MySqlCommand comando = new MySqlCommand(query, conexionAbierta);
-                    comando.Parameters.AddWithValue("@id", idPaciente);
-
-                    MySqlDataAdapter adaptador = new MySqlDataAdapter(comando);
-                    DataTable tablaDatos = new DataTable();
-                    adaptador.Fill(tablaDatos);
-
-                    if (tablaDatos.Rows.Count > 0)
-                    {
-                        string nombre = tablaDatos.Rows[0]["Nombre"].ToString();
-                        string apellidoP = tablaDatos.Rows[0]["Apellido_P"].ToString();
-                        string apellidoM = tablaDatos.Rows[0]["Apellido_M"].ToString();
-
-                        txtNombrePaciente.Text = $"{nombre} {apellidoP} {apellidoM}";
-
-                        tablaDatos.Columns.Remove("Nombre");
-                        tablaDatos.Columns.Remove("Apellido_P");
-                        tablaDatos.Columns.Remove("Apellido_M");
-
-                        PerfilPaciente.DataSource = tablaDatos;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontró al paciente en la base de datos.", "Aviso");
-                    }
-
-                    dataGridView1atenciones.Rows.Clear();
-
-                    string queryAtenciones = "";
-
-                    if (tipoPaciente == "Alumno")
-                    {
-                        queryAtenciones = @"SELECT c.Fecha AS FechaConsulta, e.Motivo_Consulta AS Motivo, d.Diagnostico AS Diagnostico                        
-                        FROM Consulta c                  
-                        LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico                  
-                        LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
-                        WHERE c.Matricula_Alumno = @id
-                        ORDER BY c.Fecha DESC;";
-                    }
-                    else if (tipoPaciente == "Trabajador")
-                    {
-                        queryAtenciones = @"SELECT c.Fecha AS FechaConsulta, e.Motivo_Consulta AS Motivo, d.Diagnostico AS Diagnostico                        
-                        FROM Consulta c                  
-                        LEFT JOIN Diagnostico d ON c.Id_Diagnostico = d.Id_Diagnostico                  
-                        LEFT JOIN Expediente e ON d.Id_Expediente = e.Id_Expediente
-                        WHERE c.Num_Trabajador = @id
-                        ORDER BY c.Fecha DESC;";
-                    }
-
-                    using (MySqlCommand cmdAtenciones = new MySqlCommand(queryAtenciones, conexionAbierta))
-                    {
-                        cmdAtenciones.Parameters.AddWithValue("@id", idPaciente);
-
-                        using (MySqlDataReader lector = cmdAtenciones.ExecuteReader())
+                        if (lector.Read())
                         {
-                            while (lector.Read())
-                            {
+                            // --- NOMBRE ---
+                            string nombre = lector["nombre"].ToString();
+                            string apellidoP = lector["apellido_p"].ToString();
+                            string apellidoM = lector["apellido_m"].ToString();
+                            txtNombrePaciente.Text = $"{nombre} {apellidoP} {apellidoM}".Trim();
 
-                                string fecha = lector["FechaConsulta"] != DBNull.Value ? Convert.ToDateTime(lector["FechaConsulta"]).ToString("yyyy-MM-dd") : "";
-                                string motivo = lector["Motivo"] != DBNull.Value ? lector["Motivo"].ToString() : "";
-                                string diagnostico = lector["Diagnostico"] != DBNull.Value ? lector["Diagnostico"].ToString() : "";
+                            // --- ÁREA Y EDAD ---
+                            txtArea.Text = ValorO_Vacio(lector["nombre_area"]);
+                            txtEdad.Text = ValorO_Vacio(lector["edad"]);
 
-                                dataGridView1atenciones.Rows.Add(fecha, motivo, diagnostico, "Ver", "Ver");
+                            // --- EXPEDIENTE EN DATAGRIDVIEW ---
+                            PerfilPaciente.Columns.Clear();
+                            PerfilPaciente.AutoGenerateColumns = true;
 
-                            }
+                            DataTable dtPerfil = new DataTable();
+                            dtPerfil.Columns.Add("Sexo");
+                            dtPerfil.Columns.Add("NSS");
+                            dtPerfil.Columns.Add("CURP");
+                            dtPerfil.Columns.Add("Tipo de Sangre");
+                            dtPerfil.Columns.Add("Peso");
+                            dtPerfil.Columns.Add("Talla");
+                            dtPerfil.Columns.Add("Alergias");
+                            dtPerfil.Columns.Add("Enfermedades");
+                            dtPerfil.Columns.Add("Revisión Ocular");
+
+                            DataRow fila = dtPerfil.NewRow();
+                            fila["Sexo"] = ValorO_Vacio(lector["sexo"]);
+                            fila["NSS"] = ValorO_Vacio(lector["nss"]);
+                            fila["CURP"] = ValorO_Vacio(lector["curp"]);
+                            fila["Tipo de Sangre"] = ValorO_Vacio(lector["tipo_sangre"]);
+                            fila["Peso"] = ValorO_Vacio(lector["peso"]);
+                            fila["Talla"] = ValorO_Vacio(lector["talla"]);
+                            fila["Alergias"] = ValorO_Vacio(lector["alergias"]);
+                            fila["Enfermedades"] = ValorO_Vacio(lector["enfermedades"]);
+                            fila["Revisión Ocular"] = ValorO_Vacio(lector["revision_ocular"]);
+                            dtPerfil.Rows.Add(fila);
+
+                            PerfilPaciente.DataSource = dtPerfil;
+                            PerfilPaciente.ReadOnly = true;
+                            PerfilPaciente.AllowUserToAddRows = false;
+                            PerfilPaciente.RowHeadersVisible = false;
+                            PerfilPaciente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                            // Guardamos ID del expediente
+                            if (lector["id_expediente"] != DBNull.Value)
+                                this.idExpedienteActual = lector["id_expediente"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró el paciente.", "Aviso");
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar el perfil: " + ex.Message, "Error");
-                }
-                finally
-                {
-                    conexionAbierta.Close();
-                }
 
-
-
+                // ============================================================
+                // ← AQUÍ FALTABA ESTO: CARGAR ATENCIONES PASADAS
+                // ============================================================
+                CargarAtenciones(idPaciente, tipoPaciente, conn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar perfil: " + ex.Message, "Error");
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
+        // ============================================================
+        // CARGAR ATENCIONES PASADAS DESDE LA BASE DE DATOS
+        // ============================================================
+        private void CargarAtenciones(string idPaciente, string tipoPaciente, MySqlConnection conn)
+        {
+            dataGridView1atenciones.Rows.Clear();
 
+            string query = "";
+
+            if (tipoPaciente == "Alumno")
+            {
+                query = @"SELECT c.fecha_consulta, e.motivo_consulta, d.diagnostico
+                        FROM consulta c
+                        LEFT JOIN diagnostico d ON c.id_consulta = d.id_consulta
+                        LEFT JOIN expediente e ON d.id_expediente = e.id_expediente
+                        WHERE c.matricula_alumno = @id
+                        ORDER BY c.fecha_consulta DESC;";
+            }
+            else
+            {
+                query = @"SELECT c.fecha_consulta, e.motivo_consulta, d.diagnostico
+                        FROM consulta c
+                        LEFT JOIN diagnostico d ON c.id_consulta = d.id_consulta
+                        LEFT JOIN expediente e ON d.id_expediente = e.id_expediente
+                        WHERE c.num_trabajador = @id
+                        ORDER BY c.fecha_consulta DESC;";
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", idPaciente);
+
+                using (MySqlDataReader lector = cmd.ExecuteReader())
+                {
+                    while (lector.Read())
+                    {
+                        string fecha = lector["fecha_consulta"] != DBNull.Value
+                            ? Convert.ToDateTime(lector["fecha_consulta"]).ToString("yyyy-MM-dd")
+                            : "";
+                        string motivo = lector["motivo_consulta"] != DBNull.Value ? lector["motivo_consulta"].ToString() : "";
+                        string diagnostico = lector["diagnostico"] != DBNull.Value ? lector["diagnostico"].ToString() : "";
+
+                        dataGridView1atenciones.Rows.Add(fecha, motivo, diagnostico, "Ver", "Ver");
+                    }
+                }
+            }
+        }
+
+        private string ValorO_Vacio(object valor)
+        {
+            return valor != DBNull.Value ? valor.ToString() : "";
+        }
+
+        // ============================================================
+        // BOTÓN EDITAR EXPEDIENTE
+        // ============================================================
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(idPacienteActual) || string.IsNullOrEmpty(tipoPacienteActual))
+            {
+                MessageBox.Show("No hay paciente cargado para editar.", "Aviso");
+                return;
+            }
+
+            AgregarPaciente ventana = new AgregarPaciente(idPacienteActual, tipoPacienteActual);
+            ventana.Show();
+            this.Close();
+        }
+
+        // ============================================================
+        // BOTÓN FORMATO
+        // ============================================================
         private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
                 FrmConsultas ventanaConsulta = new FrmConsultas();
                 ventanaConsulta.PassDatosPaciente(this.idPacienteActual, this.tipoPacienteActual);
-
                 ventanaConsulta.Show();
-
                 this.Close();
-
-
             }
             catch (Exception ex)
             {
@@ -238,91 +296,15 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PerfilPaciente.ReadOnly = false;
-
-            if (PerfilPaciente.Rows.Count > 0)
-            {
-                PerfilPaciente.CurrentCell = PerfilPaciente.Rows[0].Cells[0];
-                PerfilPaciente.BeginEdit(true);
-            }
-        }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (PerfilPaciente.Rows.Count > 0)
-            {
-                DataGridViewRow fila = PerfilPaciente.Rows[0];
-
-                string tipoSangre = fila.Cells["Tipo de Sangre"].Value?.ToString().Trim();
-                string alergias = fila.Cells["Alergias"].Value?.ToString().Trim();
-                string enfermedades = fila.Cells["Enfermedades Crónicas"].Value?.ToString().Trim();
-                string peso = fila.Cells["Peso"].Value?.ToString().Trim();
-                string talla = fila.Cells["Talla"].Value?.ToString().Trim();
-
-                Conexion conexionBD = new Conexion();
-                MySqlConnection conexionAbierta = conexionBD.obtenerconexion();
-
-                if (conexionAbierta != null)
-                {
-                    try
-                    {
-                        string queryUpdate = @"UPDATE Expediente e
-                       INNER JOIN Diagnostico d ON e.Id_Expediente = d.Id_Expediente
-                       INNER JOIN Consulta c ON d.Id_Diagnostico = c.Id_Diagnostico
-                       SET e.TipoSangre = @sangre, 
-                           e.Alergias = @alergias, 
-                           e.Enfermedades = @enfermedades, 
-                           e.Peso = @peso, 
-                           e.Talla = @talla 
-                       WHERE c.Matricula_Alumno = @mat OR c.Num_Trabajador = @mat";
-                        using (MySqlCommand comando = new MySqlCommand(queryUpdate, conexionAbierta))
-                        {
-                            comando.Parameters.AddWithValue("@sangre", tipoSangre);
-                            comando.Parameters.AddWithValue("@alergias", alergias);
-                            comando.Parameters.AddWithValue("@enfermedades", enfermedades);
-                            comando.Parameters.AddWithValue("@peso", peso);
-                            comando.Parameters.AddWithValue("@talla", talla);
-                            comando.Parameters.AddWithValue("@mat", idPacienteActual);
-
-                            int filasAfectadas = comando.ExecuteNonQuery();
-
-                            if (filasAfectadas > 0)
-                            {
-                                MessageBox.Show("Expediente actualizado y guardado correctamente.", "Éxito");
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se encontró el registro para actualizar.", "Aviso");
-                            }
-
-                            PerfilPaciente.ReadOnly = true;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al actualizar: " + ex.Message, "Error");
-                    }
-                    finally
-                    {
-                        conexionAbierta.Close();
-                    }
-                }
-            }
-        }
-
         private void BtnAtras_Click(object sender, EventArgs e)
         {
-            frmBusquedaAlumnos FrmBusquedaPacientes = new frmBusquedaAlumnos();
-            FrmBusquedaPacientes.Show();
-
+            frmBusquedaAlumnos busqueda = new frmBusquedaAlumnos();
+            busqueda.Show();
             this.Close();
         }
 
-        private void HISTORIAL_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void HISTORIAL_Load(object sender, EventArgs e) { }
+        private void label9_Click(object sender, EventArgs e) { }
+        private void groupBox2_Enter_1(object sender, EventArgs e) { }
     }
 }

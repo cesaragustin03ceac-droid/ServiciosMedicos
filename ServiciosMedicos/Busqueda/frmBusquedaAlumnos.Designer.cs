@@ -62,9 +62,11 @@
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(BtnSalir);
             groupBox1.Controls.Add(lblpersona);
-            groupBox1.Location = new Point(-7, 0);
+            groupBox1.Location = new Point(-8, 0);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(798, 69);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(912, 92);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
@@ -73,9 +75,9 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(262, 20);
+            label5.Location = new Point(299, 27);
             label5.Name = "label5";
-            label5.Size = new Size(275, 32);
+            label5.Size = new Size(338, 41);
             label5.TabIndex = 11;
             label5.Text = "Busqueda de Pacientes";
             // 
@@ -86,10 +88,9 @@
             BtnSalir.BackgroundImageLayout = ImageLayout.Zoom;
             BtnSalir.FlatAppearance.BorderSize = 0;
             BtnSalir.FlatStyle = FlatStyle.Flat;
-            BtnSalir.Location = new Point(27, 20);
-            BtnSalir.Margin = new Padding(3, 2, 3, 2);
+            BtnSalir.Location = new Point(31, 27);
             BtnSalir.Name = "BtnSalir";
-            BtnSalir.Size = new Size(84, 31);
+            BtnSalir.Size = new Size(96, 41);
             BtnSalir.TabIndex = 1;
             BtnSalir.UseVisualStyleBackColor = false;
             BtnSalir.Click += BtnSalir_Click;
@@ -97,9 +98,9 @@
             // lblpersona
             // 
             lblpersona.AutoSize = true;
-            lblpersona.Location = new Point(35, 26);
+            lblpersona.Location = new Point(40, 35);
             lblpersona.Name = "lblpersona";
-            lblpersona.Size = new Size(10, 15);
+            lblpersona.Size = new Size(12, 20);
             lblpersona.TabIndex = 0;
             lblpersona.Text = ".";
             // 
@@ -109,9 +110,11 @@
             groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(RegistroAlumnos);
             groupBox2.Controls.Add(txtBusqueda);
-            groupBox2.Location = new Point(74, 80);
+            groupBox2.Location = new Point(85, 129);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(654, 367);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(747, 489);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Enter += groupBox2_Enter;
@@ -120,62 +123,38 @@
             // 
             RegistroAlumnos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             RegistroAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RegistroAlumnos.Location = new Point(36, 75);
+            RegistroAlumnos.Location = new Point(41, 100);
+            RegistroAlumnos.Margin = new Padding(3, 4, 3, 4);
             RegistroAlumnos.Name = "RegistroAlumnos";
             RegistroAlumnos.ReadOnly = true;
             RegistroAlumnos.RowHeadersWidth = 51;
-            RegistroAlumnos.Size = new Size(579, 262);
+            RegistroAlumnos.Size = new Size(662, 349);
             RegistroAlumnos.TabIndex = 1;
-            RegistroAlumnos.CellClick += RegistroAlumnos_CellClick;
+            RegistroAlumnos.CellContentClick += RegistroAlumnos_CellContentClick;
             RegistroAlumnos.CellDoubleClick += RegistroAlumnos_CellDoubleClick;
             // 
             // txtBusqueda
             // 
             txtBusqueda.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtBusqueda.Location = new Point(36, 41);
+            txtBusqueda.Location = new Point(41, 55);
+            txtBusqueda.Margin = new Padding(3, 4, 3, 4);
             txtBusqueda.Name = "txtBusqueda";
-            txtBusqueda.PlaceholderText = "Ingrese el matricula para buscar";
-            txtBusqueda.Size = new Size(580, 23);
+            txtBusqueda.PlaceholderText = "Ingrese la matricula o No. de trabajador ";
+            txtBusqueda.Size = new Size(662, 27);
             txtBusqueda.TabIndex = 0;
             txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
-            // btnNuevo
+            // btnExpedientePaciente
             // 
-            btnNuevo.Anchor = AnchorStyles.Bottom;
-            btnNuevo.Location = new Point(131, 572);
-            btnNuevo.Margin = new Padding(3, 2, 3, 2);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(82, 22);
-            btnNuevo.TabIndex = 2;
-            btnNuevo.Text = "Nuevo";
-            btnNuevo.UseVisualStyleBackColor = true;
-            btnNuevo.Click += btnNuevo_Click;
+            btnExpedientePaciente.Location = new Point(177, 677);
+            btnExpedientePaciente.Name = "btnExpedientePaciente";
+            btnExpedientePaciente.Size = new Size(155, 61);
+            btnExpedientePaciente.TabIndex = 2;
+            btnExpedientePaciente.Text = "Ir al expediente del Paciente";
+            btnExpedientePaciente.UseVisualStyleBackColor = true;
+            btnExpedientePaciente.Click += btnExpedientePaciente_Click;
             // 
-            // btnEditar
-            // 
-            btnEditar.Anchor = AnchorStyles.Bottom;
-            btnEditar.Location = new Point(360, 572);
-            btnEditar.Margin = new Padding(3, 2, 3, 2);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(82, 22);
-            btnEditar.TabIndex = 3;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += btnEditar_Click;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Anchor = AnchorStyles.Bottom;
-            btnEliminar.Location = new Point(589, 572);
-            btnEliminar.Margin = new Padding(3, 2, 3, 2);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(82, 22);
-            btnEliminar.TabIndex = 4;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
-            // 
-            // groupBox3
+            // btnAgregarPaciente
             // 
             groupBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.Controls.Add(CmbTipoPaciente);
@@ -287,17 +266,16 @@
             // 
             // frmBusquedaAlumnos
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
-            ClientSize = new Size(784, 562);
-            Controls.Add(groupBox3);
-            Controls.Add(btnEliminar);
-            Controls.Add(btnEditar);
-            Controls.Add(btnNuevo);
+            ClientSize = new Size(896, 803);
+            Controls.Add(btnAgregarPaciente);
+            Controls.Add(btnExpedientePaciente);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmBusquedaAlumnos";
@@ -320,21 +298,7 @@
         private GroupBox groupBox2;
         private TextBox txtBusqueda;
         private DataGridView RegistroAlumnos;
-        private Button btnNuevo;
-        private Button btnEditar;
-        private Button btnEliminar;
-        private GroupBox groupBox3;
-        private TextBox txtApellidoM;
-        private TextBox txtApellidoP;
-        private TextBox txtNombre;
-        private TextBox txtMatricula;
-        private Label label1;
-        private Label label3;
-        private Label label2;
-        private Label label4;
         private Label lblpersona;
-        private ComboBox CmbTipoPaciente;
-        private Label lblTipo;
         private Button BtnSalir;
         private Label label5;
     }
