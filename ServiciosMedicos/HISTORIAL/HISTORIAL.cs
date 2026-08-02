@@ -2,7 +2,10 @@
 using ServiciosMedicos.Busqueda;
 using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
+using ServiciosMedicos.GeneracionReceta;
+using ServiciosMedicos.VistaPrevia;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -24,11 +27,12 @@ namespace ServiciosMedicos.HISTORIAL
             groupBox3atenciones.Paint += DibujarBordeGrueso;
             button1.Paint += DibujarBordeGrueso;
             button2.Paint += DibujarBordeGrueso;
+
+            dataGridView1atenciones.CellContentClick += dataGridView1atenciones_CellContentClick;
         }
 
         private void EstilarDataGridView()
         {
-            // === ATENCIONES PASADAS ===
             dataGridView1atenciones.Columns.Clear();
             dataGridView1atenciones.EnableHeadersVisualStyles = false;
             dataGridView1atenciones.AllowUserToResizeColumns = false;
@@ -48,7 +52,6 @@ namespace ServiciosMedicos.HISTORIAL
             dataGridView1atenciones.AllowUserToAddRows = false;
             dataGridView1atenciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Agregar columnas
             dataGridView1atenciones.Columns.Add("colFecha", "Fecha");
             dataGridView1atenciones.Columns.Add("colMotivo", "Motivo");
             dataGridView1atenciones.Columns.Add("colDiagnostico", "Diagnostico");
@@ -64,6 +67,9 @@ namespace ServiciosMedicos.HISTORIAL
             colReceta.HeaderText = "Receta";
             colReceta.UseColumnTextForLinkValue = false;
             dataGridView1atenciones.Columns.Add(colReceta);
+
+            dataGridView1atenciones.Columns.Add("colIdConsulta", "ID");
+            dataGridView1atenciones.Columns["colIdConsulta"].Visible = false;
 
             dataGridView1atenciones.Columns["colFecha"].FillWeight = 70;
             dataGridView1atenciones.Columns["colMotivo"].FillWeight = 90;
@@ -88,9 +94,6 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
-        // ============================================================
-        // CARGAR PERFIL COMPLETO
-        // ============================================================
         public void CargarPerfilPaciente(string idPaciente, string tipoPaciente)
         {
             this.idPacienteActual = idPaciente;
@@ -140,17 +143,14 @@ namespace ServiciosMedicos.HISTORIAL
                     {
                         if (lector.Read())
                         {
-                            // --- NOMBRE ---
                             string nombre = lector["nombre"].ToString();
                             string apellidoP = lector["apellido_p"].ToString();
                             string apellidoM = lector["apellido_m"].ToString();
                             txtNombrePaciente.Text = $"{nombre} {apellidoP} {apellidoM}".Trim();
 
-                            // --- ÁREA Y EDAD ---
                             txtArea.Text = ValorO_Vacio(lector["nombre_area"]);
                             txtEdad.Text = ValorO_Vacio(lector["edad"]);
 
-                            // --- EXPEDIENTE EN DATAGRIDVIEW ---
                             PerfilPaciente.Columns.Clear();
                             PerfilPaciente.AutoGenerateColumns = true;
 
@@ -183,7 +183,6 @@ namespace ServiciosMedicos.HISTORIAL
                             PerfilPaciente.RowHeadersVisible = false;
                             PerfilPaciente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                            // Guardamos ID del expediente
                             if (lector["id_expediente"] != DBNull.Value)
                                 this.idExpedienteActual = lector["id_expediente"].ToString();
                         }
@@ -194,9 +193,6 @@ namespace ServiciosMedicos.HISTORIAL
                     }
                 }
 
-                // ============================================================
-                // ← AQUÍ FALTABA ESTO: CARGAR ATENCIONES PASADAS
-                // ============================================================
                 CargarAtenciones(idPaciente, tipoPaciente, conn);
             }
             catch (Exception ex)
@@ -209,9 +205,7 @@ namespace ServiciosMedicos.HISTORIAL
             }
         }
 
-        // ============================================================
-        // CARGAR ATENCIONES PASADAS DESDE LA BASE DE DATOS
-        // ============================================================
+
         private void CargarAtenciones(string idPaciente, string tipoPaciente, MySqlConnection conn)
         {
             dataGridView1atenciones.Rows.Clear();
@@ -220,7 +214,7 @@ namespace ServiciosMedicos.HISTORIAL
 
             if (tipoPaciente == "Alumno")
             {
-                query = @"SELECT c.fecha_consulta, e.motivo_consulta, d.diagnostico
+                query = @"SELECT c.id_consulta, c.fecha_consulta, e.motivo_consulta, d.diagnostico
                         FROM consulta c
                         LEFT JOIN diagnostico d ON c.id_consulta = d.id_consulta
                         LEFT JOIN expediente e ON d.id_expediente = e.id_expediente
@@ -229,7 +223,7 @@ namespace ServiciosMedicos.HISTORIAL
             }
             else
             {
-                query = @"SELECT c.fecha_consulta, e.motivo_consulta, d.diagnostico
+                query = @"SELECT c.id_consulta, c.fecha_consulta, e.motivo_consulta, d.diagnostico
                         FROM consulta c
                         LEFT JOIN diagnostico d ON c.id_consulta = d.id_consulta
                         LEFT JOIN expediente e ON d.id_expediente = e.id_expediente
@@ -245,15 +239,148 @@ namespace ServiciosMedicos.HISTORIAL
                 {
                     while (lector.Read())
                     {
+                        string idConsulta = lector["id_consulta"] != DBNull.Value ? lector["id_consulta"].ToString() : "0";
                         string fecha = lector["fecha_consulta"] != DBNull.Value
                             ? Convert.ToDateTime(lector["fecha_consulta"]).ToString("yyyy-MM-dd")
                             : "";
                         string motivo = lector["motivo_consulta"] != DBNull.Value ? lector["motivo_consulta"].ToString() : "";
                         string diagnostico = lector["diagnostico"] != DBNull.Value ? lector["diagnostico"].ToString() : "";
 
-                        dataGridView1atenciones.Rows.Add(fecha, motivo, diagnostico, "Ver", "Ver");
+                        dataGridView1atenciones.Rows.Add(fecha, motivo, diagnostico, "Ver", "Ver", idConsulta);
                     }
                 }
+            }
+        }
+=
+        private void dataGridView1atenciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dataGridView1atenciones.Columns[e.ColumnIndex].Name == "colReceta")
+            {
+                string idConsulta = dataGridView1atenciones.Rows[e.RowIndex].Cells["colIdConsulta"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(idConsulta) && idConsulta != "0")
+                {
+                    VerRecetaGuardada(idConsulta);
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el identificador de la consulta.", "Error");
+                }
+            }
+        }
+
+        
+        private void VerRecetaGuardada(string idConsulta)
+        {
+            Conexion conexionBD = new Conexion();
+            MySqlConnection conn = conexionBD.obtenerconexion();
+            if (conn == null) return;
+
+            try
+            {
+                string queryReceta = @"SELECT r.id_receta, r.dia, r.mes, r.anio 
+                                       FROM receta r
+                                       INNER JOIN diagnostico d ON r.id_diagnostico = d.id_diagnostico
+                                       WHERE d.id_consulta = @idConsulta
+                                       LIMIT 1";
+
+                int idReceta = 0;
+                int dia = 0, mes = 0, anio = 0;
+                bool recetaEncontrada = false;
+
+                using (MySqlCommand cmd = new MySqlCommand(queryReceta, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idConsulta", Convert.ToInt32(idConsulta));
+                    using (MySqlDataReader lector = cmd.ExecuteReader())
+                    {
+                        if (lector.Read())
+                        {
+                            idReceta = Convert.ToInt32(lector["id_receta"]);
+                            dia = Convert.ToInt32(lector["dia"]);
+                            mes = Convert.ToInt32(lector["mes"]);
+                            anio = Convert.ToInt32(lector["anio"]);
+                            recetaEncontrada = true;
+                        }
+                    }
+                }
+
+                if (!recetaEncontrada)
+                {
+                    MessageBox.Show("Esta consulta no tiene receta guardada.", "Sin receta");
+                    return;
+                }
+
+                var listaMedicamentos = new List<frmGeneracionReceta.MedicamentoReceta>();
+
+                string queryMed = @"SELECT dm.nombre_medicamento, dm.cant_medicamento, dm.indicaciones
+                                    FROM detallemedicamento dm
+                                    WHERE dm.id_receta = @idReceta";
+
+                using (MySqlCommand cmd = new MySqlCommand(queryMed, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idReceta", idReceta);
+                    using (MySqlDataReader lector = cmd.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            var med = new frmGeneracionReceta.MedicamentoReceta
+                            {
+                                Nombre = lector["nombre_medicamento"].ToString(),
+                                Cantidad = lector["cant_medicamento"].ToString(),
+                                Indicaciones = lector["indicaciones"].ToString()
+                            };
+                            listaMedicamentos.Add(med);
+                        }
+                    }
+                }
+
+                if (listaMedicamentos.Count == 0)
+                {
+                    MessageBox.Show("La receta no contiene medicamentos.", "Receta vacía");
+                    return;
+                }
+
+                string nombreDoctora = frmBusquedaAlumnos.UsuarioNombre;
+                string cedulaDoctora = frmBusquedaAlumnos.UsuarioId;
+                string nombrePaciente = txtNombrePaciente.Text.Trim();
+                string matricula = idPacienteActual;
+                string area = txtArea.Text.Trim();
+
+                string edad = txtEdad.Text.Trim();
+                string sexo = "";
+                if (PerfilPaciente.Rows.Count > 0)
+                {
+                    sexo = PerfilPaciente.Rows[0].Cells["Sexo"].Value?.ToString() ?? "";
+                }
+                string fecha = new DateTime(anio, mes, dia).ToString("dd/MM/yyyy");
+
+                frmVistaPrevia vista = new frmVistaPrevia();
+                vista.CargarDatos(
+                    nombreDoctora,
+                    cedulaDoctora,
+                    nombrePaciente,
+                    matricula,
+                    area,
+                    edad,
+                    sexo,
+                    fecha,
+                    listaMedicamentos
+                );
+                vista.PassDatosPaciente(this.idPacienteActual, this.tipoPacienteActual);
+
+                vista.FormClosed += (s, ev) => this.Show();
+                vista.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la receta: " + ex.Message, "Error");
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -262,9 +389,7 @@ namespace ServiciosMedicos.HISTORIAL
             return valor != DBNull.Value ? valor.ToString() : "";
         }
 
-        // ============================================================
-        // BOTÓN EDITAR EXPEDIENTE
-        // ============================================================
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(idPacienteActual) || string.IsNullOrEmpty(tipoPacienteActual))
@@ -278,9 +403,7 @@ namespace ServiciosMedicos.HISTORIAL
             this.Close();
         }
 
-        // ============================================================
-        // BOTÓN FORMATO
-        // ============================================================
+        
         private void button2_Click_1(object sender, EventArgs e)
         {
             try
@@ -304,14 +427,14 @@ namespace ServiciosMedicos.HISTORIAL
         }
 
         private void HISTORIAL_Load(object sender, EventArgs e)
-        { 
-
-        }
-        private void label9_Click(object sender, EventArgs e) 
         {
 
         }
-        private void groupBox2_Enter_1(object sender, EventArgs e) 
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void groupBox2_Enter_1(object sender, EventArgs e)
         {
 
         }

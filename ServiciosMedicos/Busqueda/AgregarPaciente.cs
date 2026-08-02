@@ -20,6 +20,8 @@ namespace ServiciosMedicos.Busqueda
             InitializeComponent();
             esNuevoPaciente = true;
             this.Load += AgregarPaciente_Load;
+            txtCURP.Hide();
+            lblCURP.Hide();
         }
 
         public AgregarPaciente(string id, string tipo)
@@ -228,39 +230,44 @@ namespace ServiciosMedicos.Busqueda
             {
                 trans = conn.BeginTransaction();
 
+                // ← OBTENER id_area DESDE EL NOMBRE ESCRITO EN txtArea
+                int? idArea = ObtenerIdArea(conn, trans, txtArea.Text.Trim());
+
                 // INSERTAR en tabla alumno O trabajador
                 if (cboTipo.Text == "Alumno")
                 {
-                    string q = @"INSERT INTO alumno (matricula, nombre, apellido_p, apellido_m) 
-                                 VALUES (@id, @nom, @ap, @am);";
+                    string q = @"INSERT INTO alumno (matricula, nombre, apellido_p, apellido_m, id_area) 
+                         VALUES (@id, @nom, @ap, @am, @idArea);";
                     using (MySqlCommand cmd = new MySqlCommand(q, conn, trans))
                     {
                         cmd.Parameters.AddWithValue("@id", txtID.Text.Trim());
                         cmd.Parameters.AddWithValue("@nom", txtNombre.Text.Trim());
                         cmd.Parameters.AddWithValue("@ap", txtApellidoP.Text.Trim());
                         cmd.Parameters.AddWithValue("@am", txtApellidoM.Text.Trim());
+                        cmd.Parameters.AddWithValue("@idArea", idArea ?? (object)DBNull.Value);
                         cmd.ExecuteNonQuery();
                     }
                 }
                 else
                 {
-                    string q = @"INSERT INTO trabajador (num_trabajador, nombre, apellido_p, apellido_m) 
-                                 VALUES (@id, @nom, @ap, @am);";
+                    string q = @"INSERT INTO trabajador (num_trabajador, nombre, apellido_p, apellido_m, id_area) 
+                         VALUES (@id, @nom, @ap, @am, @idArea);";
                     using (MySqlCommand cmd = new MySqlCommand(q, conn, trans))
                     {
                         cmd.Parameters.AddWithValue("@id", Convert.ToInt32(txtID.Text.Trim()));
                         cmd.Parameters.AddWithValue("@nom", txtNombre.Text.Trim());
                         cmd.Parameters.AddWithValue("@ap", txtApellidoP.Text.Trim());
                         cmd.Parameters.AddWithValue("@am", txtApellidoM.Text.Trim());
+                        cmd.Parameters.AddWithValue("@idArea", idArea ?? (object)DBNull.Value);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                // INSERTAR expediente médico
+                // INSERTAR expediente médico (sin cambios)
                 string qExp = @"INSERT INTO expediente 
-                    (curp, edad, nss, talla, peso, sexo, tipo_sangre, alergias, enfermedades, revision_ocular) 
-                    VALUES 
-                    (@curp, @edad, @nss, @talla, @peso, @sexo, @tipoSangre, @alergias, @enfermedades, @revisionOcular);";
+            (curp, edad, nss, talla, peso, sexo, tipo_sangre, alergias, enfermedades, revision_ocular) 
+            VALUES 
+            (@curp, @edad, @nss, @talla, @peso, @sexo, @tipoSangre, @alergias, @enfermedades, @revisionOcular);";
 
                 using (MySqlCommand cmd = new MySqlCommand(qExp, conn, trans))
                 {
@@ -307,12 +314,15 @@ namespace ServiciosMedicos.Busqueda
             {
                 trans = conn.BeginTransaction();
 
-                // ACTUALIZAR tabla alumno o trabajador
+                // ← OBTENER id_area DESDE EL NOMBRE ESCRITO EN txtArea
+                int? idArea = ObtenerIdArea(conn, trans, txtArea.Text.Trim());
+
+                // ACTUALIZAR tabla alumno o trabajador (AHORA INCLUYE id_area)
                 string queryPaciente = tipoPaciente == "Alumno"
-                    ? @"UPDATE alumno SET nombre = @nombre, apellido_p = @apellidoP, apellido_m = @apellidoM 
-                        WHERE matricula = @id;"
-                    : @"UPDATE trabajador SET nombre = @nombre, apellido_p = @apellidoP, apellido_m = @apellidoM 
-                        WHERE num_trabajador = @id;";
+                    ? @"UPDATE alumno SET nombre = @nombre, apellido_p = @apellidoP, apellido_m = @apellidoM, id_area = @idArea 
+                WHERE matricula = @id;"
+                    : @"UPDATE trabajador SET nombre = @nombre, apellido_p = @apellidoP, apellido_m = @apellidoM, id_area = @idArea 
+                WHERE num_trabajador = @id;";
 
                 using (MySqlCommand cmd = new MySqlCommand(queryPaciente, conn, trans))
                 {
@@ -320,26 +330,27 @@ namespace ServiciosMedicos.Busqueda
                     cmd.Parameters.AddWithValue("@apellidoP", txtApellidoP.Text.Trim());
                     cmd.Parameters.AddWithValue("@apellidoM", txtApellidoM.Text.Trim());
                     cmd.Parameters.AddWithValue("@id", idPaciente);
+                    cmd.Parameters.AddWithValue("@idArea", idArea ?? (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
 
-                // ACTUALIZAR o INSERTAR expediente
+                // ACTUALIZAR o INSERTAR expediente (sin cambios)
                 if (expedienteExiste)
                 {
                     string q = @"UPDATE expediente 
-                        SET edad = @edad, tipo_sangre = @tipoSangre, alergias = @alergias, 
-                            enfermedades = @enfermedades, peso = @peso, talla = @talla, 
-                            nss = @nss, curp = @curp, sexo = @sexo, revision_ocular = @revisionOcular
-                        WHERE curp = @idPaciente;";
+                SET edad = @edad, tipo_sangre = @tipoSangre, alergias = @alergias, 
+                    enfermedades = @enfermedades, peso = @peso, talla = @talla, 
+                    nss = @nss, curp = @curp, sexo = @sexo, revision_ocular = @revisionOcular
+                WHERE curp = @idPaciente;";
 
                     EjecutarExpediente(q, conn, trans, idPaciente);
                 }
                 else
                 {
                     string q = @"INSERT INTO expediente 
-                        (curp, edad, nss, talla, peso, sexo, tipo_sangre, alergias, enfermedades, revision_ocular) 
-                        VALUES 
-                        (@curp, @edad, @nss, @talla, @peso, @sexo, @tipoSangre, @alergias, @enfermedades, @revisionOcular);";
+                (curp, edad, nss, talla, peso, sexo, tipo_sangre, alergias, enfermedades, revision_ocular) 
+                VALUES 
+                (@curp, @edad, @nss, @talla, @peso, @sexo, @tipoSangre, @alergias, @enfermedades, @revisionOcular);";
 
                     EjecutarExpediente(q, conn, trans, idPaciente);
                     expedienteExiste = true;
@@ -357,6 +368,33 @@ namespace ServiciosMedicos.Busqueda
             finally
             {
                 conn.Close();
+            }
+        }
+
+        // ============================================================
+        // AYUDANTE: Busca id_area por nombre. Si no existe, la crea.
+        // ============================================================
+        private int? ObtenerIdArea(MySqlConnection conn, MySqlTransaction trans, string nombreArea)
+        {
+            if (string.IsNullOrWhiteSpace(nombreArea)) return null;
+
+            // Buscar si ya existe
+            string q = "SELECT id_area FROM areas WHERE nombre_area = @nombre LIMIT 1;";
+            using (MySqlCommand cmd = new MySqlCommand(q, conn, trans))
+            {
+                cmd.Parameters.AddWithValue("@nombre", nombreArea);
+                object result = cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                    return Convert.ToInt32(result);
+            }
+
+            // Si no existe, insertarla y devolver el nuevo ID
+            string qInsert = "INSERT INTO areas (nombre_area) VALUES (@nombre); SELECT LAST_INSERT_ID();";
+            using (MySqlCommand cmd = new MySqlCommand(qInsert, conn, trans))
+            {
+                cmd.Parameters.AddWithValue("@nombre", nombreArea);
+                object result = cmd.ExecuteScalar();
+                return Convert.ToInt32(result);
             }
         }
 

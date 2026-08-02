@@ -45,7 +45,7 @@
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
-            label11 = new Label();
+            lblCURP = new Label();
             txtNSS = new TextBox();
             txtCURP = new TextBox();
             cboTipoSangre = new ComboBox();
@@ -217,14 +217,14 @@
             label10.TabIndex = 16;
             label10.Text = "NSS";
             // 
-            // label11
+            // lblCURP
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(454, 447);
-            label11.Name = "label11";
-            label11.Size = new Size(45, 20);
-            label11.TabIndex = 17;
-            label11.Text = "CURP";
+            lblCURP.AutoSize = true;
+            lblCURP.Location = new Point(454, 447);
+            lblCURP.Name = "lblCURP";
+            lblCURP.Size = new Size(45, 20);
+            lblCURP.TabIndex = 17;
+            lblCURP.Text = "CURP";
             // 
             // txtNSS
             // 
@@ -408,7 +408,7 @@
             Controls.Add(cboTipoSangre);
             Controls.Add(txtCURP);
             Controls.Add(txtNSS);
-            Controls.Add(label11);
+            Controls.Add(lblCURP);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -451,7 +451,7 @@
         private Label label8;
         private Label label9;
         private Label label10;
-        private Label label11;
+        private Label lblCURP;
         private TextBox txtNSS;
         private TextBox txtCURP;
         private ComboBox cboTipoSangre;
