@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using static ServiciosMedicos.GeneracionReceta.frmGeneracionReceta;
 
-
 namespace ServiciosMedicos.VistaPrevia
 {
     public partial class frmVistaPrevia : Form
@@ -23,6 +22,10 @@ namespace ServiciosMedicos.VistaPrevia
         private string _sexo;
         private string _fecha;
         private List<MedicamentoReceta> _medicamentos;
+
+        // NUEVO: Guardar datos del paciente para devolverlos al regresar
+        private string _idPaciente;
+        private string _tipoPaciente;
 
         // Constructor VACÍO — el diseñador lo necesita
         public frmVistaPrevia()
@@ -55,6 +58,13 @@ namespace ServiciosMedicos.VistaPrevia
             LlenarControles();
         }
 
+        // NUEVO: Recibir y guardar los datos del paciente
+        public void PassDatosPaciente(string id, string tipo)
+        {
+            _idPaciente = id;
+            _tipoPaciente = tipo;
+        }
+
         private void LlenarControles()
         {
             lblDoctora.Text = "DRA. " + (_nombreDoctora ?? "");
@@ -72,18 +82,31 @@ namespace ServiciosMedicos.VistaPrevia
 
         private void LlenarMedicamentos()
         {
-            dgvMP.Rows.Clear();
+            dgvMP.Columns.Clear();
+            dgvMP.AutoGenerateColumns = false;
+            dgvMP.Columns.Add("colMedicamento", "Medicamentos");
+            dgvMP.Columns.Add("colIndicaciones", "Indicaciones");
+            dgvMP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            int contador = 1;
+            dgvMP.Rows.Clear();
             foreach (var med in _medicamentos)
             {
-                dgvMP.Rows.Add(
-                    contador,
-                    $"{med.Nombre} (Cant: {med.Cantidad})",
-                    med.Indicaciones
-                );
-                contador++;
+                dgvMP.Rows.Add(med.Nombre, med.Indicaciones);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmGeneracionReceta frmReceta = new frmGeneracionReceta();
+
+            // NUEVO: Pasarle los datos del paciente antes de mostrarlo
+            if (!string.IsNullOrEmpty(_idPaciente))
+            {
+                frmReceta.PassDatosPaciente(_idPaciente, _tipoPaciente);
+            }
+
+            frmReceta.Show();
+            this.Close();
         }
     }
 }

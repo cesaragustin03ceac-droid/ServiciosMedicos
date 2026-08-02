@@ -90,7 +90,7 @@
             CboMotivo.Size = new Size(163, 28);
             CboMotivo.TabIndex = 0;
             CboMotivo.Text = "Motivo General";
-            //CboMotivo.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            CboMotivo.SelectedIndexChanged += CboMotivo_SelectedIndexChanged_1;
             // 
             // groupBox5
             // 

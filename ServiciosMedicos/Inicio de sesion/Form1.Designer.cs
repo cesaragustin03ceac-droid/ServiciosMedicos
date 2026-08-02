@@ -47,7 +47,7 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.BackColor = Color.White;
+            panel1.BackColor = Color.FromArgb(128, 155, 176);
             panel1.Controls.Add(BtEntrar);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);

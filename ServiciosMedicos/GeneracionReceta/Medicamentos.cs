@@ -14,15 +14,15 @@ namespace ServiciosMedicos.GeneracionReceta
         public string Indicaciones { get; set; }
 
         private DataTable dtMedicamentos = new DataTable();
+        private bool interno = false; // ← para evitar bucles
 
         public Medicamentos()
         {
             InitializeComponent();
             cboMedicamento.SelectedIndexChanged += cmbMedicamento_SelectedIndexChanged;
             btnAgregar.Click += btnAgregar_Click;
-            btnGuardar.Click += btnGuardar_Click;
-            btnEditar.Click += btnEditar_Click;
             btnInvemtario.Click += btnInvemtario_Click;
+            cboMedicamento.KeyUp += cboMedicamento_KeyUp; // ← LIKE al escribir
             CargarMedicamentos();
         }
 
@@ -54,8 +54,46 @@ namespace ServiciosMedicos.GeneracionReceta
             }
         }
 
+        // ← NUEVO: filtra con LIKE mientras escribes
+        private void cboMedicamento_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (interno) return;
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Enter || e.KeyCode == Keys.Escape)
+                return;
+
+            string texto = cboMedicamento.Text.Trim();
+            if (texto.Length < 2) return;
+
+            Conexion conexionBD = new Conexion();
+            MySqlConnection conn = conexionBD.obtenerconexion();
+            if (conn == null) return;
+
+            try
+            {
+                string query = "SELECT id_medicamento, nombre_medicamento, cantidad FROM inventario WHERE nombre_medicamento LIKE @filtro";
+                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@filtro", "%" + texto + "%");
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                interno = true;
+                int cursor = cboMedicamento.SelectionStart;
+                cboMedicamento.DataSource = dt;
+                cboMedicamento.DisplayMember = "nombre_medicamento";
+                cboMedicamento.ValueMember = "id_medicamento";
+                cboMedicamento.Text = texto;
+                cboMedicamento.SelectionStart = cursor;
+                cboMedicamento.DroppedDown = true;
+                interno = false;
+            }
+            catch { }
+            finally { conn.Close(); }
+        }
+
         private void cmbMedicamento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (interno) return; // ← ignora cambios del filtro
             if (cboMedicamento.SelectedItem == null) return;
             try
             {
@@ -96,5 +134,10 @@ namespace ServiciosMedicos.GeneracionReceta
         private void btnGuardar_Click(object sender, EventArgs e) { }
         private void btnEditar_Click(object sender, EventArgs e) { }
         private void btnInvemtario_Click(object sender, EventArgs e) { }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

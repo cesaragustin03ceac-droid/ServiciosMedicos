@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            BtnAtras = new Button();
             label1 = new Label();
             txtID = new TextBox();
             label2 = new Label();
@@ -64,16 +65,32 @@
             btnEliminar = new Button();
             cboTipo = new ComboBox();
             label16 = new Label();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.FromArgb(217, 217, 217);
+            groupBox1.Controls.Add(BtnAtras);
             groupBox1.Location = new Point(-6, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(903, 92);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // BtnAtras
+            // 
+            BtnAtras.BackColor = Color.FromArgb(217, 217, 217);
+            BtnAtras.BackgroundImage = Properties.Resources.Flecha_para_atras2;
+            BtnAtras.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnAtras.FlatStyle = FlatStyle.Flat;
+            BtnAtras.ForeColor = Color.FromArgb(217, 217, 217);
+            BtnAtras.Location = new Point(31, 27);
+            BtnAtras.Name = "BtnAtras";
+            BtnAtras.Size = new Size(96, 41);
+            BtnAtras.TabIndex = 0;
+            BtnAtras.UseVisualStyleBackColor = false;
+            BtnAtras.Click += BtnAtras_Click;
             // 
             // label1
             // 
@@ -371,6 +388,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(182, 208, 214);
             ClientSize = new Size(896, 803);
+            Controls.Add(groupBox1);
             Controls.Add(label16);
             Controls.Add(cboTipo);
             Controls.Add(btnEliminar);
@@ -406,10 +424,11 @@
             Controls.Add(label2);
             Controls.Add(txtID);
             Controls.Add(label1);
-            Controls.Add(groupBox1);
+            MaximizeBox = false;
             Name = "AgregarPaciente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AgregarPaciente";
+            groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -452,5 +471,6 @@
         private Button btnEliminar;
         private ComboBox cboTipo;
         private Label label16;
+        private Button BtnAtras;
     }
 }

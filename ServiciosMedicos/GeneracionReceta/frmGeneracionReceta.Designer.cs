@@ -95,7 +95,7 @@
             BtnAtras.BackgroundImageLayout = ImageLayout.Zoom;
             BtnAtras.FlatAppearance.BorderSize = 0;
             BtnAtras.FlatStyle = FlatStyle.Flat;
-            BtnAtras.Location = new Point(31, 27);
+            BtnAtras.Location = new Point(35, 27);
             BtnAtras.Name = "BtnAtras";
             BtnAtras.Size = new Size(96, 41);
             BtnAtras.TabIndex = 0;

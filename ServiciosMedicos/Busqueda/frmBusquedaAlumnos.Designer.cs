@@ -164,7 +164,6 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
-            MinimizeBox = false;
             Name = "frmBusquedaAlumnos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmBusquedaAlumnos";

@@ -270,6 +270,7 @@ using System.Windows.Forms;
             private void btnCancelar_Click(object sender, EventArgs e)
             {
                 FrmConsultas frmcondultas = new FrmConsultas();
+                frmcondultas.PassDatosPaciente(this.idPaciente, this.tipoPaciente);  
                 frmcondultas.Show();
                 this.Close();
             }
@@ -278,6 +279,8 @@ using System.Windows.Forms;
             {
                 FrmConsultas frmcondultas = new FrmConsultas();
                 frmcondultas.Show();
+                frmcondultas.PassDatosPaciente(this.idPaciente, this.tipoPaciente);  
+
                 this.Close();
             }
 
@@ -322,6 +325,8 @@ using System.Windows.Forms;
                 fecha,
                 listaMedicamentos    // ← Ahora sí: mismo tipo público
             );
+            vista.PassDatosPaciente(this.idPaciente, this.tipoPaciente);
+
 
             vista.FormClosed += (s, ev) => this.Show();
             vista.Show();

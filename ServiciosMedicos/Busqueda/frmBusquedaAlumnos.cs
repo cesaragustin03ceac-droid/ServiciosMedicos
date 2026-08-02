@@ -14,10 +14,22 @@ namespace ServiciosMedicos.Busqueda
         public static string UsuarioTipo = "";
         public static string UsuarioId = "";
 
+        private ToolTip tooltipGrid; 
+
+
+
         public frmBusquedaAlumnos()
         {
             InitializeComponent();
             RegistroAlumnos.SelectionChanged += RegistroAlumnos_SelectionChanged;
+            RegistroAlumnos.CellToolTipTextNeeded += RegistroAlumnos_CellToolTipTextNeeded;
+        }
+        private void RegistroAlumnos_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                e.ToolTipText = "Si quiere ir al historial dar doble clic al ID del paciente.\nSi desea modificar el expediente darle un clic en la parte de la izquierda donde se encuentra el triangulo";
+            }
         }
 
         // Al cargar la ventana, llena la tabla y oculta el botón de expediente
@@ -26,6 +38,7 @@ namespace ServiciosMedicos.Busqueda
             CargarDatos();
             RegistroAlumnos.ClearSelection();
             this.btnExpedientePaciente.Hide();
+         
         }
 
         // ========================================================================
@@ -42,7 +55,7 @@ namespace ServiciosMedicos.Busqueda
             {
                 // Tabla donde se juntarán alumnos y trabajadores
                 DataTable tablaDatos = new DataTable();
-                tablaDatos.Columns.Add("Tipo de id");
+                tablaDatos.Columns.Add("ID");
                 tablaDatos.Columns.Add("nombre");
                 tablaDatos.Columns.Add("Apellido Paterno");
                 tablaDatos.Columns.Add("Apellido Materno");
@@ -58,7 +71,7 @@ namespace ServiciosMedicos.Busqueda
                     while (lector.Read())
                     {
                         DataRow fila = tablaDatos.NewRow();
-                        fila["Tipo de id"] = lector["matricula"].ToString();
+                        fila["ID"] = lector["matricula"].ToString();
                         fila["nombre"] = lector["nombre"].ToString();
                         fila["Apellido Paterno"] = lector["apellido_p"].ToString();
                         fila["Apellido Materno"] = lector["apellido_m"].ToString();
@@ -77,7 +90,7 @@ namespace ServiciosMedicos.Busqueda
                     while (lector.Read())
                     {
                         DataRow fila = tablaDatos.NewRow();
-                        fila["Tipo de id"] = lector["num_trabajador"].ToString();
+                        fila["ID"] = lector["num_trabajador"].ToString();
                         fila["nombre"] = lector["nombre"].ToString();
                         fila["Apellido Paterno"] = lector["apellido_p"].ToString();
                         fila["Apellido Materno"] = lector["apellido_m"].ToString();
@@ -169,7 +182,7 @@ namespace ServiciosMedicos.Busqueda
                 else
                 {
                     tabla.DefaultView.RowFilter = string.Format(
-                        "[Tipo de id] LIKE '%{0}%'",
+                        "[ID] LIKE '%{0}%'",
                         filtro.Replace("'", "''")
                     );
                 }
@@ -194,7 +207,6 @@ namespace ServiciosMedicos.Busqueda
             Application.Exit();
         }
 
-        // Métodos vacíos del diseñador (sin uso actual)
         private void textBox6_TextChanged(object sender, EventArgs e) 
         {
 

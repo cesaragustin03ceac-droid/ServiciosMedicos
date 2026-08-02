@@ -1,6 +1,7 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using ServiciosMedicos.Consultas;
 using ServiciosMedicos.DataConexion;
+using System;
 using System.Windows.Forms;
 
 namespace ServiciosMedicos.Busqueda
@@ -492,6 +493,13 @@ namespace ServiciosMedicos.Busqueda
             cboTipoSangre.Enabled = false;
             cboRevicionOcular.Enabled = false;
             cboTipo.Enabled = false;
+        }
+
+        private void BtnAtras_Click(object sender, EventArgs e)
+        {
+            frmBusquedaAlumnos frmBusquedaPaciente = new frmBusquedaAlumnos();
+            frmBusquedaPaciente.Show();
+            this.Close();
         }
     }
 }

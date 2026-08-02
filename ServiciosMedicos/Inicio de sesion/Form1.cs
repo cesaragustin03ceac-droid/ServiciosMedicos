@@ -139,6 +139,78 @@ namespace ServiciosMedicos
 
         private void btnModoNegro_Click(object sender, EventArgs e)
         {
+            modoOscuro = !modoOscuro;
+            AplicarTema();
+        }
+        private void AplicarTema()
+        {
+            Color fondoOscuro = Color.FromArgb(30, 30, 30);
+            Color textoOscuro = Color.White;
+            Color panelOscuro = Color.FromArgb(45, 45, 45);
+            Color botonOscuro = Color.FromArgb(60, 60, 60);
+            Color iconoOscuro = Color.Black;
+            Color iconoOscuro2 = Color.Black;
+
+            Color fondoClaro = Color.FromArgb(173, 198, 207);
+            Color textoClaro = Color.Black;
+            Color panelClaro = Color.FromArgb(128, 155, 176);
+            Color botonClaro = Color.LightGray;
+            Color iconoClaro = Color.FromArgb(77, 115, 147);
+            Color iconoClaro2 = Color.FromArgb(77,115,147);
+
+            Color fondo = modoOscuro ? fondoOscuro : fondoClaro;
+            Color texto = modoOscuro ? textoOscuro : textoClaro;
+            Color panel = modoOscuro ? panelOscuro : panelClaro;
+            Color boton = modoOscuro ? botonOscuro : botonClaro;
+            Color icono = modoOscuro ? iconoOscuro : iconoClaro;
+            Color icono2 = modoOscuro ? iconoOscuro2 : iconoClaro2;
+
+            this.BackColor = fondo;
+
+            // Método local que revisa controles en cualquier nivel (dentro de paneles, etc.)
+            void AplicarAControl(Control ctrl)
+            {
+                if (ctrl is Panel)
+                {
+                    ctrl.BackColor = panel;
+                    // Revisa los controles que estén DENTRO de este panel
+                    foreach (Control hijo in ctrl.Controls)
+                    {
+                        AplicarAControl(hijo);
+                    }
+                }
+                else if (ctrl is Button)
+                {
+                    ctrl.BackColor = boton;
+                    ctrl.ForeColor = texto;
+                }
+                else if (ctrl is TextBox)
+                {
+                    ctrl.BackColor = modoOscuro ? Color.FromArgb(50, 50, 50) : Color.White;
+                    ctrl.ForeColor = texto;
+                }
+                else if (ctrl is Label)
+                {
+                    ctrl.ForeColor = texto;
+                }
+                else if (ctrl is PictureBox)
+                {
+                    if (ctrl.Name == "pictureBox1")
+                    {
+                        ctrl.BackColor = icono;
+                    }
+                    else if(ctrl.Name == "pictureBox2")
+                    {
+                        ctrl.BackColor = icono2;
+                    }
+                }
+            }
+
+            // Revisa todos los controles del formulario
+            foreach (Control ctrl in this.Controls)
+            {
+                AplicarAControl(ctrl);
+            }
         }
     }
 }

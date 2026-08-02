@@ -303,8 +303,17 @@ namespace ServiciosMedicos.HISTORIAL
             this.Close();
         }
 
-        private void HISTORIAL_Load(object sender, EventArgs e) { }
-        private void label9_Click(object sender, EventArgs e) { }
-        private void groupBox2_Enter_1(object sender, EventArgs e) { }
+        private void HISTORIAL_Load(object sender, EventArgs e)
+        { 
+
+        }
+        private void label9_Click(object sender, EventArgs e) 
+        {
+
+        }
+        private void groupBox2_Enter_1(object sender, EventArgs e) 
+        {
+
+        }
     }
 }
