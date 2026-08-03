@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -11,7 +10,6 @@ namespace ServiciosMedicos.Reportes
     {
         private MySqlConnection ObtenerConexion()
         {
-      
             return new MySqlConnection(
                 "Server=localhost;Database=sistema_medico;Uid=root;Pwd=;Port=3306;Charset=utf8mb4;");
         }
@@ -26,17 +24,14 @@ namespace ServiciosMedicos.Reportes
             this.CboDia.SelectedIndexChanged += new System.EventHandler(this.CboDia_SelectedIndexChanged);
         }
 
-     
         private void Reportes_Load(object sender, EventArgs e)
         {
             try
             {
-                CargarOpcionesReporte();
+                CargarOpciones();
                 CargarPeriodos();
                 CargarAreas();
-
                 CargarValoresPeriodo();
-
                 GenerarReporte();
             }
             catch (Exception ex)
@@ -46,10 +41,9 @@ namespace ServiciosMedicos.Reportes
             }
         }
 
-     
         
-     
-        private void CargarOpcionesReporte()
+
+        private void CargarOpciones()
         {
             cboOpciones.Items.Clear();
             cboOpciones.Items.Add("1. Consultas realizadas");
@@ -75,14 +69,27 @@ namespace ServiciosMedicos.Reportes
         {
             CboDIagnostico.Items.Clear();
 
-            if (CboGrupo.SelectedIndex <= 0) 
+            if (CboGrupo.SelectedIndex <= 0)
             {
+                CboDIagnostico.DropDownStyle = ComboBoxStyle.DropDownList;
                 CboDIagnostico.Enabled = false;
                 CboDIagnostico.Items.Add("Todos los registros");
                 CboDIagnostico.SelectedIndex = 0;
                 return;
             }
 
+            string tipo = CboGrupo.SelectedItem.ToString();
+
+            if (tipo == "Fecha específica")
+            {
+                CboDIagnostico.DropDownStyle = ComboBoxStyle.DropDownList;
+                CboDIagnostico.Enabled = false;
+                CboDIagnostico.Items.Add("No disponible");
+                CboDIagnostico.SelectedIndex = 0;
+                return;
+            }
+
+            CboDIagnostico.DropDownStyle = ComboBoxStyle.DropDownList;
             CboDIagnostico.Enabled = true;
 
             try
@@ -92,7 +99,7 @@ namespace ServiciosMedicos.Reportes
                     conn.Open();
                     string query = "";
 
-                    switch (CboGrupo.SelectedItem.ToString())
+                    switch (tipo)
                     {
                         case "Mensual":
                             query = "SELECT DISTINCT DATE_FORMAT(fecha_consulta,'%Y-%m') AS valor " +
@@ -100,10 +107,6 @@ namespace ServiciosMedicos.Reportes
                             break;
                         case "Diario":
                             query = "SELECT DISTINCT DATE_FORMAT(fecha_consulta,'%Y-%m-%d') AS valor " +
-                                    "FROM consulta WHERE fecha_consulta IS NOT NULL ORDER BY valor DESC";
-                            break;
-                        case "Fecha específica":
-                            query = "SELECT DISTINCT fecha_consulta AS valor " +
                                     "FROM consulta WHERE fecha_consulta IS NOT NULL ORDER BY valor DESC";
                             break;
                     }
@@ -118,6 +121,7 @@ namespace ServiciosMedicos.Reportes
                         }
                     }
                 }
+
                 if (CboDIagnostico.Items.Count > 0)
                     CboDIagnostico.SelectedIndex = 0;
             }
@@ -152,7 +156,6 @@ namespace ServiciosMedicos.Reportes
             }
         }
 
-      
         private void cboOpciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             GenerarReporte();
@@ -176,29 +179,78 @@ namespace ServiciosMedicos.Reportes
 
         private void GenerarReporte()
         {
-            if (cboOpciones.SelectedIndex == -1 || CboGrupo.SelectedIndex == -1) return;
+         
+            if (cboOpciones.SelectedIndex != 0)
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.Columns.Clear();
+                return;
+            }
+
+       
+            if (CboGrupo.SelectedItem?.ToString() == "Fecha específica")
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.Columns.Clear();
+                return;
+            }
+
+            if (CboGrupo.SelectedIndex == -1) return;
 
             try
             {
                 using (var conn = ObtenerConexion())
                 {
                     conn.Open();
-                    string query = ConstruirQuery();
-                    var cmd = new MySqlCommand(query, conn);
 
-                    if (CboGrupo.SelectedIndex > 0 && CboDIagnostico.SelectedIndex >= 0)
+                    string whereTiempo = "";
+                    string whereArea = "";
+
+                    // Filtro tiempo
+                    if (CboGrupo.SelectedIndex > 0)
                     {
-                        string valor = CboDIagnostico.SelectedItem.ToString();
-                        switch (CboGrupo.SelectedItem.ToString())
+                        string tipo = CboGrupo.SelectedItem.ToString();
+                        string valor = CboDIagnostico.SelectedItem?.ToString() ?? "";
+
+                        switch (tipo)
                         {
                             case "Mensual":
-                                cmd.Parameters.AddWithValue("@periodo", valor + "%");
+                                whereTiempo = " AND c.fecha_consulta LIKE @filtro ";
                                 break;
                             case "Diario":
-                            case "Fecha específica":
-                                cmd.Parameters.AddWithValue("@fecha", valor);
+                                whereTiempo = " AND c.fecha_consulta = @filtro ";
                                 break;
                         }
+                    }
+
+                    if (CboDia.SelectedIndex > 0)
+                    {
+                        whereArea = " AND ar.nombre_area = @area ";
+                    }
+
+                    string query = $@"
+                        SELECT 
+                            c.fecha_consulta AS 'FECHA',
+                            COUNT(*) AS 'CANTIDAD CONSULTAS',
+                            COUNT(DISTINCT c.matricula_alumno) AS 'PACIENTES UNICOS'
+                        FROM consulta c
+                        JOIN alumno al ON c.matricula_alumno = al.matricula
+                        LEFT JOIN areas ar ON al.id_area = ar.id_area
+                        WHERE 1=1 {whereTiempo} {whereArea}
+                        GROUP BY c.fecha_consulta
+                        ORDER BY c.fecha_consulta DESC";
+
+                    var cmd = new MySqlCommand(query, conn);
+
+                    if (CboGrupo.SelectedIndex > 0)
+                    {
+                        string tipo = CboGrupo.SelectedItem.ToString();
+                        string valor = CboDIagnostico.SelectedItem?.ToString() ?? "";
+
+                        if (tipo == "Mensual")
+                            cmd.Parameters.AddWithValue("@filtro", valor + "%");
+                        else if (tipo == "Diario")
+                            cmd.Parameters.AddWithValue("@filtro", valor);
                     }
 
                     if (CboDia.SelectedIndex > 0)
@@ -223,122 +275,6 @@ namespace ServiciosMedicos.Reportes
             }
         }
 
-   
-        private string ConstruirQuery()
-        {
-            string periodo = CboGrupo.SelectedItem.ToString();
-            string area = CboDia.SelectedIndex > 0 ? CboDia.SelectedItem.ToString() : "";
-
-            // Filtro de tiempo
-            string whereTiempo = "";
-            if (periodo == "Mensual")
-                whereTiempo = " AND c.fecha_consulta LIKE @periodo ";
-            else if (periodo == "Diario" || periodo == "Fecha específica")
-                whereTiempo = " AND c.fecha_consulta = @fecha ";
-
-            // Filtro de área
-            string whereArea = "";
-            if (!string.IsNullOrEmpty(area))
-                whereArea = " AND ar.nombre_area = @area ";
-
-            switch (cboOpciones.SelectedIndex)
-            {
-                case 0: // Consultas realizadas
-                    return $@"
-                        SELECT 
-                            c.fecha_consulta AS 'FECHA',
-                            COUNT(*) AS 'CANTIDAD CONSULTAS',
-                            COUNT(DISTINCT c.matricula_alumno) AS 'PACIENTES UNICOS'
-                        FROM consulta c
-                        JOIN alumno al ON c.matricula_alumno = al.matricula
-                        LEFT JOIN areas ar ON al.id_area = ar.id_area
-                        WHERE 1=1 {whereTiempo} {whereArea}
-                        GROUP BY c.fecha_consulta
-                        ORDER BY c.fecha_consulta DESC";
-
-                case 1: // Diagnósticos frecuentes
-                    return $@"
-                        SELECT 
-                            d.diagnostico AS 'DIAGNOSTICO',
-                            COUNT(*) AS 'CANTIDAD CASOS',
-                            COUNT(DISTINCT c.matricula_alumno) AS 'PACIENTES AFECTADOS',
-                            c.fecha_consulta AS 'FECHA'
-                        FROM diagnostico d
-                        JOIN consulta c ON d.id_consulta = c.id_consulta
-                        JOIN alumno al ON c.matricula_alumno = al.matricula
-                        LEFT JOIN areas ar ON al.id_area = ar.id_area
-                        WHERE 1=1 {whereTiempo} {whereArea}
-                        GROUP BY d.diagnostico, c.fecha_consulta
-                        ORDER BY COUNT(*) DESC, c.fecha_consulta DESC";
-
-                case 2: // Medicamentos recetados
-                    return $@"
-                        SELECT 
-                            dm.nombre_medicamento AS 'MEDICAMENTO',
-                            SUM(dm.cant_medicamento) AS 'CANTIDAD RECETADA',
-                            COUNT(DISTINCT dm.id_receta) AS 'N° RECETAS',
-                            i.cantidad AS 'STOCK ACTUAL'
-                        FROM detallemedicamento dm
-                        JOIN receta r ON dm.id_receta = r.id_receta
-                        JOIN diagnostico d ON r.id_diagnostico = d.id_diagnostico
-                        JOIN consulta c ON d.id_consulta = c.id_consulta
-                        JOIN alumno al ON c.matricula_alumno = al.matricula
-                        LEFT JOIN inventario i ON dm.id_medicamento = i.id_medicamento
-                        LEFT JOIN areas ar ON al.id_area = ar.id_area
-                        WHERE 1=1 {whereTiempo} {whereArea}
-                        GROUP BY dm.id_medicamento, dm.nombre_medicamento
-                        ORDER BY SUM(dm.cant_medicamento) DESC";
-
-                case 3: // Pacientes por área
-                    return $@"
-                        SELECT 
-                            ar.nombre_area AS 'AREA',
-                            COUNT(DISTINCT al.matricula) AS 'CANTIDAD PACIENTES',
-                            COUNT(c.id_consulta) AS 'TOTAL CONSULTAS'
-                        FROM areas ar
-                        LEFT JOIN alumno al ON ar.id_area = al.id_area
-                        LEFT JOIN consulta c ON al.matricula = c.matricula_alumno
-                        WHERE 1=1 {whereTiempo} {whereArea}
-                        GROUP BY ar.id_area, ar.nombre_area
-                        ORDER BY COUNT(DISTINCT al.matricula) DESC";
-
-                case 4: // Atenciones por personal
-                    return $@"
-                        SELECT 
-                            CONCAT(doc.nombre,' ',doc.apellido_p) AS 'DOCTORA',
-                            CONCAT(enf.nombre,' ',enf.apellido_p) AS 'ENFERMERA',
-                            COUNT(*) AS 'CANTIDAD ATENCIONES',
-                            c.fecha_consulta AS 'FECHA'
-                        FROM consulta c
-                        JOIN doctora doc ON c.cedula_doctora = doc.cedula
-                        JOIN enfermera enf ON c.id_enfermera = enf.id_enfermera
-                        JOIN alumno al ON c.matricula_alumno = al.matricula
-                        LEFT JOIN areas ar ON al.id_area = ar.id_area
-                        WHERE 1=1 {whereTiempo} {whereArea}
-                        GROUP BY doc.cedula, enf.id_enfermera, c.fecha_consulta
-                        ORDER BY COUNT(*) DESC";
-
-                case 5: // Inventario
-                    return @"
-                        SELECT 
-                            nombre_medicamento AS 'MEDICAMENTO',
-                            cantidad AS 'CANTIDAD',
-                            fecha_caducidad AS 'CADUCIDAD',
-                            estado AS 'ESTADO',
-                            CASE 
-                                WHEN cantidad = 0 THEN 'AGOTADO'
-                                WHEN cantidad < 10 THEN 'BAJO STOCK'
-                                ELSE 'OK'
-                            END AS 'ALERTA'
-                        FROM inventario
-                        ORDER BY cantidad ASC";
-
-                default:
-                    return "SELECT 'Seleccione un reporte' AS MENSAJE";
-            }
-        }
-
-  
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             GenerarReporte();
@@ -351,7 +287,6 @@ namespace ServiciosMedicos.Reportes
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
     }
 }
