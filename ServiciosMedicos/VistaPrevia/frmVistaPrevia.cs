@@ -13,6 +13,7 @@ namespace ServiciosMedicos.VistaPrevia
     public partial class frmVistaPrevia : Form
     {
         // Campos privados
+        // SE GUARDA TODA LA INFORMACION DESDE HISTORIAL
         private string _nombreDoctora;
         private string _cedulaDoctora;
         private string _nombrePaciente;
@@ -21,19 +22,19 @@ namespace ServiciosMedicos.VistaPrevia
         private string _edad;
         private string _sexo;
         private string _fecha;
-        private List<MedicamentoReceta> _medicamentos;
+        private List<MedicamentoReceta> _medicamentos; //LISTA DE MEDICAMENTOS RECETADOS
 
-        // NUEVO: Guardar datos del paciente para devolverlos al regresar
+        //  Guardar datos del paciente para devolverlos al regresar
         private string _idPaciente;
         private string _tipoPaciente;
 
-        // Constructor VACÍO — el diseñador lo necesita
+        // Constructor
         public frmVistaPrevia()
         {
             InitializeComponent();
         }
 
-        // Método que recibe los datos
+        // METODO QUE RECIBE LOS DATOS Y LOS GUARDA EN LAS VARIABLES PRIVADAS 
         public void CargarDatos(
             string nombreDoctora,
             string cedulaDoctora,
@@ -55,10 +56,10 @@ namespace ServiciosMedicos.VistaPrevia
             _fecha = fecha;
             _medicamentos = medicamentos ?? new List<MedicamentoReceta>();
 
-            LlenarControles();
+            LlenarControles(); // LLAMA AL METODO QUE PINTA LA PANTALLA 
         }
 
-        // NUEVO: Recibir y guardar los datos del paciente
+        //  Recibir y guardar los datos del paciente
         public void PassDatosPaciente(string id, string tipo)
         {
             _idPaciente = id;
@@ -67,9 +68,10 @@ namespace ServiciosMedicos.VistaPrevia
 
         private void LlenarControles()
         {
+            // INF DE LA DOCTORA 
             lblDoctora.Text = "DRA. " + (_nombreDoctora ?? "");
             lblCedula.Text = "MÉDICA GENERAL, CÉDULA PROFESIONAL " + (_cedulaDoctora ?? "");
-
+             // INF DEL PACIENTE 
             lblNombre.Text = _nombrePaciente ?? "";
             lblMatricula.Text = _matricula ?? "";
             lblArea.Text = _area ?? "";
@@ -77,18 +79,21 @@ namespace ServiciosMedicos.VistaPrevia
             lblSexo.Text = _sexo ?? "";
             lblFecha.Text = _fecha ?? "";
 
-            LlenarMedicamentos();
+            LlenarMedicamentos(); // LLENA LA TABLA 
         }
+       
 
+        // CREA LAS COLUMNAS Y FILAS DONDE VAN LOS MEDICAMENTOS 
         private void LlenarMedicamentos()
         {
-            dgvMP.Columns.Clear();
-            dgvMP.AutoGenerateColumns = false;
+            dgvMP.Columns.Clear(); // LIMPIA LAS COLUMNAS
+            dgvMP.AutoGenerateColumns = false; // NO CREA LAS COLUMNAS , SE HACE MANUAL 
             dgvMP.Columns.Add("colMedicamento", "Medicamentos");
             dgvMP.Columns.Add("colIndicaciones", "Indicaciones");
-            dgvMP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // SE ESTIRA EL ANCHO 
 
-            dgvMP.Rows.Clear();
+            dgvMP.Rows.Clear(); // LIMPIA 
+            // RECORRE LA LISTA DE MEDICAMENTOS Y AGREGA UNO PÓR CADA TABLA 
             foreach (var med in _medicamentos)
             {
                 dgvMP.Rows.Add(med.Nombre, med.Indicaciones);
@@ -99,14 +104,14 @@ namespace ServiciosMedicos.VistaPrevia
         {
             frmGeneracionReceta frmReceta = new frmGeneracionReceta();
 
-            // NUEVO: Pasarle los datos del paciente antes de mostrarlo
+            //  Pasarle los datos del paciente antes de mostrarlo
             if (!string.IsNullOrEmpty(_idPaciente))
             {
                 frmReceta.PassDatosPaciente(_idPaciente, _tipoPaciente);
             }
 
-            frmReceta.Show();
-            this.Close();
+            frmReceta.Show(); // ABRE LA VENTANA 
+            this.Close(); // CIERRA LA VENTANA DE VISTA PREVIA 
         }
     }
 }
