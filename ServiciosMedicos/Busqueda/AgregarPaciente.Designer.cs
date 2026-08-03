@@ -428,6 +428,7 @@
             Name = "AgregarPaciente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AgregarPaciente";
+            Load += AgregarPaciente_Load_1;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

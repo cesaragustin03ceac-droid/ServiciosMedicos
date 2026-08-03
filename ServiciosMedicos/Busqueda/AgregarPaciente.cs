@@ -8,13 +8,11 @@ namespace ServiciosMedicos.Busqueda
 {
     public partial class AgregarPaciente : Form
     {
-        // === DATOS DEL PACIENTE ===
         private string idPaciente;
         private string tipoPaciente;
         private bool expedienteExiste;
         private bool esNuevoPaciente;
 
-        // === CONSTRUCTORES ===
         public AgregarPaciente()
         {
             InitializeComponent();
@@ -33,7 +31,6 @@ namespace ServiciosMedicos.Busqueda
             this.Load += AgregarPaciente_Load;
         }
 
-        // === AL ABRIR LA VENTANA ===
         private void AgregarPaciente_Load(object sender, EventArgs e)
         {
             LlenarComboBoxes();
@@ -42,9 +39,10 @@ namespace ServiciosMedicos.Busqueda
                 ModoNuevoPaciente();
             else
                 ModoEditarPaciente();
+            btnEliminar.Click += btnEliminar_Click;
+
         }
 
-        // === MODO NUEVO PACIENTE ===
         private void ModoNuevoPaciente()
         {
             LimpiarCampos();
@@ -55,7 +53,6 @@ namespace ServiciosMedicos.Busqueda
             txtID.ReadOnly = false;
         }
 
-        // === MODO EDITAR PACIENTE ===
         private void ModoEditarPaciente()
         {
             CargarDatosPaciente();
@@ -65,7 +62,6 @@ namespace ServiciosMedicos.Busqueda
             btnEliminar.Show();
         }
 
-        // === RELLENA LAS LISTAS DESPLEGABLES ===
         private void LlenarComboBoxes()
         {
             cboTipo.Items.Clear();
@@ -83,7 +79,6 @@ namespace ServiciosMedicos.Busqueda
             cboRevicionOcular.Items.AddRange(new[] { "Miopía", "Astigmatismo", "Ninguna" });
         }
 
-        // === LIMPIA TODOS LOS CAMPOS ===
         private void LimpiarCampos()
         {
             txtID.Clear();
@@ -105,9 +100,7 @@ namespace ServiciosMedicos.Busqueda
             cboTipo.SelectedIndex = -1;
         }
 
-        // ============================================================
-        // CARGAR DATOS DESDE LA BASE DE DATOS
-        // ============================================================
+       
         private void CargarDatosPaciente()
         {
             Conexion conexionBD = new Conexion();
@@ -167,7 +160,6 @@ namespace ServiciosMedicos.Busqueda
                             cboTipoSangre.Text = ValorO_Vacio(lector["tipo_sangre"]);
                             cboRevicionOcular.Text = ValorO_Vacio(lector["revision_ocular"]);
 
-                            // DETECTA SI EXISTE EL EXPEDIENTE POR SU ID, NO POR CAMPOS SUELTOS
                             expedienteExiste = lector["id_expediente"] != DBNull.Value;
                         }
                         else
@@ -187,20 +179,17 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // === AYUDANTE: Si el valor es nulo, devuelve texto vacío ===
         private string ValorO_Vacio(object valor)
         {
             return valor != DBNull.Value ? valor.ToString() : "";
         }
 
-        // === BOTÓN EDITAR ===
         private void btnEditar_Click(object sender, EventArgs e)
         {
             HabilitarCampos();
             btnGuardar.Show();
         }
 
-        // === BOTÓN GUARDAR ===
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (esNuevoPaciente)
@@ -209,9 +198,7 @@ namespace ServiciosMedicos.Busqueda
                 GuardarCambios();
         }
 
-        // ============================================================
-        // GUARDAR NUEVO PACIENTE
-        // ============================================================
+       
         private void GuardarNuevo()
         {
             if (string.IsNullOrEmpty(txtID.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(cboTipo.Text))
@@ -230,10 +217,8 @@ namespace ServiciosMedicos.Busqueda
             {
                 trans = conn.BeginTransaction();
 
-                // ← OBTENER id_area DESDE EL NOMBRE ESCRITO EN txtArea
                 int? idArea = ObtenerIdArea(conn, trans, txtArea.Text.Trim());
 
-                // INSERTAR en tabla alumno O trabajador
                 if (cboTipo.Text == "Alumno")
                 {
                     string q = @"INSERT INTO alumno (matricula, nombre, apellido_p, apellido_m, id_area) 
@@ -263,7 +248,6 @@ namespace ServiciosMedicos.Busqueda
                     }
                 }
 
-                // INSERTAR expediente médico (sin cambios)
                 string qExp = @"INSERT INTO expediente 
             (curp, edad, nss, talla, peso, sexo, tipo_sangre, alergias, enfermedades, revision_ocular) 
             VALUES 
@@ -299,9 +283,7 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // ============================================================
-        // GUARDAR CAMBIOS DE PACIENTE EXISTENTE
-        // ============================================================
+        
         private void GuardarCambios()
         {
             Conexion conexionBD = new Conexion();
@@ -314,10 +296,8 @@ namespace ServiciosMedicos.Busqueda
             {
                 trans = conn.BeginTransaction();
 
-                // ← OBTENER id_area DESDE EL NOMBRE ESCRITO EN txtArea
                 int? idArea = ObtenerIdArea(conn, trans, txtArea.Text.Trim());
 
-                // ACTUALIZAR tabla alumno o trabajador (AHORA INCLUYE id_area)
                 string queryPaciente = tipoPaciente == "Alumno"
                     ? @"UPDATE alumno SET nombre = @nombre, apellido_p = @apellidoP, apellido_m = @apellidoM, id_area = @idArea 
                 WHERE matricula = @id;"
@@ -334,7 +314,6 @@ namespace ServiciosMedicos.Busqueda
                     cmd.ExecuteNonQuery();
                 }
 
-                // ACTUALIZAR o INSERTAR expediente (sin cambios)
                 if (expedienteExiste)
                 {
                     string q = @"UPDATE expediente 
@@ -371,14 +350,11 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // ============================================================
-        // AYUDANTE: Busca id_area por nombre. Si no existe, la crea.
-        // ============================================================
+       
         private int? ObtenerIdArea(MySqlConnection conn, MySqlTransaction trans, string nombreArea)
         {
             if (string.IsNullOrWhiteSpace(nombreArea)) return null;
 
-            // Buscar si ya existe
             string q = "SELECT id_area FROM areas WHERE nombre_area = @nombre LIMIT 1;";
             using (MySqlCommand cmd = new MySqlCommand(q, conn, trans))
             {
@@ -388,7 +364,6 @@ namespace ServiciosMedicos.Busqueda
                     return Convert.ToInt32(result);
             }
 
-            // Si no existe, insertarla y devolver el nuevo ID
             string qInsert = "INSERT INTO areas (nombre_area) VALUES (@nombre); SELECT LAST_INSERT_ID();";
             using (MySqlCommand cmd = new MySqlCommand(qInsert, conn, trans))
             {
@@ -398,7 +373,6 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // === AYUDANTE: Ejecuta consulta de expediente ===
         private void EjecutarExpediente(string query, MySqlConnection conn, MySqlTransaction trans, string id)
         {
             using (MySqlCommand cmd = new MySqlCommand(query, conn, trans))
@@ -418,71 +392,195 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // ============================================================
-        // ELIMINAR PACIENTE
-        // ============================================================
+
+        
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult confirmar = MessageBox.Show(
-                "¿Seguro que deseas eliminar completamente a este paciente?",
+                "¿Seguro que deseas eliminar completamente a este paciente?\n\n" +
+                "Se eliminarán también todas sus consultas, diagnósticos, recetas y medicamentos asignados.",
                 "Eliminación total", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirmar != DialogResult.Yes) return;
+
+            if (string.IsNullOrEmpty(idPaciente))
+            {
+                MessageBox.Show("No hay un paciente cargado.", "Error");
+                return;
+            }
+
+            idPaciente = idPaciente.Trim();
 
             Conexion conexionBD = new Conexion();
             MySqlConnection conn = conexionBD.obtenerconexion();
             if (conn == null) return;
 
+            MySqlTransaction trans = null;
+
             try
             {
-                string qExp = "DELETE FROM expediente WHERE curp = @id;";
-                using (MySqlCommand cmd = new MySqlCommand(qExp, conn))
+                trans = conn.BeginTransaction();
+
+                string qVerificar = tipoPaciente == "Alumno"
+                    ? "SELECT COUNT(*) FROM alumno WHERE matricula = @id;"
+                    : "SELECT COUNT(*) FROM trabajador WHERE num_trabajador = @id;";
+
+                using (MySqlCommand cmd = new MySqlCommand(qVerificar, conn, trans))
                 {
-                    cmd.Parameters.AddWithValue("@id", idPaciente);
+                    if (tipoPaciente == "Alumno")
+                        cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
+                    else
+                        cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(idPaciente);
+
+                    long existe = (long)cmd.ExecuteScalar();
+                    if (existe == 0)
+                    {
+                        trans.Rollback();
+                        MessageBox.Show("El paciente ya fue eliminado ", "Exito");
+                        VolverABusqueda();
+                        return;
+                    }
+                }
+
+                int? idExpediente = null;
+                using (MySqlCommand cmd = new MySqlCommand(
+                    "SELECT id_expediente FROM expediente WHERE curp = @id LIMIT 1;", conn, trans))
+                {
+                    cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
+                    object res = cmd.ExecuteScalar();
+                    if (res != null && res != DBNull.Value)
+                        idExpediente = Convert.ToInt32(res);
+                }
+
+                List<int> idsConsultas = new List<int>();
+                string qConIds = tipoPaciente == "Alumno"
+                    ? "SELECT id_consulta FROM consulta WHERE matricula_alumno = @id;"
+                    : "SELECT id_consulta FROM consulta WHERE num_trabajador = @id;";
+
+                using (MySqlCommand cmd = new MySqlCommand(qConIds, conn, trans))
+                {
+                    if (tipoPaciente == "Alumno")
+                        cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
+                    else
+                        cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(idPaciente);
+
+                    using (MySqlDataReader r = cmd.ExecuteReader())
+                        while (r.Read())
+                            idsConsultas.Add(Convert.ToInt32(r["id_consulta"]));
+                }
+
+                if (idsConsultas.Count > 0)
+                {
+                    string inConsultas = string.Join(",", idsConsultas);
+
+                    List<int> idsDiagnosticos = new List<int>();
+                    using (MySqlCommand cmd = new MySqlCommand(
+                        $"SELECT id_diagnostico FROM diagnostico WHERE id_consulta IN ({inConsultas});", conn, trans))
+                    using (MySqlDataReader r = cmd.ExecuteReader())
+                        while (r.Read())
+                            idsDiagnosticos.Add(Convert.ToInt32(r["id_diagnostico"]));
+
+                    if (idsDiagnosticos.Count > 0)
+                    {
+                        string inDiagnosticos = string.Join(",", idsDiagnosticos);
+
+                        List<int> idsRecetas = new List<int>();
+                        using (MySqlCommand cmd = new MySqlCommand(
+                            $"SELECT id_receta FROM receta WHERE id_diagnostico IN ({inDiagnosticos});", conn, trans))
+                        using (MySqlDataReader r = cmd.ExecuteReader())
+                            while (r.Read())
+                                idsRecetas.Add(Convert.ToInt32(r["id_receta"]));
+
+                        if (idsRecetas.Count > 0)
+                        {
+                            string inRecetas = string.Join(",", idsRecetas);
+                            using (MySqlCommand cmd = new MySqlCommand(
+                                $"DELETE FROM detallemedicamento WHERE id_receta IN ({inRecetas});", conn, trans))
+                                cmd.ExecuteNonQuery();
+                        }
+
+                        using (MySqlCommand cmd = new MySqlCommand(
+                            $"DELETE FROM receta WHERE id_diagnostico IN ({inDiagnosticos});", conn, trans))
+                            cmd.ExecuteNonQuery();
+
+                        using (MySqlCommand cmd = new MySqlCommand(
+                            $"DELETE FROM diagnostico WHERE id_consulta IN ({inConsultas});", conn, trans))
+                            cmd.ExecuteNonQuery();
+                    }
+
+                    string qDelCon = tipoPaciente == "Alumno"
+                        ? "DELETE FROM consulta WHERE matricula_alumno = @id;"
+                        : "DELETE FROM consulta WHERE num_trabajador = @id;";
+
+                    using (MySqlCommand cmd = new MySqlCommand(qDelCon, conn, trans))
+                    {
+                        if (tipoPaciente == "Alumno")
+                            cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
+                        else
+                            cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(idPaciente);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                if (idExpediente.HasValue)
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(
+                        "DELETE FROM diagnostico WHERE id_expediente = @idExp;", conn, trans))
+                    {
+                        cmd.Parameters.Add("@idExp", MySqlDbType.Int32).Value = idExpediente.Value;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand(
+                    "DELETE FROM expediente WHERE curp = @id;", conn, trans))
+                {
+                    cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
                     cmd.ExecuteNonQuery();
                 }
 
-                string qPaciente = tipoPaciente == "Alumno"
+                string qDelPac = tipoPaciente == "Alumno"
                     ? "DELETE FROM alumno WHERE matricula = @id;"
                     : "DELETE FROM trabajador WHERE num_trabajador = @id;";
 
-                using (MySqlCommand cmd = new MySqlCommand(qPaciente, conn))
+                using (MySqlCommand cmd = new MySqlCommand(qDelPac, conn, trans))
                 {
                     if (tipoPaciente == "Alumno")
-                        cmd.Parameters.AddWithValue("@id", idPaciente);
+                        cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = idPaciente;
                     else
-                        cmd.Parameters.AddWithValue("@id", Convert.ToInt32(idPaciente));
+                        cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(idPaciente);
 
-                    int filas = cmd.ExecuteNonQuery();
-
-                    if (filas > 0)
-                    {
-                        MessageBox.Show("Paciente eliminado correctamente.", "Éxito");
-                        VolverABusqueda();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo eliminar el paciente.", "Aviso");
-                    }
+                    cmd.ExecuteNonQuery();
                 }
+
+                trans.Commit();
+                MessageBox.Show("Paciente y todos sus registros eliminados correctamente.", "Éxito");
+                VolverABusqueda();
             }
-            catch
+            catch (MySqlException ex)
             {
-                MessageBox.Show("No se pudo eliminar.", "Error");
+                trans?.Rollback();
+                string msg = ex.Number == 1451
+                    ? "No se puede eliminar porque tiene registros relacionados que no se pudieron borrar automáticamente."
+                    : $"Error MySQL ({ex.Number}): {ex.Message}";
+                MessageBox.Show(msg, "Error de base de datos");
+            }
+            catch (Exception ex)
+            {
+                trans?.Rollback();
+                MessageBox.Show("Error inesperado: " + ex.Message, "Error");
             }
             finally
             {
-                conn.Close();
+                conn?.Close();
             }
         }
 
-        // === AYUDANTE: Vacío = NULL en base de datos ===
         private object ValorO_DBNull(string texto)
         {
             return string.IsNullOrEmpty(texto) ? (object)DBNull.Value : texto.Trim();
         }
 
-        // === AYUDANTE: Regresa a búsqueda ===
         private void VolverABusqueda()
         {
             frmBusquedaAlumnos busqueda = new frmBusquedaAlumnos();
@@ -490,7 +588,6 @@ namespace ServiciosMedicos.Busqueda
             this.Close();
         }
 
-        // === HABILITA/DESHABILITA CAMPOS ===
         private void HabilitarCampos()
         {
             txtID.ReadOnly = false;
@@ -538,6 +635,11 @@ namespace ServiciosMedicos.Busqueda
             frmBusquedaAlumnos frmBusquedaPaciente = new frmBusquedaAlumnos();
             frmBusquedaPaciente.Show();
             this.Close();
+        }
+
+        private void AgregarPaciente_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -12,7 +12,6 @@ namespace ServiciosMedicos.VistaPrevia
 {
     public partial class frmVistaPrevia : Form
     {
-        // Campos privados
         private string _nombreDoctora;
         private string _cedulaDoctora;
         private string _nombrePaciente;
@@ -23,17 +22,14 @@ namespace ServiciosMedicos.VistaPrevia
         private string _fecha;
         private List<MedicamentoReceta> _medicamentos;
 
-        // NUEVO: Guardar datos del paciente para devolverlos al regresar
         private string _idPaciente;
         private string _tipoPaciente;
 
-        // Constructor VACÍO — el diseñador lo necesita
         public frmVistaPrevia()
         {
             InitializeComponent();
         }
 
-        // Método que recibe los datos
         public void CargarDatos(
             string nombreDoctora,
             string cedulaDoctora,
@@ -58,7 +54,6 @@ namespace ServiciosMedicos.VistaPrevia
             LlenarControles();
         }
 
-        // NUEVO: Recibir y guardar los datos del paciente
         public void PassDatosPaciente(string id, string tipo)
         {
             _idPaciente = id;
@@ -99,7 +94,6 @@ namespace ServiciosMedicos.VistaPrevia
         {
             frmGeneracionReceta frmReceta = new frmGeneracionReceta();
 
-            // NUEVO: Pasarle los datos del paciente antes de mostrarlo
             if (!string.IsNullOrEmpty(_idPaciente))
             {
                 frmReceta.PassDatosPaciente(_idPaciente, _tipoPaciente);

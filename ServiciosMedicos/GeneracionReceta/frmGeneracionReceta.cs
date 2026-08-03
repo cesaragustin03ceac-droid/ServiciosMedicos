@@ -136,7 +136,6 @@ namespace ServiciosMedicos.GeneracionReceta
             }
         }
 
-        // Agrega este helper en la misma clase (si no lo tienes ya)
         private string ValorO_Vacio(object valor)
         {
             return valor != DBNull.Value ? valor.ToString() : "";
@@ -307,18 +306,15 @@ namespace ServiciosMedicos.GeneracionReceta
 
         private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            // Validar medicamentos
             if (listaMedicamentos == null || listaMedicamentos.Count == 0)
             {
                 MessageBox.Show("Agregue al menos un medicamento.", "Sin medicamentos");
                 return;
             }
 
-            // Datos de la doctora (del login)
             string nombreDoctora = frmBusquedaAlumnos.UsuarioNombre;
             string cedulaDoctora = frmBusquedaAlumnos.UsuarioId;
 
-            // Datos del paciente
             string nombrePaciente = txtNombre.Text.Trim();
             string matricula = txtMatricula.Text.Trim();
             string area = areaPaciente ?? "";
@@ -326,7 +322,6 @@ namespace ServiciosMedicos.GeneracionReceta
             string sexo = sexoPaciente ?? "";
             string fecha = txtFecha.Text.Trim();
 
-            // CONSTRUCTOR VACÍO + MÉTODO CargarDatos
             frmVistaPrevia vista = new frmVistaPrevia();
 
             vista.CargarDatos(
@@ -338,7 +333,7 @@ namespace ServiciosMedicos.GeneracionReceta
                 edad,
                 sexo,
                 fecha,
-                listaMedicamentos    // ← Ahora sí: mismo tipo público
+                listaMedicamentos    
             );
             vista.PassDatosPaciente(this.idPaciente, this.tipoPaciente);
 

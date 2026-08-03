@@ -14,15 +14,17 @@ namespace ServiciosMedicos.GeneracionReceta
         public string Indicaciones { get; set; }
 
         private DataTable dtMedicamentos = new DataTable();
-        private bool interno = false; // ← para evitar bucles
+        private bool interno = false; 
 
         public Medicamentos()
         {
             InitializeComponent();
+            //si encuntra algo
             cboMedicamento.SelectedIndexChanged += cmbMedicamento_SelectedIndexChanged;
+            //clic ejecuta el metodo
             btnAgregar.Click += btnAgregar_Click;
             btnInvemtario.Click += btnInvemtario_Click;
-            cboMedicamento.KeyUp += cboMedicamento_KeyUp; // ← LIKE al escribir
+            cboMedicamento.KeyUp += cboMedicamento_KeyUp; 
             CargarMedicamentos();
         }
 
@@ -35,12 +37,17 @@ namespace ServiciosMedicos.GeneracionReceta
                 try
                 {
                     string query = "SELECT id_medicamento, nombre_medicamento, cantidad FROM inventario";
+                    //extrae datos
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conexionAbierta);
                     dtMedicamentos.Clear();
+                    //llega los recultado con la bd
                     da.Fill(dtMedicamentos);
                     cboMedicamento.DataSource = null;
+                    //lo que ve
                     cboMedicamento.DisplayMember = "nombre_medicamento";
+                    //el valor
                     cboMedicamento.ValueMember = "id_medicamento";
+                    //conecta el combo a la tabla
                     cboMedicamento.DataSource = dtMedicamentos;
                 }
                 catch (Exception ex)
@@ -54,14 +61,16 @@ namespace ServiciosMedicos.GeneracionReceta
             }
         }
 
-        // ← NUEVO: filtra con LIKE mientras escribes
         private void cboMedicamento_KeyUp(object sender, KeyEventArgs e)
         {
             if (interno) return;
+            //Deja que le combo se normal
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Enter || e.KeyCode == Keys.Escape)
                 return;
 
+            //quita los espacios a lo escrito
             string texto = cboMedicamento.Text.Trim();
+            //al menos 2 para buscar
             if (texto.Length < 2) return;
 
             Conexion conexionBD = new Conexion();
@@ -74,11 +83,14 @@ namespace ServiciosMedicos.GeneracionReceta
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 da.SelectCommand.Parameters.AddWithValue("@filtro", "%" + texto + "%");
 
+                //tabla temporal
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
+                //la bandera
                 interno = true;
                 int cursor = cboMedicamento.SelectionStart;
+                
                 cboMedicamento.DataSource = dt;
                 cboMedicamento.DisplayMember = "nombre_medicamento";
                 cboMedicamento.ValueMember = "id_medicamento";
@@ -93,7 +105,7 @@ namespace ServiciosMedicos.GeneracionReceta
 
         private void cmbMedicamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (interno) return; // ← ignora cambios del filtro
+            if (interno) return; 
             if (cboMedicamento.SelectedItem == null) return;
             try
             {

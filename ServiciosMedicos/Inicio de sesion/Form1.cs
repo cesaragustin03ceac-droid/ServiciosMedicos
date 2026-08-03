@@ -6,7 +6,6 @@ namespace ServiciosMedicos
 {
     public partial class Form1 : Form
     {
-        // Bandera para cambiar entre modo claro y oscuro
         private bool modoOscuro = false;
 
         public Form1()
@@ -14,30 +13,23 @@ namespace ServiciosMedicos
             InitializeComponent();
         }
 
-        // Al cargar la ventana, pone el foco en el botón Entrar
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ActiveControl = BtEntrar;
             this.AcceptButton = BtEntrar;
         }
 
-        // ========================================================================
-        // BOTÓN ENTRAR: Revisa usuario y contraseña en la base de datos
-        // ========================================================================
         private void BtEntrar_Click(object sender, EventArgs e)
         {
-            // 1. Lee lo que escribió el usuario
             string usuario = TxbUsuario.Text.Trim();
             string password = TxbContrasena.Text;
 
-            // 2. Valida que no estén vacíos
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Ingresa usuario y contraseña.", "Campos vacíos");
                 return;
             }
 
-            // 3. Abre conexión con la base de datos
             Conexion conexionBD = new Conexion();
             MySqlConnection conn = conexionBD.obtenerconexion();
 
@@ -49,14 +41,13 @@ namespace ServiciosMedicos
 
             try
             {
-                // Variables para guardar lo que traiga la base de datos
                 string nombre = "";
                 string apellido = "";
                 string hash = "";
-                string tipo = ""; // Aquí guardamos si es doctora o enfermera
+                string tipo = ""; 
                 string id = "";
 
-                // 4. Busca primero en la tabla Doctora
+                
                 string queryDoc = "SELECT cedula, nombre, apellido_p, contrasena FROM Doctora WHERE cedula = @user;";
 
                 using (MySqlCommand cmd = new MySqlCommand(queryDoc, conn))
@@ -76,7 +67,6 @@ namespace ServiciosMedicos
                     }
                 }
 
-                // 5. Si no estaba en Doctora, busca en Enfermera
                 if (string.IsNullOrEmpty(tipo))
                 {
                     string queryEnf = "SELECT id_enfermera, nombre, apellido_p, contrasena FROM Enfermera WHERE id_enfermera = @user;";
@@ -99,21 +89,17 @@ namespace ServiciosMedicos
                     }
                 }
 
-                // 6. Si no lo encontró en ninguna tabla, muestra error
                 if (string.IsNullOrEmpty(tipo))
                 {
                     MessageBox.Show("Usuario no encontrado.", "Acceso denegado");
                     return;
                 }
 
-                // 7. Compara la contraseña ingresada con la de la base (encriptada)
                 if (BCrypt.Net.BCrypt.Verify(password, hash))
                 {
-                    // 8. Guarda datos del usuario logueado para usarlos después
                     frmBusquedaAlumnos.UsuarioNombre = $"{nombre} {apellido}";
                     frmBusquedaAlumnos.UsuarioTipo = tipo;
                     frmBusquedaAlumnos.UsuarioId = id;
-                    // 9. Abre la ventana principal y cierra el login
                     frmBusquedaAlumnos ventana = new frmBusquedaAlumnos();
                     ventana.Show();
                     this.Hide();
@@ -129,7 +115,7 @@ namespace ServiciosMedicos
             }
             finally
             {
-                conn.Close(); // Cierra la conexión con la base de datos
+                conn.Close(); 
             }
         }
 
@@ -167,13 +153,11 @@ namespace ServiciosMedicos
 
             this.BackColor = fondo;
 
-            // Método local que revisa controles en cualquier nivel (dentro de paneles, etc.)
             void AplicarAControl(Control ctrl)
             {
                 if (ctrl is Panel)
                 {
                     ctrl.BackColor = panel;
-                    // Revisa los controles que estén DENTRO de este panel
                     foreach (Control hijo in ctrl.Controls)
                     {
                         AplicarAControl(hijo);
@@ -206,7 +190,6 @@ namespace ServiciosMedicos
                 }
             }
 
-            // Revisa todos los controles del formulario
             foreach (Control ctrl in this.Controls)
             {
                 AplicarAControl(ctrl);

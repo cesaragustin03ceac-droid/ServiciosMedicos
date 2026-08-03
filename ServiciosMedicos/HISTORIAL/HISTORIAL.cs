@@ -251,7 +251,7 @@ namespace ServiciosMedicos.HISTORIAL
                 }
             }
         }
-=
+
         private void dataGridView1atenciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;

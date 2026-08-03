@@ -98,7 +98,6 @@ namespace ServiciosMedicos.GeneracionReceta
 
             try
             {
-                // VALIDAR DUPLICADO
                 string queryVerificar = "SELECT COUNT(*) FROM inventario WHERE LOWER(nombre_medicamento) = LOWER(@nombre)";
                 using (MySqlCommand cmd = new MySqlCommand(queryVerificar, conn))
                 {
@@ -111,7 +110,6 @@ namespace ServiciosMedicos.GeneracionReceta
                     }
                 }
 
-                // INSERTAR
                 string queryInsertar = "INSERT INTO inventario (nombre_medicamento, cantidad) VALUES (@nombre, @cantidad)";
                 using (MySqlCommand cmd = new MySqlCommand(queryInsertar, conn))
                 {
@@ -159,7 +157,6 @@ namespace ServiciosMedicos.GeneracionReceta
 
             try
             {
-                // Buscar por nombre (LIKE para que encuentre aunque escriba parcial)
                 string queryBuscar = @"SELECT id_medicamento, cantidad 
                                        FROM inventario 
                                        WHERE nombre_medicamento LIKE CONCAT('%', @nombre, '%') 
@@ -209,7 +206,6 @@ namespace ServiciosMedicos.GeneracionReceta
             }
         }
 
-        // Al seleccionar del dropdown, muestra cantidad actual
         private void cboNombreModificar_SelectedIndexChanged(object sender, EventArgs e)
         {
             string nombre = cboNombreModificar.Text;

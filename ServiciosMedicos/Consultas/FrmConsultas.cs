@@ -23,7 +23,6 @@ namespace ServiciosMedicos.Consultas
 
         private void CargarOpcionesGenerales()
         {
-            // Motivo
             CboMotivo.Items.Clear();
             CboMotivo.Items.Add("Chequeo general de rutina");
             CboMotivo.Items.Add("Malestar general");
@@ -31,7 +30,6 @@ namespace ServiciosMedicos.Consultas
             CboMotivo.Items.Add("Otro");
             CboMotivo.SelectedIndex = -1;
 
-            // Diagnostico
             cboDiagnostico.Items.Clear();
             cboDiagnostico.Items.Add("Infeccion de estomago");
             cboDiagnostico.Items.Add("Resfriado comun");
@@ -39,7 +37,6 @@ namespace ServiciosMedicos.Consultas
             cboDiagnostico.Items.Add("Otro");
             cboDiagnostico.SelectedIndex = -1;
 
-            // Sintomas - NUEVO
             cboSintomas.Items.Clear();
             cboSintomas.Items.Add("Fiebre");
             cboSintomas.Items.Add("Tos");
@@ -95,11 +92,9 @@ namespace ServiciosMedicos.Consultas
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Obtener valores de Motivo y Diagnostico
             string motivoFinal = !string.IsNullOrWhiteSpace(txtMotivo.Text) ? txtMotivo.Text.Trim() : CboMotivo.SelectedItem?.ToString();
             string diagnosticoFinal = !string.IsNullOrWhiteSpace(TxtDiagnostico.Text) ? TxtDiagnostico.Text.Trim() : cboDiagnostico.SelectedItem?.ToString();
 
-            // Obtener valores de los nuevos campos
             string antecedentes = txtMalestarA.Text.Trim();
             string presion = txtPrecion.Text.Trim();
             string temperatura = txtTemperatura.Text.Trim();
@@ -136,7 +131,6 @@ namespace ServiciosMedicos.Consultas
                     throw new Exception("El paciente no tiene expediente. Creelo primero en Agregar Paciente.");
                 }
 
-                // INSERT de consulta con presion y temperatura incluidas
                 string queryConsulta = @"INSERT INTO consulta 
                     (fecha_consulta, matricula_alumno, num_trabajador, cedula_doctora, id_enfermera, presion, temperatura) 
                     VALUES 
@@ -154,7 +148,6 @@ namespace ServiciosMedicos.Consultas
                     idConsulta = cmd.LastInsertedId;
                 }
 
-                // INSERT de diagnostico
                 string queryDiag = @"INSERT INTO diagnostico 
                     (diagnostico, id_consulta, id_expediente) 
                     VALUES 
@@ -168,7 +161,6 @@ namespace ServiciosMedicos.Consultas
                     cmd.ExecuteNonQuery();
                 }
 
-                // UPDATE de expediente: motivo y antecedentes
                 string queryUpdateExp = @"UPDATE expediente 
                     SET motivo_consulta = @motivo, antecedentes = @antecedentes 
                     WHERE id_expediente = @idExp;";
@@ -222,7 +214,6 @@ namespace ServiciosMedicos.Consultas
 
       
 
-        // CORREGIDO: Usar SelectedItem para consistencia
         private void cboDiagnostico_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboDiagnostico.SelectedItem?.ToString() == "Otro")
@@ -236,7 +227,6 @@ namespace ServiciosMedicos.Consultas
             }
         }
 
-        // NUEVO: Comportamiento igual que Motivo y Diagnostico
         private void cboSintomas_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboSintomas.SelectedItem?.ToString() == "Otro")

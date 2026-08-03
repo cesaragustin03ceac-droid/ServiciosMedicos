@@ -9,11 +9,10 @@ namespace ServiciosMedicos.Busqueda
 {
     public partial class frmBusquedaAlumnos : Form
     {
-        // Guarda quién inició sesión (nombre y tipo: doctora/enfermera)
         public static string UsuarioNombre = "";
         public static string UsuarioTipo = "";
         public static string UsuarioId = "";
-
+        //mensaje emergente
         private ToolTip tooltipGrid; 
 
 
@@ -21,7 +20,9 @@ namespace ServiciosMedicos.Busqueda
         public frmBusquedaAlumnos()
         {
             InitializeComponent();
+            //cuando seleccionan la tabla
             RegistroAlumnos.SelectionChanged += RegistroAlumnos_SelectionChanged;
+            //es para el toolpip
             RegistroAlumnos.CellToolTipTextNeeded += RegistroAlumnos_CellToolTipTextNeeded;
         }
         private void RegistroAlumnos_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
@@ -32,18 +33,16 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // Al cargar la ventana, llena la tabla y oculta el botón de expediente
         private void frmBusquedaAlumnos_Load(object sender, EventArgs e)
         {
             CargarDatos();
             RegistroAlumnos.ClearSelection();
             this.btnExpedientePaciente.Hide();
+
          
         }
 
-        // ========================================================================
-        // EXTRAER INFORMACIÓN DE LA BASE DE DATOS
-        // ========================================================================
+        
         private void CargarDatos()
         {
             Conexion conexionBD = new Conexion();
@@ -53,7 +52,6 @@ namespace ServiciosMedicos.Busqueda
 
             try
             {
-                // Tabla donde se juntarán alumnos y trabajadores
                 DataTable tablaDatos = new DataTable();
                 tablaDatos.Columns.Add("ID");
                 tablaDatos.Columns.Add("nombre");
@@ -61,7 +59,6 @@ namespace ServiciosMedicos.Busqueda
                 tablaDatos.Columns.Add("Apellido Materno");
                 tablaDatos.Columns.Add("Tipo de trabajador");
 
-                // 1. Consulta los alumnos
                 string queryAlumnos = @"SELECT matricula, nombre, apellido_p, apellido_m 
                                         FROM Alumno;";
 
@@ -75,12 +72,11 @@ namespace ServiciosMedicos.Busqueda
                         fila["nombre"] = lector["nombre"].ToString();
                         fila["Apellido Paterno"] = lector["apellido_p"].ToString();
                         fila["Apellido Materno"] = lector["apellido_m"].ToString();
-                        fila["Tipo de trabajador"] = "Alumno"; // Se asigna desde el código
+                        fila["Tipo de trabajador"] = "Alumno"; 
                         tablaDatos.Rows.Add(fila);
                     }
                 }
 
-                // 2. Consulta los trabajadores
                 string queryTrabajadores = @"SELECT num_trabajador, nombre, apellido_p, apellido_m 
                                              FROM Trabajador;";
 
@@ -94,12 +90,13 @@ namespace ServiciosMedicos.Busqueda
                         fila["nombre"] = lector["nombre"].ToString();
                         fila["Apellido Paterno"] = lector["apellido_p"].ToString();
                         fila["Apellido Materno"] = lector["apellido_m"].ToString();
-                        fila["Tipo de trabajador"] = "Trabajador"; // Se asigna desde el código
+                        fila["Tipo de trabajador"] = "Trabajador"; 
+
                         tablaDatos.Rows.Add(fila);
                     }
                 }
+                //muestra la tabla completa
 
-                // 3. Muestra los datos en la tabla
                 RegistroAlumnos.DataSource = tablaDatos;
             }
             catch (Exception ex)
@@ -112,9 +109,7 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // ========================================================================
-        // MOSTRAR BOTÓN SOLO SI HAY UN PACIENTE SELECCIONADO
-        // ========================================================================
+        
         private void RegistroAlumnos_SelectionChanged(object sender, EventArgs e)
         {
             if (RegistroAlumnos.SelectedRows.Count > 0 &&
@@ -129,14 +124,13 @@ namespace ServiciosMedicos.Busqueda
             }
         }
 
-        // ========================================================================
-        // BOTÓN EXPEDIENTE: Abre el formulario con los datos del paciente elegido
-        // ========================================================================
         private void btnExpedientePaciente_Click(object sender, EventArgs e)
         {
             if (RegistroAlumnos.SelectedRows.Count == 0) return;
 
+            //toma la primera fila 
             DataGridViewRow fila = RegistroAlumnos.SelectedRows[0];
+
             string idSeleccionado = fila.Cells[0].Value?.ToString();
             string tipoSeleccionado = fila.Cells[4].Value?.ToString();
 
@@ -147,13 +141,10 @@ namespace ServiciosMedicos.Busqueda
             this.Hide();
         }
 
-        // ========================================================================
-        // DOBLE CLIC: Abre el historial médico del paciente
-        // ========================================================================
         private void RegistroAlumnos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
+            //Si existe un doble clic
             DataGridViewRow fila = RegistroAlumnos.Rows[e.RowIndex];
             string idSeleccionado = fila.Cells[0].Value?.ToString();
             string tipoSeleccionado = fila.Cells[4].Value?.ToString();
@@ -161,37 +152,39 @@ namespace ServiciosMedicos.Busqueda
             if (string.IsNullOrEmpty(idSeleccionado)) return;
 
             ServiciosMedicos.HISTORIAL.HISTORIAL ventanaPerfil = new ServiciosMedicos.HISTORIAL.HISTORIAL();
+            //carga los datos
             ventanaPerfil.CargarPerfilPaciente(idSeleccionado, tipoSeleccionado);
             ventanaPerfil.Show();
             this.Hide();
         }
 
-        // ========================================================================
-        // BUSCADOR: Filtra la tabla mientras se escribe
-        // ========================================================================
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
+            //la busqueda
             string filtro = txtBusqueda.Text.Trim();
 
+            //si hay datos
             if (RegistroAlumnos.DataSource is DataTable tabla)
             {
+                // es nulo
                 if (string.IsNullOrEmpty(filtro))
                 {
+                    //todos los registros
                     tabla.DefaultView.RowFilter = "";
                 }
                 else
                 {
+                    //busca los ID
                     tabla.DefaultView.RowFilter = string.Format(
                         "[ID] LIKE '%{0}%'",
+
                         filtro.Replace("'", "''")
                     );
                 }
             }
         }
 
-        // ========================================================================
-        // BOTÓN NUEVO PACIENTE: Abre formulario en blanco
-        // ========================================================================
+        
         private void btnAgregarPaciente_Click(object sender, EventArgs e)
         {
             AgregarPaciente ventana = new AgregarPaciente();
@@ -199,9 +192,7 @@ namespace ServiciosMedicos.Busqueda
             this.Hide();
         }
 
-        // ========================================================================
-        // BOTÓN SALIR: Cierra la aplicación
-        // ========================================================================
+      
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
